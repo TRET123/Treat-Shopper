@@ -5,13 +5,6 @@ const Orders = require('./server/db/models/order')
 const db = require('./server/db/db')
 const faker = require('faker')
 
-// first name faker.fake('{{name.firstName}}')
-// last name faker.fake('{{name.lastName}}')
-// email faker.fake('{{internet.email}}')
-// password faker.fake('{{internet.password}}'
-// address faker.fake('{{address.streetAddress}}')
-// admin faker.fake('{{random.boolean}}')
-
 const instanceCount = 100
 const users = []
 
