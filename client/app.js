@@ -7,9 +7,9 @@ import AllProducts from './components/AllProducts'
 const App = () => {
   return (
     <div>
-      <AllProducts />
       <Navbar />
       <Routes />
+      <AllProducts />
     </div>
   )
 }
