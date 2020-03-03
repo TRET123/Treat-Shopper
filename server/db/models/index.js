@@ -3,8 +3,8 @@ const Product = require('./product')
 const Order = require('./order')
 const Cart = require('./cart')
 
-Product.belongsToMany(Order, {through: Cart})
-Order.belongsToMany(Product, {through: Cart})
+Product.belongsToMany(Order, {through: {model: Cart}})
+Order.belongsToMany(Product, {through: {model: Cart}})
 
 User.hasMany(Order)
 Order.belongsTo(User)
