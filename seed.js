@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('./server/db')
-const {User, Product, Order} = require('./server/db/models')
+const {User, Product, Order, Cart} = require('./server/db/models')
 const faker = require('faker')
 
 const instanceCount = 100
@@ -69,6 +69,17 @@ async function seed() {
       return Product.create(candy)
     })
   )
+
+  // const p1 = await Product.findByPk(1)
+  // const p2 = await Product.findByPk(2)
+  // const p3 = await Product.findByPk(3)
+
+  // const order = await Order.create()
+  // const user = await User.findByPk(1)
+  // await user.addOrder(order)
+  // await order.addProduct(p1)
+  // await order.addProduct(p2)
+  // await order.addProduct(p3)
 
   console.log(`seeded successfully`)
 }
