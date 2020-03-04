@@ -51,15 +51,13 @@ class Cart extends Component {
   // }
   getCartTotal = function() {
     return this.state.cart
-      .reduce((acc, value) => {
-        return acc + value.price
+      .reduce((acc, item) => {
+        return acc + item.price * item.quantity
       }, 0)
       .toFixed(2)
-    // console.log('get total', getCartTotal())
   }
   getItemTotal = function() {
     return this.state.cart.item.price * this.state.cart.item.quantity.toFixed(2)
-    // console.log('get total', getCartTotal())
   }
 
   render() {
@@ -69,7 +67,9 @@ class Cart extends Component {
           <div className="item" key={item.id}>
             <div className="buttons">
               <span>
-                <button type="submit">x</button>
+                <button className="remove-button" type="submit">
+                  x
+                </button>
               </span>
             </div>
             <div className="image">
@@ -77,14 +77,14 @@ class Cart extends Component {
             </div>
 
             <div className="description">
-              <span>{item.name}</span>
+              <span className="description">{item.name}</span>
             </div>
             <div className="quantity">
-              <button className="plus-btn" type="submit" name="button">
+              <button className="buttons" type="submit" name="button">
                 +
               </button>
               <input defaultValue={item.quantity} type="text" name="name" />
-              <button className="minus-btn" type="button" name="button">
+              <button className="buttons" type="submit" name="button">
                 -
               </button>
             </div>
@@ -105,15 +105,11 @@ class Cart extends Component {
           <ul>{addedItems}</ul>
         </div>
         <div className="quantity">
-          {/* <hr /> */}
           <div className="cart-total">
             <span className="cart-total-2">
-              {' '}
               Cart Total: ${this.getCartTotal()}
             </span>
-            <button className="buttons" type="submit">
-              Checkout
-            </button>
+            <button type="submit">Checkout</button>
           </div>
         </div>
       </div>

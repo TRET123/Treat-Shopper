@@ -117,8 +117,13 @@ img:hover {
   border-bottom: 1px solid #e1e8ee;
 }
 .buttons {
+  color: #5e6977;
+}
+.remove-button {
   position: relative;
-
+  border: none;
+  border: 0;
+  color: #5e6977;
   margin-right: 60px;
 }
 .image {
@@ -134,7 +139,7 @@ img:hover {
 
 .description span {
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   color: #43484d;
   font-weight: 400;
 }
@@ -169,7 +174,7 @@ img:hover {
   margin: 6px 0;
 }
 .image {
-  margin-right: 100px;
+  margin-right: 90px;
 }
 .image img {
   width: 80%;
