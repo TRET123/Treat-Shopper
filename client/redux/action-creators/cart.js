@@ -1,8 +1,22 @@
-import {GET_CART} from '../action-types/cart'
+import {INCREMENT_QTY, DECREMENT_QTY, REMOVE_ITEM} from '../action-types/cart'
 
-export const getCart = cart => {
+export const incrementQty = product => {
   return {
-    type: GET_CART,
-    cart
+    type: INCREMENT_QTY,
+    product
+  }
+}
+
+export const decrementQty = product => {
+  return {
+    type: DECREMENT_QTY,
+    product
+  }
+}
+
+export const removeItem = product => {
+  return {
+    type: REMOVE_ITEM,
+    product
   }
 }

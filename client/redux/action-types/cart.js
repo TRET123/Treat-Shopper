@@ -1,1 +1,3 @@
-export const GET_CART = 'GET_CART'
+export const DECREMENT_QTY = 'DECREMENT_QTY'
+export const INCREMENT_QTY = 'INCREMENT_QTY'
+export const DELETE_ITEM = 'DELETE_ITEM'

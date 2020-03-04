@@ -7,6 +7,16 @@ const faker = require('faker')
 const instanceCount = 100
 const users = []
 
+// admin
+users.push({
+  email: 'tret@fs.com',
+  password: '1234',
+  admin: true,
+  address: faker.fake('{{address.streetAddress}}'),
+  lastName: faker.fake('{{name.lastName}}'),
+  firstName: faker.fake('{{name.firstName}}')
+})
+
 // generating random users
 for (let i = 0; i < instanceCount; i++) {
   const randomUser = {
@@ -66,6 +76,19 @@ async function seed() {
       return Product.create(candy)
     })
   )
+
+  const p1 = await Product.findByPk(1)
+  const p2 = await Product.findByPk(2)
+  const p3 = await Product.findByPk(3)
+
+  const user = await User.findByPk(1)
+  const order = await Order.create()
+
+  await user.addOrder(order)
+
+  await order.addProduct(p1)
+  await order.addProduct(p2)
+  await order.addProduct(p3)
 
   console.log(`seeded successfully`)
 }

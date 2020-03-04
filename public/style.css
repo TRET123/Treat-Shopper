@@ -1,9 +1,6 @@
-/* comment */
-
 body {
   font-family: sans-serif;
   background-image: url('/images/background.jpg');
-  background-image: url('background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
