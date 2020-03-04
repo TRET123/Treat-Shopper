@@ -14,8 +14,7 @@ const data = [
     description: 'Make the most of your break',
     candyType: 'Chocolate',
     calories: 200,
-    imageUrl:
-      'https://target.scene7.com/is/image/Target/GUEST_9766bfa7-3fcb-4f4c-9576-15e17ccc1044?wid=488&hei=488&fmt=pjpeg'
+    imageUrl: './images/candy2.png'
   },
   {
     id: 2,
@@ -26,8 +25,7 @@ const data = [
     description: 'Taste the rainbow',
     candyType: 'Sour',
     calories: 100,
-    imageUrl:
-      'https://target.scene7.com/is/image/Target/GUEST_3d2a8073-36e6-4cec-8c8c-872639105820?wid=488&hei=488&fmt=pjpeg'
+    imageUrl: './images/candy3.png'
   }
 ]
 import {Link} from 'react-router-dom'
@@ -36,6 +34,8 @@ class Cart extends Component {
   constructor() {
     super()
     this.state = {cart: data}
+    this.getCartTotal = this.getCartTotal.bind(this)
+    this.getItemTotal = this.getItemTotal.bind(this)
   }
   //to remove the item completely
   // handleRemove = id => {
@@ -49,63 +49,68 @@ class Cart extends Component {
   // handleSubtractQuantity = id => {
   //   this.props.subtractQuantity(id)
   // }
+  getCartTotal = function() {
+    return this.state.cart
+      .reduce((acc, item) => {
+        return acc + item.price * item.quantity
+      }, 0)
+      .toFixed(2)
+  }
+  getItemTotal = function() {
+    return this.state.cart.item.price * this.state.cart.item.quantity.toFixed(2)
+  }
+
   render() {
     let addedItems = this.state.cart.length ? (
       this.state.cart.map(item => {
         return (
-          <li className="collection-item avatar" key={item.id}>
-            <div className="item-img">
-              <img src={item.imageUrl} alt={item.imageUrl} className="" />
+          <div className="item" key={item.id}>
+            <div className="buttons">
+              <span>
+                <button className="remove-button" type="submit">
+                  x
+                </button>
+              </span>
             </div>
-            <div className="item-desc">
-              <span className="title">{item.title}</span>
-              <p>Price: ${item.price}</p>
-              <p>Quantity: {item.quantity}</p>
-              <div className="add-remove">
-                <Link to="/cart">
-                  <button
-                    type="submit"
-                    className="material-icons"
-                    onClick={() => {
-                      this.handleAddQuantity(item.id)
-                    }}
-                  >
-                    +
-                  </button>
-                </Link>
-                <Link to="/cart">
-                  <button
-                    type="submit"
-                    className="material-icons"
-                    onClick={() => {
-                      this.handleSubtractQuantity(item.id)
-                    }}
-                  >
-                    -
-                  </button>
-                </Link>
-              </div>
-              <button
-                type="submit"
-                // className='waves-effect waves-light btn pink remove'
-                onClick={() => {
-                  this.handleRemove(item.id)
-                }}
-              >
-                Remove
+            <div className="image">
+              <img src={item.imageUrl} />
+            </div>
+
+            <div className="description">
+              <span className="description">{item.name}</span>
+            </div>
+            <div className="quantity">
+              <button className="buttons" type="submit" name="button">
+                +
+              </button>
+              <input defaultValue={item.quantity} type="text" name="name" />
+              <button className="buttons" type="submit" name="button">
+                -
               </button>
             </div>
-          </li>
+            <div className="total-price">
+              ${(item.price * item.quantity).toFixed(2)}
+            </div>
+            <hr />
+          </div>
         )
       })
     ) : (
       <p>Your cart is empty</p>
     )
     return (
-      <div className="container">
-        <div className="cart">
-          <h5 className="title">Shopping Cart:</h5>
+      <div className="shopping-cart">
+        <div>
+          <h5 className="title">Shopping Cart</h5>
           <ul>{addedItems}</ul>
+        </div>
+        <div className="quantity">
+          <div className="cart-total">
+            <span className="cart-total-2">
+              Cart Total: ${this.getCartTotal()}
+            </span>
+            <button type="submit">Checkout</button>
+          </div>
         </div>
       </div>
     )

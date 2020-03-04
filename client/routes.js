@@ -6,6 +6,7 @@ import {Login, Signup, UserHome} from './components'
 import {me} from './redux/thunks/user'
 import AllProducts from './components/AllProducts'
 import SingleProduct from './components/SingleProduct'
+import Cart from './components/Cart'
 
 /**
  * COMPONENT
@@ -23,6 +24,7 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route exact path="/cart" component={Cart} />
         <Route
           path="/candies/:id"
           render={({match}) => <SingleProduct match={match} />}
@@ -32,6 +34,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route exact path="/cart" component={Cart} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
