@@ -11,4 +11,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.put()
+
 module.exports = router

@@ -67,6 +67,19 @@ async function seed() {
     })
   )
 
+  const p1 = await Product.findByPk(1)
+  const p2 = await Product.findByPk(2)
+  const p3 = await Product.findByPk(3)
+
+  const user = await User.findByPk(1)
+  const order = await Order.create()
+
+  await user.addOrder(order)
+
+  await order.addProduct(p1)
+  await order.addProduct(p2)
+  await order.addProduct(p3)
+
   console.log(`seeded successfully`)
 }
 
