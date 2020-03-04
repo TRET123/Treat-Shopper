@@ -6,7 +6,7 @@ import {logout} from '../redux/thunks/user'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
+    <h1>Treat Shopper</h1>
     <nav>
       {isLoggedIn ? (
         <div>
