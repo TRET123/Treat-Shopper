@@ -19,3 +19,66 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.checkoutForm {
+  background-color: tan;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  /* flex-direction: row; */
+}
+
+.p35 {
+  flex: 35%;
+}
+
+/* .p50 {
+  flex: 50%;
+} */
+
+.p65 {
+  flex: 65%;
+}
+
+.container {
+  background-color: tan;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 20px;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+span.total {
+  float: right;
+  color: black;
+}
+
+.btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn:hover {
+  background-color: #3bb1e7;
+}
+
+/* Confirmation Page */
+#confirmPage {
+  /* background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRtq3_fJcYBj78t-ji8ezzFTC9sPHZvfX2W9Czd8setW4Qlcejs) */
+}
