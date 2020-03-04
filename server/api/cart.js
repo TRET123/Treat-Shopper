@@ -31,11 +31,11 @@ router.put('/:userId/:productId/:action', async (req, res, next) => {
 
     if (req.params.action === 'add') {
       await userCart.addProduct(product)
-      await userCart.update({quanity: userCart.quantity + 1})
+      await userCart.update({quantity: userCart.quantity + 1})
       res.json(userCart)
     } else if (req.params.action === 'remove') {
       await userCart.removeProduct(product)
-      await userCart.update({quanity: userCart.quantity - 1})
+      await userCart.update({quantity: userCart.quantity - 1})
       res.json(userCart)
     }
   } catch (error) {
