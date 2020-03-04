@@ -35,7 +35,7 @@ const dummyCandies = [
   {
     name: 'Skittles',
     inventory: 100,
-    price: 1.99,
+    price: 199,
     description: 'Taste the rainbow',
     candyType: 'Sour',
     calories: 100,
@@ -44,7 +44,7 @@ const dummyCandies = [
   {
     name: 'KitKat',
     inventory: 150,
-    price: 2.99,
+    price: 299,
     description: 'Make the most of your break',
     candyType: 'Chocolate',
     calories: 200,
@@ -53,11 +53,102 @@ const dummyCandies = [
   {
     name: 'M&M',
     inventory: 90,
-    price: 1.5,
+    price: 150,
     description: 'Melts in your mouth, not in your hand',
     candyType: 'Chocolate',
     calories: 150,
     imageUrl: '/images/candy1.png'
+  },
+  {
+    name: '100 Grand Candy Bar',
+    imageUrl: '/images/100-grand.jpg',
+    inventory: 50,
+    calories: 200,
+    price: 125,
+    description:
+      'Ever wish you had 100 GRAND? Now you can, even if it is only crunchy chocolate covering soft, chewy caramel goodness. This candy bar will help you feel closer to a million bucks!',
+    candyType: 'chocolate'
+  },
+  {
+    name: '5th Avenue Candy Bar',
+    imageUrl: '/images/5th-ave.jpg',
+    inventory: 55,
+    calories: 150,
+    price: 150,
+    description:
+      'The crunchy peanut butter and creamy milk chocolate that has been a quintessential fan favorite for more than 75 years. Named after that fashionable street in New York City, you may feel quite fashion forward snacking on this tasty treat. You will want to have enough of this hard-to-find bar on hand.',
+    candyType: 'chocolate'
+  },
+  {
+    name: 'Airheads Blue Raspberry Taffy Bar',
+    imageUrl: '/images/blue-airhead.jpg',
+    inventory: 100,
+    calories: 50,
+    price: 50,
+    description:
+      "You can't just listen to the blues. You can't just live the blues. Man, you've gotta taste the blues! And Airheads Blue Raspberry is the perfect way to do it! It's a soft and flavorful candy that'll get your tongue buzzing with a great big blue raspberry flavor. Each bar is individually wrapped, so you can stash them under your bed, in your locker, or in your top-secret candy drawer and dig in whenever you get that blue raspberry craving!",
+    candyType: 'sour'
+  },
+  {
+    name: 'Bonomo Banana Turkish Taffy Candy Bar',
+    imageUrl: '/images/bonomo.jpg',
+    inventory: 200,
+    calories: 50,
+    price: 150,
+    description:
+      "Monkeys are not the only mammals who love bananas. Humans can't get enough either! Bonomo Banana Turkish Taffy is an enchanting way to play with your food and bring out your inner monkey. It may not be packed with potassium, but it is packed with loads of fun. Also available in Chocolate, Strawberry and Vanilla.",
+    candyType: 'chewy'
+  },
+  {
+    name: 'Airheads Watermelon Taffy Bar ',
+    imageUrl: '/images/airhead-watermelon.jpg',
+    inventory: 50,
+    calories: 50,
+    price: 50,
+    description:
+      'The nice people at Airheads have taken a delicious summertime treat and transformed it into a year-round, all-the-time, gotta-have-it candy! This amazingly soft taffy is so full of watermelon flavor, every bite will feel like the 4th of July. So when your friends catch you applying sunscreen in December and wearing flippers and a snorkel in January, make sure you have plenty of Airheads Watermelon to share with them. Then ask if anyone has a surfboard you can borrow.',
+    candyType: 'sour'
+  },
+  {
+    name: 'Chuckles Assorted Fruit Jelly Candy Bars',
+    imageUrl: '/images/chuckles.jpg',
+    inventory: 30,
+    calories: 90,
+    price: 150,
+    description:
+      'It’s no joke! Chuckles are some of the best candies around. These chewy “bars” are actually a neat little row of five bite-sized jelly nuggets, all dusted with sugar and each in a unique fruit flavor! They’re perfectly poppable little chunks of pure bliss. You can share them with friends or bite them in half and stick them back together again to make up your own flavor combinations. If you’ve got a lot of self-control you can even eat one piece at the end of each day of the work week (how’s that for a sweet reward?). However you choose to enjoy them, chuckles are fun and fruity, so they’ll definitely become one of your favorites!',
+    candyType: 'chewy'
+  },
+  {
+    name: 'Clark Cups Peanut Butter Cups',
+    imageUrl: '/images/clark.jpg',
+    inventory: 160,
+    calories: 200,
+    price: 150,
+    description:
+      "A new peanut butter cup from Boyer, the makers of Mallo Cups and Smoothie Cups. Clark Cups are a classic Boyer peanut butter cup filled with crunchy bits you'll remember from the original Clark candy bar.",
+    candyType: 'chewy'
+  },
+  {
+    name: 'Classic Original Coconut Patties',
+    imageUrl: '/images/coconut-patties.jpg',
+    inventory: 160,
+    calories: 200,
+    price: 150,
+    description:
+      'These classic original coconut patties are made up of a smooth, shredded coconut texture that is then dipped in a rich dark chocolatey coating, making a perfect combination for coconut candy lovers.',
+    candyType: 'chewy'
+  },
+
+  {
+    name: 'Joyva Raspberry Joys',
+    imageUrl: '/images/joyva.jpg',
+    inventory: 90,
+    calories: 140,
+    price: 125,
+    description:
+      'These Joyva Raspberry Joys are a delicious treat from Brooklyn New York. Rich dark chocolate covers each of these raspberry jell bars.',
+    candyType: 'chewy'
   }
 ]
 
