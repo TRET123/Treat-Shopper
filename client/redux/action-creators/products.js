@@ -1,4 +1,4 @@
-import {GET_ALL_PRODUCTS, GET_SINGLE_PRODUCT} from '../action-types/products'
+import {GET_ALL_PRODUCTS, GET_SELECTED_PRODUCT} from '../action-types/products'
 
 export const getAllProducts = allProducts => {
   return {
@@ -7,9 +7,9 @@ export const getAllProducts = allProducts => {
   }
 }
 
-export const getSingleProduct = singleProduct => {
+export const getSelectedProduct = selectedProduct => {
   return {
-    type: GET_SINGLE_PRODUCT,
-    singleProduct
+    type: GET_SELECTED_PRODUCT,
+    selectedProduct
   }
 }

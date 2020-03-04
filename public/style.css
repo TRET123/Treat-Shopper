@@ -1,5 +1,8 @@
 body {
   font-family: sans-serif;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 a {
@@ -78,7 +81,6 @@ span.total {
   background-color: #3bb1e7;
 }
 
-/* Confirmation Page */
-#confirmPage {
-  /* background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRtq3_fJcYBj78t-ji8ezzFTC9sPHZvfX2W9Czd8setW4Qlcejs) */
+img:hover {
+  transform: scale(1.05);
 }
