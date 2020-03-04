@@ -1,6 +1,9 @@
 body {
   font-family: sans-serif;
+  <<<<<<<HEAD
   background-image: url('/images/background.jpg');
+  =======background-image: url('background.jpg');
+  >>>>>>>80b12cd8b39744c90a3c396feb8716b5dcd39231
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -23,6 +26,64 @@ form div {
   display: inline-block;
 }
 
-img:hover {
+<<<<<<< head ======= .checkoutForm {
+  background-color: tan;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  /* flex-direction: row; */
+}
+
+.p35 {
+  flex: 35%;
+}
+
+/* .p50 {
+  flex: 50%;
+} */
+
+.p65 {
+  flex: 65%;
+}
+
+.container {
+  background-color: tan;
+  padding: 5px 20px 15px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 20px;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+span.total {
+  float: right;
+  color: black;
+}
+
+.btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.btn:hover {
+  background-color: #3bb1e7;
+}
+
+>>>>>>>80b12cd8b39744c90a3c396feb8716b5dcd39231 img:hover {
   transform: scale(1.05);
 }

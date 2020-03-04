@@ -1,8 +1,8 @@
-import {GET_CART_PRODUCTS} from '../action-types/cart'
+import {GET_CART} from '../action-types/cart'
 
-export const getCartProducts = cartProducts => {
+export const getCart = cart => {
   return {
-    type: GET_CART_PRODUCTS,
-    cartProducts
+    type: GET_CART,
+    cart
   }
 }

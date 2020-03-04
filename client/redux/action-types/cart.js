@@ -1,1 +1,1 @@
-export const GET_CART_PRODUCTS = 'GET_CART_PRODUCTS'
+export const GET_CART = 'GET_CART'

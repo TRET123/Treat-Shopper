@@ -67,16 +67,16 @@ async function seed() {
     })
   )
 
-  // const p1 = await Product.findByPk(1)
-  // const p2 = await Product.findByPk(2)
-  // const p3 = await Product.findByPk(3)
+  const p1 = await Product.findByPk(1)
+  const p2 = await Product.findByPk(2)
+  const p3 = await Product.findByPk(3)
 
-  // const order = await Order.create()
-  // const user = await User.findByPk(1)
-  // await user.addOrder(order)
-  // await order.addProduct(p1)
-  // await order.addProduct(p2)
-  // await order.addProduct(p3)
+  const cart = await Cart.create()
+  const user = await User.findByPk(1)
+  await cart.addProduct(p1)
+  await cart.addProduct(p2)
+  await cart.addProduct(p3)
+  await user.setCart(cart)
 
   console.log(`seeded successfully`)
 }
