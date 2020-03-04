@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getAllProductsThunk} from '../redux/thunks/products'
-import {SingleProduct} from './SingleProduct'
+import SingleProduct from './SingleProduct'
 
 class AllProducts extends Component {
   async componentDidMount() {
@@ -20,7 +20,7 @@ class AllProducts extends Component {
         })}
       </div>
     ) : (
-      <img src="/loading.gif" />
+      <img src="/images/loading.gif" />
     )
   }
 }

@@ -1,18 +1,83 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Product, Order, Cart} = require('../server/db/models')
+const faker = require('faker')
+
+const instanceCount = 100
+const users = []
+
+// generating random users
+for (let i = 0; i < instanceCount; i++) {
+  const randomUser = {
+    email: faker.fake('{{internet.email}}'),
+    password: faker.fake('{{internet.password}}'),
+    address: faker.fake('{{address.streetAddress}}'),
+    lastName: faker.fake('{{name.lastName}}'),
+    firstName: faker.fake('{{name.firstName}}')
+  }
+
+  users.push(randomUser)
+}
+
+// some dummy data for our products
+const dummyCandies = [
+  {
+    name: 'Skittles',
+    inventory: 100,
+    price: 1.99,
+    description: 'Taste the rainbow',
+    candyType: 'Sour',
+    calories: 100,
+    imageUrl: '/images/candy3.png'
+  },
+  {
+    name: 'KitKat',
+    inventory: 150,
+    price: 2.99,
+    description: 'Make the most of your break',
+    candyType: 'Chocolate',
+    calories: 200,
+    imageUrl: '/images/candy2.png'
+  },
+  {
+    name: 'M&M',
+    inventory: 90,
+    price: 1.5,
+    description: 'Melts in your mouth, not in your hand',
+    candyType: 'Chocolate',
+    calories: 150,
+    imageUrl: '/images/candy1.png'
+  }
+]
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  await Promise.all(
+    users.map(user => {
+      return User.create(user)
+    })
+  )
 
-  console.log(`seeded ${users.length} users`)
+  await Promise.all(
+    dummyCandies.map(candy => {
+      return Product.create(candy)
+    })
+  )
+
+  // const p1 = await Product.findByPk(1)
+  // const p2 = await Product.findByPk(2)
+  // const p3 = await Product.findByPk(3)
+
+  // const order = await Order.create()
+  // const user = await User.findByPk(1)
+  // await user.addOrder(order)
+  // await order.addProduct(p1)
+  // await order.addProduct(p2)
+  // await order.addProduct(p3)
+
   console.log(`seeded successfully`)
 }
 
