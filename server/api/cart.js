@@ -16,7 +16,7 @@ const User = require('../db/models/user')
 
 router.get('/', async (req, res, next) => {
   try {
-    const allCarts = await Order.findAll({include: Product})
+    const allCarts = await Order.findAll({where: {userId: 1}, include: Product})
     res.json(allCarts)
   } catch (err) {
     console.error('Error getting all items in the carts')
