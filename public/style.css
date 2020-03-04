@@ -1,9 +1,7 @@
 body {
   font-family: sans-serif;
-  <<<<<<<HEAD
   background-image: url('/images/background.jpg');
-  =======background-image: url('background.jpg');
-  >>>>>>>80b12cd8b39744c90a3c396feb8716b5dcd39231
+  background-image: url('background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -26,7 +24,7 @@ form div {
   display: inline-block;
 }
 
-<<<<<<< head ======= .checkoutForm {
+.checkoutForm {
   background-color: tan;
   display: flex;
   flex-wrap: wrap;
@@ -84,6 +82,6 @@ span.total {
   background-color: #3bb1e7;
 }
 
->>>>>>>80b12cd8b39744c90a3c396feb8716b5dcd39231 img:hover {
+img:hover {
   transform: scale(1.05);
 }
