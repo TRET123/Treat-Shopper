@@ -7,6 +7,16 @@ const faker = require('faker')
 const instanceCount = 100
 const users = []
 
+// admin
+users.push({
+  email: 'tret@fs.com',
+  password: '1234',
+  admin: true,
+  address: faker.fake('{{address.streetAddress}}'),
+  lastName: faker.fake('{{name.lastName}}'),
+  firstName: faker.fake('{{name.firstName}}')
+})
+
 // generating random users
 for (let i = 0; i < instanceCount; i++) {
   const randomUser = {

@@ -12,27 +12,25 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// increment or decrement product quantity in cart
+// increment, decrement, or remove product quantity in cart
 router.put('/:productId/:action', async (req, res, next) => {
   try {
     const cart = await Cart.findOne({
       where: {productId: req.params.productId}
     })
-    if (req.params.action === 'add') {
+    const currentOrder = await Order.findByPk(cart.orderId)
+    const productInCart = await Product.findByPk(req.params.productId)
+    if (req.params.action === 'increment') {
       await cart.update({quantity: cart.quantity + 1})
-    } else if (req.params.action === 'remove') {
+    } else if (req.params.action === 'decrement') {
       cart.update({quantity: cart.quantity - 1})
       if (cart.quantity === 0) {
-        const currentOrder = await Order.findByPk(cart.orderId)
-        const productInCart = await Product.findByPk(req.params.productId)
         await currentOrder.removeProduct(productInCart)
       }
-    } else if (req.params.action === 'delete') {
-      const currentOrder = await Order.findByPk(cart.orderId)
-      const productInCart = await Product.findByPk(req.params.productId)
+    } else if (req.params.action === 'remove') {
       await currentOrder.removeProduct(productInCart)
     }
-    res.json(cart)
+    res.json(productInCart)
   } catch (error) {
     next(error)
   }
