@@ -29,8 +29,7 @@ const dummyCandies = [
     description: 'Taste the rainbow',
     candyType: 'Sour',
     calories: 100,
-    imageUrl:
-      'https://target.scene7.com/is/image/Target/GUEST_3d2a8073-36e6-4cec-8c8c-872639105820?wid=488&hei=488&fmt=pjpeg'
+    imageUrl: '/candy3.png'
   },
   {
     name: 'KitKat',
@@ -39,8 +38,7 @@ const dummyCandies = [
     description: 'Make the most of your break',
     candyType: 'Chocolate',
     calories: 200,
-    imageUrl:
-      'https://target.scene7.com/is/image/Target/GUEST_9766bfa7-3fcb-4f4c-9576-15e17ccc1044?wid=488&hei=488&fmt=pjpeg'
+    imageUrl: '/candy2.png'
   },
   {
     name: 'M&M',
@@ -49,8 +47,7 @@ const dummyCandies = [
     description: 'Melts in your mouth, not in your hand',
     candyType: 'Chocolate',
     calories: 150,
-    imageUrl:
-      'http://www.ocsaccess.com/admin/clientfiles/ucsne/images/xlarge/mm%20choc.jpg'
+    imageUrl: '/candy1.png'
   }
 ]
 

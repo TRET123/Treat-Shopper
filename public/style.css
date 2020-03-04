@@ -1,5 +1,8 @@
 body {
   font-family: sans-serif;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 a {
@@ -18,4 +21,8 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+img:hover {
+  transform: scale(1.05);
 }
