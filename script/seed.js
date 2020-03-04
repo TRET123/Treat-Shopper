@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product, Order, Cart} = require('../server/db/models')
+const {User, Product, Order, OrderItem} = require('../server/db/models')
 const faker = require('faker')
 
 const instanceCount = 100

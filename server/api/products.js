@@ -53,10 +53,6 @@ router.put('/:id', async (req, res, next) => {
     const productToUpdate = await Product.findByPk(id)
     await productToUpdate.update(req.body)
 
-    // const updatedRobotWithProjects = await User.findById(id, {
-    //   include: [Project]
-    // });
-
     res.status(200).send(productToUpdate)
   } catch (error) {
     console.error('Error updating a product')
