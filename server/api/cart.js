@@ -1,7 +1,6 @@
 const router = require('express').Router()
-const Cart = require('../db/models/cart')
 const Product = require('../db/models/product')
-const Order = require('../db/models/order')
+const Cart = require('../db/models/cart')
 const User = require('../db/models/user')
 
 // router.get('/', async (req, res, next) => {
@@ -16,11 +15,32 @@ const User = require('../db/models/user')
 
 router.get('/', async (req, res, next) => {
   try {
-    const allCarts = await Order.findAll({include: Product})
-    res.json(allCarts)
-  } catch (err) {
+    const cart = await Cart.findAll({include: Product})
+    res.json(cart)
+  } catch (error) {
     console.error('Error getting all items in the carts')
-    next(err)
+    next(error)
+  }
+})
+
+// add to cart
+router.put('/:userId/:productId/:action', async (req, res, next) => {
+  try {
+    const userCart = await Cart.findOne({where: {userId: req.params.userId}})
+    const product = await Product.findByPk(req.params.productId)
+
+    if (req.params.action === 'add') {
+      await userCart.addProduct(product)
+      await userCart.update({quanity: userCart.quantity + 1})
+      res.json(userCart)
+    } else if (req.params.action === 'remove') {
+      await userCart.removeProduct(product)
+      await userCart.update({quanity: userCart.quantity - 1})
+      res.json(userCart)
+    }
+  } catch (error) {
+    console.error('Error updating cart')
+    next(error)
   }
 })
 
