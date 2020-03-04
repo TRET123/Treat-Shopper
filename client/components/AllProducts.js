@@ -20,7 +20,7 @@ class AllProducts extends Component {
         })}
       </div>
     ) : (
-      <img src="/loading.gif" />
+      <img src="/images/loading.gif" />
     )
   }
 }

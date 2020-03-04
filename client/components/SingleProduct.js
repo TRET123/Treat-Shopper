@@ -21,7 +21,7 @@ class SingleProduct extends Component {
         <p>{product.description}</p>
       </div>
     ) : (
-      <img src="/loading.gif" />
+      <img src="/images/loading.gif" />
     )
   }
 }

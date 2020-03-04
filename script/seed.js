@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product, Cart} = require('../server/db/models')
+const {User, Product, Order, Cart} = require('../server/db/models')
 const faker = require('faker')
 
 const instanceCount = 100
@@ -29,7 +29,7 @@ const dummyCandies = [
     description: 'Taste the rainbow',
     candyType: 'Sour',
     calories: 100,
-    imageUrl: '/candy3.png'
+    imageUrl: '/images/candy3.png'
   },
   {
     name: 'KitKat',
@@ -38,7 +38,7 @@ const dummyCandies = [
     description: 'Make the most of your break',
     candyType: 'Chocolate',
     calories: 200,
-    imageUrl: '/candy2.png'
+    imageUrl: '/images/candy2.png'
   },
   {
     name: 'M&M',
@@ -47,7 +47,7 @@ const dummyCandies = [
     description: 'Melts in your mouth, not in your hand',
     candyType: 'Chocolate',
     calories: 150,
-    imageUrl: '/candy1.png'
+    imageUrl: '/images/candy1.png'
   }
 ]
 
