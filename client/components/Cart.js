@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
-import {HashRouter, Route} from 'react-router-dom'
-// import {  } from '../redux/index';
+// import {removeItem, addQuantity, subtractQuantity} from '../redux/index';
 import {connect} from 'react-redux'
-import Navbar from './navbar'
-import Item from './CartItem'
+
 const data = [
   {
     id: 1,
@@ -28,8 +26,7 @@ const data = [
     imageUrl: './images/candy3.png'
   }
 ]
-import {Link} from 'react-router-dom'
-// import {removeItem, addQuantity, subtractQuantity} from './actions/cartActions’
+
 class Cart extends Component {
   constructor() {
     super()
@@ -37,15 +34,15 @@ class Cart extends Component {
     this.getCartTotal = this.getCartTotal.bind(this)
     this.getItemTotal = this.getItemTotal.bind(this)
   }
-  //to remove the item completely
+
   // handleRemove = id => {
   //   this.props.removeItem(id)
   // }
-  // //to add the quantity
+
   // handleAddQuantity = id => {
   //   this.props.addQuantity(id)
   // }
-  // //to substruct from the quantity
+
   // handleSubtractQuantity = id => {
   //   this.props.subtractQuantity(id)
   // }
@@ -119,7 +116,6 @@ class Cart extends Component {
 const mapStateToProps = state => {
   return {
     items: state.addedItems
-    //addedItems: state.addedItems
   }
 }
 const mapDispatchToProps = dispatch => {
