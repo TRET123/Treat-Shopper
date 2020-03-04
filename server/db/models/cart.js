@@ -6,7 +6,7 @@ const Cart = db.define('cart', {
     type: Sequelize.INTEGER,
     defaultValue: 1,
     validate: {
-      min: 1
+      min: 0
     }
   }
 })

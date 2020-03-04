@@ -12,6 +12,21 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// get order associated to user
+router.get('/:userId', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId)
+    const order = await Order.findByPk(req.params.userId, {
+      where: {complete: false},
+      include: Product
+    })
+    await user.addOrder(order)
+    res.json(order)
+  } catch (error) {
+    next(error)
+  }
+})
+
 // create new order for user
 router.post('/:userId', async (req, res, next) => {
   try {
@@ -19,7 +34,7 @@ router.post('/:userId', async (req, res, next) => {
     const [order] = await Order.findOrCreate({
       where: {userId: req.params.userId, complete: false}
     })
-    user.addOrder(order)
+    await user.addOrder(order)
     res.json(order)
   } catch (error) {
     next(error)
