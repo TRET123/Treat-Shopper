@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {getSelectedProductThunk} from '../redux/thunks/products'
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 class SingleProduct extends Component {
@@ -13,12 +14,34 @@ class SingleProduct extends Component {
   }
   render() {
     const product = this.props.product || this.props.selected
+    const {
+      id,
+      name,
+      imageUrl,
+      description,
+      inventory,
+      price,
+      calories,
+      candyType
+    } = product
 
     return product ? (
       <div>
-        <h1>{product.name}</h1>
-        <img src={product.imageUrl} />
-        <p>{product.description}</p>
+        <Link to={`/candies/${id}`} key={id}>
+          <h1>{name}</h1>
+          <img src={imageUrl} />
+        </Link>
+
+        <hr style={{margin: '1% 25% 40 25%'}} />
+
+        <p>
+          Description:
+          <br />
+          {description}
+        </p>
+        <br />
+
+        <p>Price: {price}</p>
       </div>
     ) : (
       <img src="/images/loading.gif" />
