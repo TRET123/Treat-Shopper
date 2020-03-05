@@ -66,20 +66,13 @@ span.total {
 }
 
 .btn {
-  background-color: #4caf50;
-  color: white;
-  padding: 12px;
-  margin: 10px 0;
-  border: none;
   width: 100%;
-  border-radius: 3px;
   cursor: pointer;
-  font-size: 17px;
 }
 
-.btn:hover {
+/* .btn:hover {
   background-color: #3bb1e7;
-}
+} */
 
 img:hover {
   transform: scale(1.05);
@@ -191,3 +184,63 @@ img:hover {
   font-size: 18px;
   font-weight: 400;
 }
+/* single page css */
+img {
+  max-width: 100%;
+}
+
+.card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #eee;
+  padding: 5em;
+  line-height: 1.5;
+}
+
+.product-title,
+.price,
+.sizes,
+.colors {
+  text-transform: UPPERCASE;
+  font-weight: bold;
+}
+
+.checked,
+.price span {
+  color: #ff9f1a;
+}
+
+.product-title,
+.rating,
+.product-description,
+.price,
+.vote,
+.sizes {
+  margin-bottom: 15px;
+}
+
+.product-title {
+  margin-top: 0;
+  color: brown;
+}
+
+.add-to-cart,
+.like {
+  background: #ff9f1a;
+  padding: 1.2em 1.5em;
+  border: none;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+  color: #fff;
+}
+.add-to-cart:hover,
+.like:hover {
+  background: burlywood;
+  color: #fff;
+}
+
+.orange {
+  background: burlywood;
+}
+
+/* confirmation page CSS */

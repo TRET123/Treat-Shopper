@@ -8,6 +8,7 @@ import AllProducts from './components/AllProducts'
 import SingleProduct from './components/SingleProduct'
 import Cart from './components/Cart'
 import CheckoutForm from './components/CheckoutForm'
+import ConfirmationPage from './components/ConfirmationPage'
 /**
  * COMPONENT
  */
@@ -40,7 +41,8 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Route path="/login" component={Login} />
+        <Route exact path="/confirmation_page" component={ConfirmationPage} />
       </Switch>
     )
   }

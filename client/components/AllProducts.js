@@ -55,7 +55,11 @@ class AllProducts extends Component {
         {allProducts.length ? (
           <div>
             {allProducts.map(product => {
-              return <SingleProduct key={product.id} product={product} />
+              return (
+                <Link to={`/candies/${product.id}`} key={product.id}>
+                  <SingleProduct key={product.id} product={product} />
+                </Link>
+              )
             })}
           </div>
         ) : (

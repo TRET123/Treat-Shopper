@@ -26,23 +26,67 @@ class SingleProduct extends Component {
     } = product
 
     return product ? (
-      <div>
-        <Link to={`/candies/${id}`} key={id}>
+      product === this.props.product ? (
+        <div>
           <h1>{name}</h1>
           <img src={imageUrl} />
-        </Link>
 
-        <hr style={{margin: '1% 25% 40 25%'}} />
+          <hr style={{margin: '1% 25% 40 25%'}} />
 
-        <p>
-          Description:
+          <p>
+            Description:
+            <br />
+            {description}
+          </p>
           <br />
-          {description}
-        </p>
-        <br />
 
-        <p>Price: {price}</p>
-      </div>
+          <p>Price: {price}</p>
+        </div>
+      ) : (
+        <div className="container">
+          <div className="card" align="center">
+            <div className="wrapper row">
+              <div>
+                <h3 className="product-title">{name}</h3>
+                <div>
+                  <img src={imageUrl} />
+                </div>
+                <br />
+              </div>
+
+              <div>
+                <div className="rating">
+                  <div className="stars">
+                    <span className="fa fa-star checked"></span>
+                    <span className="fa fa-star checked"></span>
+                    <span className="fa fa-star checked"></span>
+                    <span className="fa fa-star checked"></span>
+                    <span className="fa fa-star"></span>
+                  </div>
+                  <span className="review-no">41 reviews</span>
+                </div>
+                <p className="product-description">{description}</p>
+                <h4 className="price">
+                  current price: <span>${(price / 100).toFixed(2)}</span>
+                </h4>
+                <p className="vote">
+                  <strong>91%</strong> of buyers enjoyed this product!{' '}
+                  <strong>(87 votes)</strong>
+                </p>
+
+                <div className="action">
+                  <button className="add-to-cart btn btn-default" type="button">
+                    add to cart
+                  </button>
+                  <button className="like btn btn-default" type="button">
+                    <span className="fa fa-heart"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
     ) : (
       <img src="/images/loading.gif" />
     )
@@ -62,3 +106,7 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
+
+{
+  /* <img src="/images/loading.gif" /> */
+}
