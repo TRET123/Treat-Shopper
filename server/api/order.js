@@ -72,9 +72,8 @@ router.post('/addToOrder/:productId', async (req, res, next) => {
     let user = await User.findByPk(req.user.id)
     let product = await Product.findByPk(req.params.productId)
     let order = await Order.findOne({where: {complete: false, userId: user.id}})
-    console.log('user', user, 'product', product, 'order', order)
     await order.addProduct(product)
-    res.json(order)
+    res.json(product)
   } catch (error) {
     next(error)
   }

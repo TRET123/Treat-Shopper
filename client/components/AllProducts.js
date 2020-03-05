@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAllProductsThunk} from '../redux/thunks/products'
+import {addProductThunk, getUserOrderThunk} from '../redux/thunks/order'
 import SingleProduct from './SingleProduct'
 
 class AllProducts extends Component {
@@ -63,7 +64,10 @@ class AllProducts extends Component {
                   <button
                     type="submit"
                     className="buttons"
-                    onClick={this.addToCart}
+                    onClick={() => {
+                      this.props.getUserOrder()
+                      this.props.addProduct(product.id)
+                    }}
                   >
                     Add to cart
                   </button>
@@ -87,7 +91,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAllProducts: () => dispatch(getAllProductsThunk())
+    getAllProducts: () => dispatch(getAllProductsThunk()),
+    addProduct: id => dispatch(addProductThunk(id)),
+    getUserOrder: () => dispatch(getUserOrderThunk())
   }
 }
 
