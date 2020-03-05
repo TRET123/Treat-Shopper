@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAllProductsThunk} from '../redux/thunks/products'
+import {addProductThunk, getUserOrderThunk} from '../redux/thunks/order'
 import SingleProduct from './SingleProduct'
 
 class AllProducts extends Component {
@@ -45,9 +46,9 @@ class AllProducts extends Component {
         <label htmlFor="fuelType">Filter by candy type: </label>
         <select onChange={this.onChange} value={this.state.fuelType}>
           <option value="all">All</option>
-          <option value="gas">Sour</option>
-          <option value="diesel">Chocolate</option>
-          <option value="electric">Gummies</option>
+          <option value="sour">Sour</option>
+          <option value="chocolate">Chocolate</option>
+          <option value="chewy">Chewy</option>
         </select>
 
         <hr style={{margin: '1% 25% 40 25%'}} />
@@ -56,9 +57,21 @@ class AllProducts extends Component {
           <div>
             {allProducts.map(product => {
               return (
-                <Link to={`/candies/${product.id}`} key={product.id}>
-                  <SingleProduct key={product.id} product={product} />
-                </Link>
+                <div key={product.id}>
+                  <Link to={`/candies/${product.id}`}>
+                    <SingleProduct key={product.id} product={product} />
+                  </Link>
+                  <button
+                    type="submit"
+                    className="buttons"
+                    onClick={() => {
+                      this.props.getUserOrder()
+                      this.props.addProduct(product.id)
+                    }}
+                  >
+                    Add to cart
+                  </button>
+                </div>
               )
             })}
           </div>
@@ -78,7 +91,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAllProducts: () => dispatch(getAllProductsThunk())
+    getAllProducts: () => dispatch(getAllProductsThunk()),
+    addProduct: id => dispatch(addProductThunk(id)),
+    getUserOrder: () => dispatch(getUserOrderThunk())
   }
 }
 

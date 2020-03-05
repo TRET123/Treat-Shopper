@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 // import { submitOrderThunk } from './redux/thunks'
 import {connect} from 'react-redux'
 
@@ -56,7 +57,6 @@ class CheckoutForm extends Component {
                 <h1 className="check-heading">Checkout Form</h1>
                 <div className="row">
                   <div className="p50">
-                    <h4>Billing Address</h4>
                     <label htmlFor="firstName">
                       First Name:
                       <br />
@@ -96,7 +96,7 @@ class CheckoutForm extends Component {
                     </label>
                     <br />
 
-                    {/* <h4>Payment Info</h4> */}
+                    <h4>Payment Info</h4>
                     <label htmlFor="cardholder">
                       Cardholder:
                       <br />
@@ -203,9 +203,10 @@ class CheckoutForm extends Component {
                     <b>4</b>
                   </span>
                 </h3>
+                <br />
 
                 <p>
-                  <a href="#">Skittles</a> <span className="price">$1.50</span>{' '}
+                  <a href="#">Skittles</a> <span className="price">$1.29</span>{' '}
                 </p>
                 <p>
                   <a href="#">Sour Straws</a>{' '}
@@ -224,9 +225,13 @@ class CheckoutForm extends Component {
                     <b>$7.28</b>
                   </span>
                 </p>
-                <button type="submit" className="btn">
-                  <b>Checkout</b>
-                </button>
+                <Link to="/confirmation_page">
+                  <input
+                    className="btn btn-primary"
+                    type="submit"
+                    value="Submit"
+                  ></input>
+                </Link>
               </div>
             </div>
           </div>
