@@ -1,2 +1,5 @@
 export const GET_USER_ORDER = 'GET_USER_ORDER'
 export const ADD_PRODUCT = 'ADD_PRODUCT'
+export const DECREMENT_QTY = 'DECREMENT_QTY'
+export const INCREMENT_QTY = 'INCREMENT_QTY'
+export const REMOVE_ITEM = 'REMOVE_ITEM'
