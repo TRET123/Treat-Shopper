@@ -23,12 +23,12 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-// admin role only
-
 router.post('/', async (req, res, next) => {
   try {
+    // admins only
+    if (!req.user || !req.user.admin) return res.sendStatus(401)
     const newProduct = await Product.create(req.body)
-    res.send(newProduct)
+    res.status(201).json(newProduct)
   } catch (error) {
     console.error('Error adding a product')
     next(error)
@@ -37,12 +37,14 @@ router.post('/', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
+    // admins only
+    if (!req.user || !req.user.admin) return res.sendStatus(401)
     await Product.destroy({
       where: {
         id: req.params.id
       }
     })
-    res.status(204).send()
+    res.sendStatus(204)
   } catch (error) {
     console.error('Error deleting a product')
     next(error)
@@ -51,6 +53,8 @@ router.delete('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
+    // admins only
+    if (!req.user || !req.user.admin) return res.sendStatus(401)
     const id = req.params.id
     const productToUpdate = await Product.findByPk(id)
     await productToUpdate.update(req.body)

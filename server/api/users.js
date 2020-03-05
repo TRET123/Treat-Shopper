@@ -25,10 +25,10 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-// admin role only
-
 router.post('/', async (req, res, next) => {
   try {
+    // admins only
+    if (!req.user || !req.user.admin) return res.sendStatus(401)
     const newUser = await User.create(req.body)
     res.send(newUser)
   } catch (error) {
@@ -39,6 +39,8 @@ router.post('/', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
+    // admins only
+    if (!req.user || !req.user.admin) return res.sendStatus(401)
     await User.destroy({
       where: {
         id: req.params.id
@@ -53,6 +55,8 @@ router.delete('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
+    // admins only
+    if (!req.user || !req.user.admin) return res.sendStatus(401)
     const id = req.params.id
     const userToUpdate = await User.findByPk(id)
     await userToUpdate.update(req.body)
