@@ -23,6 +23,8 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+// admin role only
+
 router.post('/', async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body)
@@ -52,10 +54,6 @@ router.put('/:id', async (req, res, next) => {
     const id = req.params.id
     const productToUpdate = await Product.findByPk(id)
     await productToUpdate.update(req.body)
-
-    // const updatedRobotWithProjects = await User.findById(id, {
-    //   include: [Project]
-    // });
 
     res.status(200).send(productToUpdate)
   } catch (error) {

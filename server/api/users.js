@@ -1,13 +1,9 @@
 const router = require('express').Router()
-const User = require('../db/models/user')
-const Cart = require('../db/models/cart')
+const {User} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
       attributes: ['id', 'firstName', 'lastName', 'email']
     })
     res.json(users)
@@ -28,6 +24,8 @@ router.get('/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+// admin role only
 
 router.post('/', async (req, res, next) => {
   try {
@@ -58,10 +56,6 @@ router.put('/:id', async (req, res, next) => {
     const id = req.params.id
     const userToUpdate = await User.findByPk(id)
     await userToUpdate.update(req.body)
-
-    // const updatedRobotWithProjects = await User.findById(id, {
-    //   include: [Project]
-    // });
 
     res.status(200).send(userToUpdate)
   } catch (error) {

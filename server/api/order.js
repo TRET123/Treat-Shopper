@@ -1,8 +1,7 @@
 const router = require('express').Router()
-const {Product, Cart, User, Order} = require('../db/models')
+const {Product, User, Order} = require('../db/models')
 
 // send current orders
-
 router.get('/', async (req, res, next) => {
   try {
     const orders = await Order.findAll()
@@ -12,10 +11,10 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// get order associated to user
-router.get('/:userId', async (req, res, next) => {
+// get order associated to logged in user
+router.get('/userOrder', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId)
+    const user = await User.findByPk(req.session.userId)
     const order = await Order.findByPk(req.params.userId, {
       where: {complete: false},
       include: Product
@@ -27,8 +26,8 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-// create new order for user
-router.post('/:userId', async (req, res, next) => {
+// create new order for logged in user
+router.post('/createUserOrder', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId)
     const [order] = await Order.findOrCreate({
