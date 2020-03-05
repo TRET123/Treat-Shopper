@@ -10,7 +10,10 @@ export const order = (state = initialState, action) => {
       return {...state, userOrder: action.userOrder}
     case ADD_PRODUCT:
       // console.log('state', state, 'state products', state.userOrder.products)
-      return {...state, products: [...state.userOrder.products, action.product]}
+      return {
+        ...state,
+        [state.products]: [...state.userOrder.products, action.product]
+      }
     default:
       return state
   }

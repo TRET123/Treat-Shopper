@@ -12,11 +12,13 @@ import {getUserOrderThunk} from '../redux/thunks/order'
 class Cart extends Component {
   constructor() {
     super()
-    // this.state = {cart: data}
     this.getCartTotal = this.getCartTotal.bind(this)
-    this.getItemTotal = this.getItemTotal.bind(this)
     this.handleAddQuantity = this.handleAddQuantity.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
+  }
+
+  async componentDidMount() {
+    await this.props.getUserOrder()
   }
 
   handleRemove = (productid, orderid) => {
@@ -32,20 +34,17 @@ class Cart extends Component {
   }
 
   getCartTotal = function() {
-    return this.props.items
-      .reduce((acc, item) => {
-        return acc + item.price * item.quantity
-      }, 0)
-      .toFixed(2)
-  }
-  getItemTotal = function() {
-    return (
-      this.props.items.cart.price * this.props.items.cart.quantity.toFixed(2)
-    )
+    if (this.props.items) {
+      return this.props.items
+        .reduce((acc, item) => {
+          return acc + (item.price / 100) * item.orderItem.quantity
+        }, 0)
+        .toFixed(2)
+    }
   }
 
   render() {
-    let addedItems = this.props.items.length ? (
+    const addedItems = this.props.items ? (
       this.props.items.map(item => {
         return (
           <div className="item" key={item.id}>
@@ -80,7 +79,11 @@ class Cart extends Component {
               >
                 +
               </button>
-              <input defaultValue={item.quantity} type="text" name="name" />
+              <input
+                defaultValue={item.orderItem.quantity}
+                type="text"
+                name="name"
+              />
               <button
                 onClick={() =>
                   this.handleSubtractQuantity(item.id, item.orderItem.orderId)
@@ -93,7 +96,7 @@ class Cart extends Component {
               </button>
             </div>
             <div className="total-price">
-              ${(item.price * item.quantity).toFixed(2)}
+              ${((item.price / 100) * item.orderItem.quantity).toFixed(2)}
             </div>
             <hr />
           </div>
@@ -122,11 +125,13 @@ class Cart extends Component {
     )
   }
 }
+
 const mapStateToProps = state => {
   return {
-    items: state.cart.cart
+    items: state.order.userOrder.products
   }
 }
+
 const mapDispatchToProps = dispatch => {
   return {
     removeItem: (productid, orderid) => {
@@ -137,6 +142,9 @@ const mapDispatchToProps = dispatch => {
     },
     subtractQuantity: (productid, orderid) => {
       dispatch(decrementQtyThunk(productid, orderid))
+    },
+    getUserOrder: () => {
+      dispatch(getUserOrderThunk())
     }
   }
 }
