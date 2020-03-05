@@ -1,5 +1,9 @@
 import React, {Component} from 'react'
-// import {removeItem, addQuantity, subtractQuantity} from '../redux/index';
+import {
+  removeItemThunk,
+  decrementQtyThunk,
+  incrementQtyThunk
+} from '../redux/thunks/cart'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import CheckoutForm from './CheckoutForm'
@@ -31,22 +35,26 @@ const data = [
 class Cart extends Component {
   constructor() {
     super()
-    this.state = {cart: data}
+    // this.state = {cart: data}
     this.getCartTotal = this.getCartTotal.bind(this)
     this.getItemTotal = this.getItemTotal.bind(this)
+    this.handleAddQuantity = this.handleAddQuantity.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
+    this.addQuantity = this.addQuantity.bind(this)
   }
 
-  // handleRemove = id => {
-  //   this.props.removeItem(id)
-  // }
+  handleRemove = (productid, orderid) => {
+    this.props.removeItem(productid, orderid)
+  }
 
-  // handleAddQuantity = id => {
-  //   this.props.addQuantity(id)
-  // }
+  handleAddQuantity = (productid, orderid) => {
+    this.props.addQuantity(productid, orderid)
+  }
 
-  // handleSubtractQuantity = id => {
-  //   this.props.subtractQuantity(id)
-  // }
+  handleSubtractQuantity = (productid, orderid) => {
+    this.props.subtractQuantity(productid, orderid)
+  }
+
   getCartTotal = function() {
     return this.state.cart
       .reduce((acc, item) => {
@@ -65,7 +73,13 @@ class Cart extends Component {
           <div className="item" key={item.id}>
             <div className="buttons">
               <span>
-                <button className="remove-button" type="submit">
+                <button
+                  onClick={() =>
+                    this.handleRemove(item.id, item.orderItem.orderId)
+                  }
+                  className="remove-button"
+                  type="submit"
+                >
                   x
                 </button>
               </span>
@@ -78,11 +92,25 @@ class Cart extends Component {
               <span className="description">{item.name}</span>
             </div>
             <div className="quantity">
-              <button className="buttons" type="submit" name="button">
+              <button
+                onClick={() =>
+                  this.handleAddQuantity(item.id, item.orderItem.orderId)
+                }
+                className="buttons"
+                type="submit"
+                name="button"
+              >
                 +
               </button>
               <input defaultValue={item.quantity} type="text" name="name" />
-              <button className="buttons" type="submit" name="button">
+              <button
+                onClick={() =>
+                  this.handleSubtractQuantity(item.id, item.orderItem.orderId)
+                }
+                className="buttons"
+                type="submit"
+                name="button"
+              >
                 -
               </button>
             </div>
@@ -118,19 +146,19 @@ class Cart extends Component {
 }
 const mapStateToProps = state => {
   return {
-    items: state.addedItems
+    items: state.cart.cart
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
-    removeItem: id => {
-      dispatch(removeItem(id))
+    removeItem: (productid, orderid) => {
+      dispatch(removeItemThunk(productid, orderid))
     },
-    addQuantity: id => {
-      dispatch(addQuantity(id))
+    addQuantity: (productid, orderid) => {
+      dispatch(incrementQtyThunk(productid, orderid))
     },
-    subtractQuantity: id => {
-      dispatch(subtractQuantity(id))
+    subtractQuantity: (productid, orderid) => {
+      dispatch(decrementQtyThunk(productid, orderid))
     }
   }
 }

@@ -56,9 +56,18 @@ class AllProducts extends Component {
           <div>
             {allProducts.map(product => {
               return (
-                <Link to={`/candies/${product.id}`} key={product.id}>
-                  <SingleProduct key={product.id} product={product} />
-                </Link>
+                <div key={product.id}>
+                  <Link to={`/candies/${product.id}`}>
+                    <SingleProduct key={product.id} product={product} />
+                  </Link>
+                  <button
+                    type="submit"
+                    className="buttons"
+                    onClick={this.addToCart}
+                  >
+                    Add to cart
+                  </button>
+                </div>
               )
             })}
           </div>
