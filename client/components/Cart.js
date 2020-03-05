@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 // import {removeItem, addQuantity, subtractQuantity} from '../redux/index';
 import {connect} from 'react-redux'
-
+import {Link} from 'react-router-dom'
+import CheckoutForm from './CheckoutForm'
 const data = [
   {
     id: 1,
@@ -106,7 +107,9 @@ class Cart extends Component {
             <span className="cart-total-2">
               Cart Total: ${this.getCartTotal()}
             </span>
-            <button type="submit">Checkout</button>
+            <Link to="/checkout">
+              <button type="button">Checkout</button>
+            </Link>
           </div>
         </div>
       </div>
