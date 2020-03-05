@@ -36,19 +36,28 @@ export const order = (state = initialState, action) => {
     case DECREMENT_QTY:
       return {
         ...state,
-        products: state.userOrder.products.map(product => {
-          if (product.id === action.product.id) {
-            return {
-              ...product,
-              orderItem: {
-                ...product.orderItem,
-                quantity: product.orderItem.quantity - 1
-              }
-            }
-          }
-          return product
-        })
+        userOrder: {
+          ...state.userOrder,
+          products: state.userOrder.products.filter(
+            product => product.id !== action.product.id
+          )
+        }
       }
+    // return {
+    //   ...state,
+    //   products: state.userOrder.products.map(product => {
+    //     if (product.id === action.product.id) {
+    //       return {
+    //         ...product,
+    //         orderItem: {
+    //           ...product.orderItem,
+    //           quantity: product.orderItem.quantity - 1
+    //         }
+    //       }
+    //     }
+    //     return product
+    //   })
+    // }
     case INCREMENT_QTY:
       return {
         ...state,
