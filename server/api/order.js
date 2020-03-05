@@ -1,8 +1,9 @@
 const router = require('express').Router()
 const {Product, User, Order} = require('../db/models')
 
-// send current orders
+// get current orders
 router.get('/', async (req, res, next) => {
+  if (req.query.get === 'userOrder') return next()
   try {
     const orders = await Order.findAll({include: Product})
     res.json(orders)
@@ -11,7 +12,22 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// send order by id
+// get order in progress associated to logged in user
+// NOTE: this route has to come before the "get order by id route"
+router.get('/userOrder', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.session.passport.user)
+    const userOrder = await Order.findOne({
+      where: {complete: false, userId: user.id},
+      include: Product
+    })
+    userOrder ? res.json(userOrder) : res.sendStatus(404)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// get order by id
 router.get('/:orderId', async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.orderId, {include: Product})
@@ -21,27 +37,12 @@ router.get('/:orderId', async (req, res, next) => {
   }
 })
 
-// get order in progress associated to logged in user
-router.get('/userOrder', async (req, res, next) => {
-  try {
-    const user = await User.findByPk(req.session.userId)
-    const order = await Order.findByPk(req.params.userId, {
-      where: {complete: false},
-      include: Product
-    })
-    await user.addOrder(order)
-    res.json(order)
-  } catch (error) {
-    next(error)
-  }
-})
-
 // create new order for logged in user
 router.post('/createUserOrder', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId)
+    const user = await User.findByPk(req.session.passport.user)
     const [order] = await Order.findOrCreate({
-      where: {userId: req.params.userId, complete: false}
+      where: {complete: false, userId: user.id}
     })
     await user.addOrder(order)
     res.json(order)
