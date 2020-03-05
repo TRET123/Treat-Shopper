@@ -16,7 +16,10 @@ export const cart = (state = initialState, action) => {
         ...state,
         cart: state.cart.map(product => {
           if (product.id === action.product.id) {
-            product.cart.quantity -= 1
+            return {
+              ...product,
+              cart: {...product.cart, quantity: product.cart.quantity - 1}
+            }
           }
           return product
         })
@@ -26,7 +29,10 @@ export const cart = (state = initialState, action) => {
         ...state,
         cart: state.cart.map(product => {
           if (product.id === action.product.id) {
-            product.cart.quantity += 1
+            return {
+              ...product,
+              cart: {...product.cart, quantity: product.cart.quantity + 1}
+            }
           }
           return product
         })

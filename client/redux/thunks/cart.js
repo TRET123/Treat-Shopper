@@ -1,10 +1,10 @@
 import axios from 'axios'
 import {removeItem, decrementQty, incrementQty} from '../action-creators/cart'
 
-export const removeItemThunk = product => {
+export const removeItemThunk = (productId, orderId) => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/cart/${product.id}/remove`)
+      const {data} = await axios.put(`/api/cart/remove/${productId}/${orderId}`)
       dispatch(removeItem(data))
     } catch (error) {
       console.error(error)
@@ -12,10 +12,12 @@ export const removeItemThunk = product => {
   }
 }
 
-export const decrementQtyThunk = product => {
+export const decrementQtyThunk = (productId, orderId) => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/cart/${product.id}/decrement`)
+      const {data} = await axios.put(
+        `/api/cart/decrement/${productId}/${orderId}`
+      )
       dispatch(decrementQty(data))
     } catch (error) {
       console.error(error)
@@ -23,10 +25,12 @@ export const decrementQtyThunk = product => {
   }
 }
 
-export const incrementQtyThunk = product => {
+export const incrementQtyThunk = (productId, orderId) => {
   return async dispatch => {
     try {
-      const {data} = await axios.put(`/api/cart/${product.id}/increment`)
+      const {data} = await axios.put(
+        `/api/cart/increment/${productId}/${orderId}`
+      )
       dispatch(incrementQty(data))
     } catch (error) {
       console.error(error)
