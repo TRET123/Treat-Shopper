@@ -2,12 +2,12 @@ import React, {Component} from 'react'
 import {
   removeItemThunk,
   decrementQtyThunk,
-  incrementQtyThunk
-} from '../redux/thunks/cart'
+  incrementQtyThunk,
+  getUserOrderThunk
+} from '../redux/thunks/order'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import CheckoutForm from './CheckoutForm'
-import {getUserOrderThunk} from '../redux/thunks/order'
+// import CheckoutForm from './CheckoutForm'
 
 class Cart extends Component {
   constructor() {
@@ -70,7 +70,6 @@ class Cart extends Component {
             </div>
             <div className="quantity">
               <button
-
                 onClick={() =>
                   this.handleAddQuantity(item.id, item.orderItem.orderId)
                 }
@@ -80,7 +79,7 @@ class Cart extends Component {
               >
                 +
               </button>
-      
+
               <input
                 defaultValue={item.orderItem.quantity}
                 type="text"
@@ -129,6 +128,7 @@ class Cart extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log('state in Cart component', state)
   return {
     items: state.order.userOrder.products
   }
