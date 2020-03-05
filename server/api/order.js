@@ -4,14 +4,24 @@ const {Product, User, Order} = require('../db/models')
 // send current orders
 router.get('/', async (req, res, next) => {
   try {
-    const orders = await Order.findAll()
+    const orders = await Order.findAll({include: Product})
     res.json(orders)
   } catch (error) {
     next(error)
   }
 })
 
-// get order associated to logged in user
+// send order by id
+router.get('/:orderId', async (req, res, next) => {
+  try {
+    const order = await Order.findByPk(req.params.orderId, {include: Product})
+    res.json(order)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// get order in progress associated to logged in user
 router.get('/userOrder', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.session.userId)
