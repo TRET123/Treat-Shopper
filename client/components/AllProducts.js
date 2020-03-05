@@ -46,9 +46,9 @@ class AllProducts extends Component {
         <label htmlFor="fuelType">Filter by candy type: </label>
         <select onChange={this.onChange} value={this.state.fuelType}>
           <option value="all">All</option>
-          <option value="gas">Sour</option>
-          <option value="diesel">Chocolate</option>
-          <option value="electric">Gummies</option>
+          <option value="sour">Sour</option>
+          <option value="chocolate">Chocolate</option>
+          <option value="chewy">Chewy</option>
         </select>
 
         <hr style={{margin: '1% 25% 40 25%'}} />
