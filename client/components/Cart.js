@@ -7,30 +7,7 @@ import {
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import CheckoutForm from './CheckoutForm'
-const data = [
-  {
-    id: 1,
-    quantity: 5,
-    name: 'KitKat',
-    inventory: 150,
-    price: 2.99,
-    description: 'Make the most of your break',
-    candyType: 'Chocolate',
-    calories: 200,
-    imageUrl: './images/candy2.png'
-  },
-  {
-    id: 2,
-    quantity: 4,
-    name: 'Skittles',
-    inventory: 100,
-    price: 1.99,
-    description: 'Taste the rainbow',
-    candyType: 'Sour',
-    calories: 100,
-    imageUrl: './images/candy3.png'
-  }
-]
+import {getUserOrderThunk} from '../redux/thunks/order'
 
 class Cart extends Component {
   constructor() {
@@ -40,7 +17,6 @@ class Cart extends Component {
     this.getItemTotal = this.getItemTotal.bind(this)
     this.handleAddQuantity = this.handleAddQuantity.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
-    this.addQuantity = this.addQuantity.bind(this)
   }
 
   handleRemove = (productid, orderid) => {
@@ -56,19 +32,21 @@ class Cart extends Component {
   }
 
   getCartTotal = function() {
-    return this.state.cart
+    return this.props.items
       .reduce((acc, item) => {
         return acc + item.price * item.quantity
       }, 0)
       .toFixed(2)
   }
   getItemTotal = function() {
-    return this.state.cart.item.price * this.state.cart.item.quantity.toFixed(2)
+    return (
+      this.props.items.cart.price * this.props.items.cart.quantity.toFixed(2)
+    )
   }
 
   render() {
-    let addedItems = this.state.cart.length ? (
-      this.state.cart.map(item => {
+    let addedItems = this.props.items.length ? (
+      this.props.items.map(item => {
         return (
           <div className="item" key={item.id}>
             <div className="buttons">
