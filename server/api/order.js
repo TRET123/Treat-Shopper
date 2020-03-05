@@ -16,11 +16,15 @@ router.get('/', async (req, res, next) => {
 // NOTE: this route has to come before the "get order by id route"
 router.get('/userOrder', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.session.passport.user)
+    // logged in users only
+    if (!req.user) return res.sendStatus(401)
+
+    const user = await User.findByPk(req.user.id)
     const userOrder = await Order.findOne({
       where: {complete: false, userId: user.id},
       include: Product
     })
+
     userOrder ? res.json(userOrder) : res.sendStatus(404)
   } catch (error) {
     next(error)
@@ -30,8 +34,14 @@ router.get('/userOrder', async (req, res, next) => {
 // get order by id
 router.get('/:orderId', async (req, res, next) => {
   try {
+    // deny access to guest users
+    if (!req.user) return res.sendStatus(401)
+
     const order = await Order.findByPk(req.params.orderId, {include: Product})
-    res.json(order)
+
+    // admins or owner or order only
+    if (req.user.admin || order.userId === req.user.id) res.json(order)
+    else res.sendStatus(401)
   } catch (error) {
     next(error)
   }
@@ -40,11 +50,16 @@ router.get('/:orderId', async (req, res, next) => {
 // create new order for logged in user
 router.post('/createUserOrder', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.session.passport.user)
+    // logged in users only
+    if (!req.user) return res.sendStatus(400)
+
+    const user = await User.findByPk(req.user.id)
     const [order] = await Order.findOrCreate({
       where: {complete: false, userId: user.id}
     })
+
     await user.addOrder(order)
+
     res.json(order)
   } catch (error) {
     next(error)
