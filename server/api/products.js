@@ -23,6 +23,8 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+// admin role only
+
 router.post('/', async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body)

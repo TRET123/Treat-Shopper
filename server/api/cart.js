@@ -1,8 +1,8 @@
 const router = require('express').Router()
-const {Product, OrderItem, User, Order} = require('../db/models')
+const {Product, OrderItem, Order} = require('../db/models')
 
 // increment, decrement, or remove product quantity in cart
-router.put('/:productId/:orderId/:action', async (req, res, next) => {
+router.put('/:action/:productId/:orderId', async (req, res, next) => {
   try {
     const orderItem = await OrderItem.findOne({
       where: {productId: req.params.productId, orderId: req.params.orderId}

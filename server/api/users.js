@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, OrderItem} = require('../db/models')
+const {User} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -24,6 +24,8 @@ router.get('/:id', async (req, res, next) => {
     next(error)
   }
 })
+
+// admin role only
 
 router.post('/', async (req, res, next) => {
   try {
