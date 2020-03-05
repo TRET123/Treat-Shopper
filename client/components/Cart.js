@@ -107,7 +107,9 @@ class Cart extends Component {
             <span className="cart-total-2">
               Cart Total: ${this.getCartTotal()}
             </span>
-            <button type="submit">Checkout</button>
+            <Link to="/checkout">
+              <button type="button">Checkout</button>
+            </Link>
           </div>
         </div>
       </div>
