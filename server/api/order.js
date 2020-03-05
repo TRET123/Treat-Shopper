@@ -34,6 +34,7 @@ router.get('/userOrder', async (req, res, next) => {
 // get order by id
 router.get('/:orderId', async (req, res, next) => {
   try {
+    console.log('req user', req.user.id)
     // deny access to guest users
     if (!req.user) return res.sendStatus(401)
 
@@ -61,6 +62,18 @@ router.post('/createUserOrder', async (req, res, next) => {
     await user.addOrder(order)
 
     res.json(order)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/addToOrder/:productId', async (req, res, next) => {
+  try {
+    let user = await User.findByPk(req.user.id)
+    let product = await Product.findByPk(req.params.productId)
+    let order = await Order.findOne({where: {complete: false, userId: user.id}})
+    await order.addProduct(product)
+    res.json(product)
   } catch (error) {
     next(error)
   }
