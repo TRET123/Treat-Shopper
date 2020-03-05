@@ -70,6 +70,7 @@ class Cart extends Component {
             </div>
             <div className="quantity">
               <button
+
                 onClick={() =>
                   this.handleAddQuantity(item.id, item.orderItem.orderId)
                 }
@@ -79,6 +80,7 @@ class Cart extends Component {
               >
                 +
               </button>
+      
               <input
                 defaultValue={item.orderItem.quantity}
                 type="text"

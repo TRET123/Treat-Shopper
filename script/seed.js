@@ -61,7 +61,7 @@ const dummyCandies = [
   },
   {
     name: '100 Grand Candy Bar',
-    imageUrl: '/images/100-grand.jpg',
+    imageUrl: '/images/candy5.png',
     inventory: 50,
     calories: 200,
     price: 125,
@@ -71,7 +71,7 @@ const dummyCandies = [
   },
   {
     name: '5th Avenue Candy Bar',
-    imageUrl: '/images/5th-ave.jpg',
+    imageUrl: '/images/candy4.png',
     inventory: 55,
     calories: 150,
     price: 150,
@@ -81,7 +81,7 @@ const dummyCandies = [
   },
   {
     name: 'Airheads Blue Raspberry Taffy Bar',
-    imageUrl: '/images/blue-airhead.jpg',
+    imageUrl: '/images/candy7.png',
     inventory: 100,
     calories: 50,
     price: 50,
@@ -90,18 +90,8 @@ const dummyCandies = [
     candyType: 'sour'
   },
   {
-    name: 'Bonomo Banana Turkish Taffy Candy Bar',
-    imageUrl: '/images/bonomo.jpg',
-    inventory: 200,
-    calories: 50,
-    price: 150,
-    description:
-      "Monkeys are not the only mammals who love bananas. Humans can't get enough either! Bonomo Banana Turkish Taffy is an enchanting way to play with your food and bring out your inner monkey. It may not be packed with potassium, but it is packed with loads of fun. Also available in Chocolate, Strawberry and Vanilla.",
-    candyType: 'chewy'
-  },
-  {
     name: 'Airheads Watermelon Taffy Bar ',
-    imageUrl: '/images/airhead-watermelon.jpg',
+    imageUrl: '/images/candy6.png',
     inventory: 50,
     calories: 50,
     price: 50,
@@ -111,7 +101,7 @@ const dummyCandies = [
   },
   {
     name: 'Chuckles Assorted Fruit Jelly Candy Bars',
-    imageUrl: '/images/chuckles.jpg',
+    imageUrl: '/images/candy8.png',
     inventory: 30,
     calories: 90,
     price: 150,
@@ -121,7 +111,7 @@ const dummyCandies = [
   },
   {
     name: 'Clark Cups Peanut Butter Cups',
-    imageUrl: '/images/clark.jpg',
+    imageUrl: '/images/candy9.png',
     inventory: 160,
     calories: 200,
     price: 150,
@@ -131,7 +121,7 @@ const dummyCandies = [
   },
   {
     name: 'Classic Original Coconut Patties',
-    imageUrl: '/images/coconut-patties.jpg',
+    imageUrl: '/images/candy10.png',
     inventory: 160,
     calories: 200,
     price: 150,
@@ -142,7 +132,7 @@ const dummyCandies = [
 
   {
     name: 'Joyva Raspberry Joys',
-    imageUrl: '/images/joyva.jpg',
+    imageUrl: '/images/candy11.png',
     inventory: 90,
     calories: 140,
     price: 125,
