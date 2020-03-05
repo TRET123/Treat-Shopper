@@ -78,11 +78,19 @@ class Cart extends Component {
               <span className="description">{item.name}</span>
             </div>
             <div className="quantity">
-              <button className="buttons" type="submit" name="button">
+              <button
+                className="btn btn-success btn-xs"
+                type="submit"
+                name="button"
+              >
                 +
               </button>
               <input defaultValue={item.quantity} type="text" name="name" />
-              <button className="buttons" type="submit" name="button">
+              <button
+                className="btn btn-danger btn-xs"
+                type="submit"
+                name="button"
+              >
                 -
               </button>
             </div>
