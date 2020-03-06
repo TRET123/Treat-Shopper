@@ -30,7 +30,6 @@ nav a {
   display: flex;
   align-items: flex-end;
   justify-content: space-evenly;
-  background-color: lightgray;
 }
 
 form div {
@@ -39,7 +38,8 @@ form div {
 }
 
 #header {
-  background-color: lightgray;
+  background-color: lightpink;
+  opacity: 80%;
 }
 
 #products {
