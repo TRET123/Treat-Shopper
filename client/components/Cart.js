@@ -9,6 +9,13 @@ import {Link} from 'react-router-dom'
 import CheckoutForm from './CheckoutForm'
 import {getUserOrderThunk} from '../redux/thunks/order'
 
+// have some local state called guestCart
+// ex : this.state = { guestCart: [] }
+// in componentDidMount, capture the response status
+// ex: const response = await this.props.getUserOrder()
+// if response.status is 206, set guestCart to JSON.parse(sessionStorage.guestCart)
+// inside render method, check if there is something in this.state.guestCart
+// if something in guesCart, render the products in the this.state.guestCart array
 class Cart extends Component {
   constructor() {
     super()
@@ -70,7 +77,6 @@ class Cart extends Component {
             </div>
             <div className="quantity">
               <button
-
                 onClick={() =>
                   this.handleAddQuantity(item.id, item.orderItem.orderId)
                 }
@@ -80,7 +86,7 @@ class Cart extends Component {
               >
                 +
               </button>
-      
+
               <input
                 defaultValue={item.orderItem.quantity}
                 type="text"

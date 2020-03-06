@@ -22,9 +22,10 @@ export const addProductThunk = productId => {
         dispatch(addProduct(response.data))
       } else {
         const {data} = await axios.get(`/api/products/${productId}`)
-        const guestCart = JSON.parse(sessionStorage.guestCart)
-        guestCart.push(data)
-        sessionStorage.setItem('guestCart', JSON.stringify(guestCart))
+        if (!sessionStorage.guestCart.includes(`"id":${productId}`)) {
+          const guestCart = [...JSON.parse(sessionStorage.guestCart), data]
+          sessionStorage.setItem('guestCart', JSON.stringify(guestCart))
+        }
       }
     } catch (error) {
       console.error(error)
