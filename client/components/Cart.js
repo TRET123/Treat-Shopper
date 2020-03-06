@@ -9,6 +9,13 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 // import CheckoutForm from './CheckoutForm'
 
+// have some local state called guestCart
+// ex : this.state = { guestCart: [] }
+// in componentDidMount, capture the response status
+// ex: const response = await this.props.getUserOrder()
+// if response.status is 206, set guestCart to JSON.parse(sessionStorage.guestCart)
+// inside render method, check if there is something in this.state.guestCart
+// if something in guesCart, render the products in the this.state.guestCart array
 class Cart extends Component {
   constructor() {
     super()

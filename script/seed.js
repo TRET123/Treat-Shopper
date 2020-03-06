@@ -37,7 +37,7 @@ const dummyCandies = [
     inventory: 100,
     price: 199,
     description: 'Taste the rainbow',
-    candyType: 'Sour',
+    candyType: 'sour',
     calories: 100,
     imageUrl: '/images/candy3.png'
   },
@@ -46,7 +46,7 @@ const dummyCandies = [
     inventory: 150,
     price: 299,
     description: 'Make the most of your break',
-    candyType: 'Chocolate',
+    candyType: 'chocolate',
     calories: 200,
     imageUrl: '/images/candy2.png'
   },
@@ -55,7 +55,7 @@ const dummyCandies = [
     inventory: 90,
     price: 150,
     description: 'Melts in your mouth, not in your hand',
-    candyType: 'Chocolate',
+    candyType: 'chocolate',
     calories: 150,
     imageUrl: '/images/candy1.png'
   },

@@ -27,20 +27,14 @@ class SingleProduct extends Component {
 
     return product ? (
       product === this.props.product ? (
-        <div>
+        <div id="singleProduct">
           <h1>{name}</h1>
-          <img src={imageUrl} />
-
-          <hr style={{margin: '1% 25% 40 25%'}} />
-
-          <p>
-            Description:
-            <br />
-            {description}
-          </p>
-          <br />
-
-          <p>Price: {price}</p>
+          <div id="productImage">
+            <Link to={`/candies/${product.id}`}>
+              <img src={imageUrl} />
+            </Link>
+          </div>
+          <p>${(price / 100).toFixed(2)}</p>
         </div>
       ) : (
         <div className="container">
@@ -48,7 +42,7 @@ class SingleProduct extends Component {
             <div className="wrapper row">
               <div>
                 <h3 className="product-title">{name}</h3>
-                <div>
+                <div id="productImage">
                   <img src={imageUrl} />
                 </div>
                 <br />
@@ -106,7 +100,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
-
-{
-  /* <img src="/images/loading.gif" /> */
-}
