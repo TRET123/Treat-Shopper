@@ -7,7 +7,6 @@ import {
 } from '../redux/thunks/order'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-// import CheckoutForm from './CheckoutForm'
 
 class Cart extends Component {
   constructor() {
@@ -108,6 +107,10 @@ class Cart extends Component {
     ) : (
       <p>Your cart is empty</p>
     )
+    console.log('a i', addedItems)
+    if (addedItems.length) {
+      return true
+    }
     return (
       <div className="shopping-cart">
         <div>
@@ -120,7 +123,9 @@ class Cart extends Component {
               Cart Total: ${this.getCartTotal()}
             </span>
             <Link to="/checkout">
-              <button type="button">Checkout</button>
+              <button disabled={!addedItems.length} type="button">
+                Checkout
+              </button>
             </Link>
           </div>
         </div>
@@ -128,7 +133,7 @@ class Cart extends Component {
     )
   }
 }
-
+// <button disabled={!this.state.value} />
 const mapStateToProps = state => {
   console.log('state in Cart component', state)
   return {
