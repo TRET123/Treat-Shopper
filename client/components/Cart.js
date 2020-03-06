@@ -44,7 +44,10 @@ class Cart extends Component {
     if (this.props.items) {
       return this.props.items
         .reduce((acc, item) => {
-          return acc + (item.price / 100) * item.orderItem.quantity
+          return (
+            acc +
+            (item.price / 100) * (item.orderItem ? item.orderItem.quantity : 0)
+          )
         }, 0)
         .toFixed(2)
     }
@@ -89,7 +92,7 @@ class Cart extends Component {
               </button>
 
               <input
-                placeholder={item.orderItem.quantity}
+                placeholder={item.orderItem ? item.orderItem.quantity : 0}
                 type="text"
                 name="name"
               />
@@ -106,7 +109,11 @@ class Cart extends Component {
               <div className="total-price"></div>
             </div>
             <div className="total-price">
-              ${((item.price / 100) * item.orderItem.quantity).toFixed(2)}
+              $
+              {(
+                (item.price / 100) *
+                (item.orderItem ? item.orderItem.quantity : 0)
+              ).toFixed(2)}
             </div>
             <hr />
           </div>

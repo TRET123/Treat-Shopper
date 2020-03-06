@@ -11,7 +11,7 @@ export const getUserOrderThunk = () => {
   return async dispatch => {
     try {
       const response = await axios.get('/api/orders/userOrder')
-      if (!response.status === 206) {
+      if (response.status !== 206) {
         dispatch(getUserOrder(response.data))
       }
     } catch (error) {
@@ -24,7 +24,7 @@ export const addProductThunk = productId => {
   return async dispatch => {
     try {
       const response = await axios.post(`/api/orders/addToOrder/${productId}`)
-      if (!response.status === 206) {
+      if (response.status !== 206) {
         dispatch(addProduct(response.data))
       } else {
         const {data} = await axios.get(`/api/products/${productId}`)
