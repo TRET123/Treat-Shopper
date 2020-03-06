@@ -1,6 +1,13 @@
+* {
+  text-align: center;
+  font-family: monospace;
+  font-size: 105%;
+}
+
 body {
   font-family: sans-serif;
   background-image: url('/images/background.jpg');
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -21,6 +28,20 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+#products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(5%, auto);
+}
+
+#productImage {
+  height: 488px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .checkoutForm {

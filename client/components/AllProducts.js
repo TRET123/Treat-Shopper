@@ -54,13 +54,11 @@ class AllProducts extends Component {
         <hr style={{margin: '1% 25% 40 25%'}} />
 
         {allProducts.length ? (
-          <div>
+          <div id="products">
             {allProducts.map(product => {
               return (
                 <div key={product.id}>
-                  <Link to={`/candies/${product.id}`}>
-                    <SingleProduct key={product.id} product={product} />
-                  </Link>
+                  <SingleProduct key={product.id} product={product} />
                   <button
                     type="submit"
                     className="buttons"
@@ -71,6 +69,8 @@ class AllProducts extends Component {
                   >
                     Add to cart
                   </button>
+                  <br />
+                  <br />
                 </div>
               )
             })}
