@@ -39,7 +39,7 @@ class Cart extends Component {
   handleSubtractQuantity = (productid, orderid) => {
     this.props.subtractQuantity(productid, orderid)
   }
-
+  // add logic if dec qty to zero then remove product from cart
   getCartTotal = function() {
     if (this.props.items) {
       return this.props.items
@@ -98,7 +98,12 @@ class Cart extends Component {
               />
               <button
                 onClick={() =>
-                  this.handleSubtractQuantity(item.id, item.orderItem.orderId)
+                  item.orderItem.quantity > 1
+                    ? this.handleSubtractQuantity(
+                        item.id,
+                        item.orderItem.orderId
+                      )
+                    : this.handleRemove(item.id, item.orderItem.orderId)
                 }
                 className="buttons"
                 type="submit"
