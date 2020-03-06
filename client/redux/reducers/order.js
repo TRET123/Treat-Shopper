@@ -14,7 +14,6 @@ export const order = (state = initialState, action) => {
     case GET_USER_ORDER:
       return {...state, userOrder: action.userOrder}
     case ADD_PRODUCT:
-      console.log('state products', state.userOrder.products)
       return {
         ...state,
         userOrder: {

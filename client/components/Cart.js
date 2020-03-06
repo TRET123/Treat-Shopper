@@ -55,7 +55,6 @@ class Cart extends Component {
   render() {
     const addedItems = this.props.items ? (
       this.props.items.map(item => {
-        console.log('items', this.props.items)
         return (
           <div className="item" key={item.id}>
             <div className="buttons">
@@ -91,7 +90,8 @@ class Cart extends Component {
               </button>
 
               <input
-                placeholder={item.orderItem ? item.orderItem.quantity : 0}
+
+                placeholder={item.orderItem ? item.orderItem.quantity : ''}
                 type="text"
                 name="name"
               />
@@ -126,7 +126,6 @@ class Cart extends Component {
     ) : (
       <p>Your cart is empty</p>
     )
-    console.log('a i', addedItems)
     if (addedItems.length) {
       return true
     }
@@ -154,7 +153,6 @@ class Cart extends Component {
 }
 // <button disabled={!this.state.value} />
 const mapStateToProps = state => {
-  console.log('state in Cart component', state)
   return {
     items: state.order.userOrder.products
   }
