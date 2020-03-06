@@ -5,32 +5,33 @@ import {Link} from 'react-router-dom'
 import {logout} from '../redux/thunks/user'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>Treat Shopper</h1>
+  <div id="header">
     <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/cart"></Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
+      <div className="nav">
+        {isLoggedIn ? (
+          <div className="nav">
+            {/* The navbar will show these links after you log in */}
+            <Link to="/home">Home</Link>
+            <Link to="/cart"></Link>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
+        ) : (
+          <div className="nav">
+            {/* The navbar will show these links before you log in */}
+            <Link to="/home">Home</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+        )}
 
-      {/* Link to all Candies */}
-      <Link to="/candies">View All Candies</Link>
-      <Link to="/cart">
-        <i className="fas fa-shopping-cart"></i>
-      </Link>
+        {/* Link to all Candies */}
+        <Link to="/candies">View All Candies</Link>
+        <Link to="/cart">
+          <i className="fas fa-shopping-cart"></i>
+        </Link>
+      </div>
     </nav>
     <hr />
   </div>

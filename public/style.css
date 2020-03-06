@@ -25,9 +25,21 @@ nav a {
   margin: 1em;
 }
 
+.nav {
+  margin-top: 1%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  background-color: lightgray;
+}
+
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+#header {
+  background-color: lightgray;
 }
 
 #products {
