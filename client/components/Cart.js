@@ -53,6 +53,7 @@ class Cart extends Component {
   render() {
     const addedItems = this.props.items ? (
       this.props.items.map(item => {
+        console.log('items', this.props.items)
         return (
           <div className="item" key={item.id}>
             <div className="buttons">
@@ -88,7 +89,7 @@ class Cart extends Component {
               </button>
 
               <input
-                defaultValue={item.orderItem.quantity}
+                placeholder={item.orderItem.quantity}
                 type="text"
                 name="name"
               />
@@ -102,6 +103,7 @@ class Cart extends Component {
               >
                 -
               </button>
+              <div className="total-price"></div>
             </div>
             <div className="total-price">
               ${((item.price / 100) * item.orderItem.quantity).toFixed(2)}

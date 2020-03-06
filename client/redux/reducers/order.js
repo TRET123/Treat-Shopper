@@ -38,41 +38,43 @@ export const order = (state = initialState, action) => {
         ...state,
         userOrder: {
           ...state.userOrder,
-          products: state.userOrder.products.filter(
-            product => product.id !== action.product.id
-          )
+          products: [
+            ...state.userOrder.products.map(product => {
+              if (product.id === action.product.id) {
+                return {
+                  ...product,
+                  orderItem: {
+                    ...product.orderItem,
+                    quantity: product.orderItem.quantity - 1
+                  }
+                }
+              }
+              return product
+            })
+          ]
         }
       }
-    // return {
-    //   ...state,
-    //   products: state.userOrder.products.map(product => {
-    //     if (product.id === action.product.id) {
-    //       return {
-    //         ...product,
-    //         orderItem: {
-    //           ...product.orderItem,
-    //           quantity: product.orderItem.quantity - 1
-    //         }
-    //       }
-    //     }
-    //     return product
-    //   })
-    // }
+
     case INCREMENT_QTY:
       return {
         ...state,
-        products: state.userOrder.products.map(product => {
-          if (product.id === action.product.id) {
-            return {
-              ...product,
-              orderItem: {
-                ...product.orderItem,
-                quantity: product.orderItem.quantity + 1
+        userOrder: {
+          ...state.userOrder,
+          products: [
+            ...state.userOrder.products.map(product => {
+              if (product.id === action.product.id) {
+                return {
+                  ...product,
+                  orderItem: {
+                    ...product.orderItem,
+                    quantity: product.orderItem.quantity + 1
+                  }
+                }
               }
-            }
-          }
-          return product
-        })
+              return product
+            })
+          ]
+        }
       }
     default:
       return state
