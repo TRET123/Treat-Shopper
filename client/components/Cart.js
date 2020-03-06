@@ -38,12 +38,15 @@ class Cart extends Component {
   handleSubtractQuantity = (productid, orderid) => {
     this.props.subtractQuantity(productid, orderid)
   }
-
+  // add logic if dec qty to zero then remove product from cart
   getCartTotal = function() {
     if (this.props.items) {
       return this.props.items
         .reduce((acc, item) => {
-          return acc + (item.price / 100) * item.orderItem.quantity
+          return (
+            acc +
+            (item.price / 100) * (item.orderItem ? item.orderItem.quantity : 0)
+          )
         }, 0)
         .toFixed(2)
     }
@@ -87,13 +90,19 @@ class Cart extends Component {
               </button>
 
               <input
+
                 placeholder={item.orderItem ? item.orderItem.quantity : ''}
                 type="text"
                 name="name"
               />
               <button
                 onClick={() =>
-                  this.handleSubtractQuantity(item.id, item.orderItem.orderId)
+                  item.orderItem.quantity > 1
+                    ? this.handleSubtractQuantity(
+                        item.id,
+                        item.orderItem.orderId
+                      )
+                    : this.handleRemove(item.id, item.orderItem.orderId)
                 }
                 className="buttons"
                 type="submit"
