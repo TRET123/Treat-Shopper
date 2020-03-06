@@ -17,8 +17,7 @@ router.get('/', async (req, res, next) => {
 router.get('/userOrder', async (req, res, next) => {
   try {
     // logged in users only
-    if (!req.user) return res.sendStatus(401)
-
+    if (!req.user) return res.sendStatus(206)
     const user = await User.findByPk(req.user.id)
     const userOrder = await Order.findOne({
       where: {complete: false, userId: user.id},
@@ -34,7 +33,6 @@ router.get('/userOrder', async (req, res, next) => {
 // get order by id
 router.get('/:orderId', async (req, res, next) => {
   try {
-    console.log('req user', req.user.id)
     // deny access to guest users
     if (!req.user) return res.sendStatus(401)
 
@@ -69,9 +67,12 @@ router.post('/createUserOrder', async (req, res, next) => {
 
 router.post('/addToOrder/:productId', async (req, res, next) => {
   try {
-    let user = await User.findByPk(req.user.id)
-    let product = await Product.findByPk(req.params.productId)
-    let order = await Order.findOne({where: {complete: false, userId: user.id}})
+    const product = await Product.findByPk(req.params.productId)
+    if (!req.user) return res.sendStatus(206)
+    const user = await User.findByPk(req.user.id)
+    const order = await Order.findOne({
+      where: {complete: false, userId: user.id}
+    })
     await order.addProduct(product)
     res.json(product)
   } catch (error) {

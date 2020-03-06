@@ -4,9 +4,10 @@ import axios from 'axios'
 export const getUserOrderThunk = () => {
   return async dispatch => {
     try {
-      const {data} = await axios.get('/api/orders/userOrder')
-
-      dispatch(getUserOrder(data))
+      const response = await axios.get('/api/orders/userOrder')
+      if (!response.status === 206) {
+        dispatch(getUserOrder(response.data))
+      }
     } catch (error) {
       console.error(error)
     }
@@ -16,8 +17,15 @@ export const getUserOrderThunk = () => {
 export const addProductThunk = productId => {
   return async dispatch => {
     try {
-      const {data} = await axios.post(`/api/orders/addToOrder/${productId}`)
-      dispatch(addProduct(data))
+      const response = await axios.post(`/api/orders/addToOrder/${productId}`)
+      if (!response.status === 206) {
+        dispatch(addProduct(response.data))
+      } else {
+        const {data} = await axios.get(`/api/products/${productId}`)
+        const guestCart = JSON.parse(sessionStorage.guestCart)
+        guestCart.push(data)
+        sessionStorage.setItem('guestCart', JSON.stringify(guestCart))
+      }
     } catch (error) {
       console.error(error)
     }
