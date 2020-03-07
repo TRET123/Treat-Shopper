@@ -6,7 +6,12 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: {
+        msg: 'Please enter a valid email address'
+      }
+    }
   },
 
   password: {
@@ -72,6 +77,7 @@ const setSaltAndPassword = user => {
 
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
+
 User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPassword)
 })
