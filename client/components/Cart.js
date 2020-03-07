@@ -125,9 +125,6 @@ class Cart extends Component {
     ) : (
       <p>Your cart is empty</p>
     )
-    // if (addedItems.length) {
-    //   return true
-    // }
     return (
       <div className="shopping-cart">
         <div>
