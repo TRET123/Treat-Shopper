@@ -139,7 +139,9 @@ class Cart extends Component {
               Cart Total: ${this.getCartTotal()}
             </span>
             <Link to="/checkout">
-              <button type="button">Checkout</button>
+              <button disabled={!addedItems.length} type="button">
+                Checkout
+              </button>
             </Link>
           </div>
         </div>
