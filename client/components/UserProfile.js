@@ -47,7 +47,7 @@ class UserProfile extends Component {
         <hr />
         <div className="user-profile-items">
           <div className="user-profile-item">
-            FirstName
+            First Name
             <input
               placeholder={this.props.user.firstName}
               className="user-profile-input"
@@ -58,7 +58,7 @@ class UserProfile extends Component {
             />
           </div>
           <div className="user-profile-item">
-            LastName
+            Last Name
             <input
               className="user-profile-input"
               placeholder={this.props.user.lastName}
@@ -93,8 +93,9 @@ class UserProfile extends Component {
           </div>
         </div>
 
-        <div id="user-profile-update-btn">
+        <div id="user-profile-update-div">
           <button
+            id="user-profile-update-btn"
             disabled={!isEnabled}
             type="submit"
             onClick={this.handleSubmit}

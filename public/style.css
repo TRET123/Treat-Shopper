@@ -277,7 +277,7 @@ img {
 }
 .user-profile {
   width: 750px;
-  height: 540px;
+  height: 500px;
   margin: 80px auto;
   background: #ffffff;
   box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.1);
@@ -294,7 +294,7 @@ img {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: flex-start;
-  padding-left: 200px;
+  padding-left: 170px;
   padding-bottom: 25px;
   flex-direction: row;
   color: #5e6977;
@@ -303,10 +303,12 @@ img {
 .user-profile-input {
   width: 70%;
 }
-#user-profile-update-btn {
+#user-profile-update-div {
   padding-top: 30px;
+  color: #5e6977;
+  /* font-size: smaller; */
 }
-.test {
-  max-width: 200px;
+#user-profile-update-btn {
+  color: #5e6977;
 }
 /* confirmation page CSS */
