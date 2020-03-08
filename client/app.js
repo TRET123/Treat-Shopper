@@ -13,7 +13,7 @@ import Routes from './routes'
 // }
 class App extends React.Component {
   componentDidMount() {
-    sessionStorage.setItem('guestCart', '[]')
+    if (!sessionStorage.guestCart) sessionStorage.setItem('guestCart', '[]')
   }
 
   render() {

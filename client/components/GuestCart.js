@@ -1,22 +1,8 @@
 import React, {Component} from 'react'
-import {
-  removeItemThunk,
-  decrementQtyThunk,
-  incrementQtyThunk,
-  getUserOrderThunk
-} from '../redux/thunks/order'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 
-// have some local state called guestCart
-// ex : this.state = { guestCart: [] }
-// in componentDidMount, capture the response status
-// ex: const response = await this.props.getUserOrder()
-// if response.status is 206, set guestCart to JSON.parse(sessionStorage.guestCart)
-// inside render method, check if there is something in this.state.guestCart
-// if something in guesCart, render the products in the this.state.guestCart array
-class Cart extends Component {
+export default class GuestCart extends Component {
   constructor() {
     super()
     this.getCartTotal = this.getCartTotal.bind(this)
@@ -33,46 +19,54 @@ class Cart extends Component {
       this.setState({
         guestCart: JSON.parse(sessionStorage.guestCart)
       })
-      console.log(this.state)
     }
   }
 
-  handleRemove = (productid, orderid) => {
-    this.props.removeItem(productid, orderid)
+  handleRemove(productId) {
+    this.setState({
+      guestCart: this.state.guestCart.filter(product => {
+        return productId !== product.id
+      })
+    })
   }
 
-  handleAddQuantity = (productid, orderid) => {
-    this.props.addQuantity(productid, orderid)
+  handleAddQuantity(productId) {
+    this.setState({
+      guestCart: this.state.guestCart.map(product => {
+        if (productId === product.id) product.quantity += 1
+        return product
+      })
+    })
   }
 
-  handleSubtractQuantity = (productid, orderid) => {
-    this.props.subtractQuantity(productid, orderid)
+  handleSubtractQuantity(productId) {
+    this.setState({
+      guestCart: this.state.guestCart.map(product => {
+        if (productId === product.id) product.quantity -= 1
+        return product
+      })
+    })
   }
   // add logic if dec qty to zero then remove product from cart
-  getCartTotal = function() {
+  getCartTotal() {
     if (this.state.guestCart.length) {
       return this.state.guestCart
         .reduce((acc, item) => {
-          return (
-            acc +
-            (item.price / 100) * (item.orderItem ? item.orderItem.quantity : 0)
-          )
+          return acc + (item.price / 100) * item.quantity
         }, 0)
         .toFixed(2)
     }
   }
 
   render() {
-    const addedItems = JSON.parse(sessionStorage.guestCart).length ? (
+    const addedItems = this.state.guestCart.length ? (
       this.state.guestCart.map(item => {
         return (
           <div className="item" key={item.id}>
             <div className="buttons">
               <span>
                 <button
-                  onClick={() =>
-                    this.handleRemove(item.id, item.orderItem.orderId)
-                  }
+                  onClick={() => this.handleRemove(item.id)}
                   className="remove-button"
                   type="submit"
                 >
@@ -89,9 +83,7 @@ class Cart extends Component {
             </div>
             <div className="quantity">
               <button
-                onClick={() =>
-                  this.handleAddQuantity(item.id, item.orderItem.orderId)
-                }
+                onClick={() => this.handleAddQuantity(item.id)}
                 className="buttons"
                 type="submit"
                 name="button"
@@ -99,18 +91,11 @@ class Cart extends Component {
                 +
               </button>
 
-              <input
-                placeholder={item.orderItem ? item.orderItem.quantity : ''}
-                type="text"
-                name="name"
-              />
+              <input placeholder={item.quantity} type="text" name="name" />
               <button
                 onClick={() =>
-                  item.orderItem.quantity > 1
-                    ? this.handleSubtractQuantity(
-                        item.id,
-                        item.orderItem.orderId
-                      )
+                  item.quantity > 1
+                    ? this.handleSubtractQuantity(item.id)
                     : this.handleRemove(item.id, item.orderItem.orderId)
                 }
                 className="buttons"
@@ -122,11 +107,7 @@ class Cart extends Component {
               <div className="total-price"></div>
             </div>
             <div className="total-price">
-              $
-              {(
-                (item.price / 100) *
-                (item.orderItem ? item.orderItem.quantity : 0)
-              ).toFixed(2)}
+              ${((item.price / 100) * item.quantity).toFixed(2)}
             </div>
             <hr />
           </div>
@@ -157,27 +138,3 @@ class Cart extends Component {
     )
   }
 }
-// <button disabled={!this.state.value} />
-const mapStateToProps = state => {
-  return {
-    items: state.order.userOrder.products
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    removeItem: (productid, orderid) => {
-      dispatch(removeItemThunk(productid, orderid))
-    },
-    addQuantity: (productid, orderid) => {
-      dispatch(incrementQtyThunk(productid, orderid))
-    },
-    subtractQuantity: (productid, orderid) => {
-      dispatch(decrementQtyThunk(productid, orderid))
-    },
-    getUserOrder: () => {
-      dispatch(getUserOrderThunk())
-    }
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Cart)
