@@ -90,7 +90,6 @@ class Cart extends Component {
               </button>
 
               <input
-
                 placeholder={item.orderItem ? item.orderItem.quantity : ''}
                 type="text"
                 name="name"
@@ -126,9 +125,6 @@ class Cart extends Component {
     ) : (
       <p>Your cart is empty</p>
     )
-    if (addedItems.length) {
-      return true
-    }
     return (
       <div className="shopping-cart">
         <div>

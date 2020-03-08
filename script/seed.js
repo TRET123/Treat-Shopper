@@ -158,6 +158,12 @@ async function seed() {
     })
   )
 
+  const p = await Product.findByPk(3)
+  const o = await Order.create()
+  await o.addProduct(p)
+  const oi = await OrderItem.findOne({where: {productId: 3, orderId: 1}})
+  await oi.update({quantity: 5})
+
   console.log(`seeded successfully`)
 }
 
