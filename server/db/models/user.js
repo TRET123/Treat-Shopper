@@ -16,6 +16,16 @@ const User = db.define('user', {
 
   password: {
     type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      len: {
+        args: [6],
+        msg: 'Password must be more than 6 characters'
+      }
+    },
+    // validate: {
+    //   len: [6], msg: 'Password must be at least 6 characters'},
+
     get() {
       return () => this.getDataValue('password')
     }

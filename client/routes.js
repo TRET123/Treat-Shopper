@@ -9,6 +9,7 @@ import SingleProduct from './components/SingleProduct'
 import Cart from './components/Cart'
 import CheckoutForm from './components/CheckoutForm'
 import ConfirmationPage from './components/ConfirmationPage'
+import UserProfile from './components/UserProfile'
 /**
  * COMPONENT
  */
@@ -38,6 +39,7 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={CheckoutForm} />
+            <Route exact path="/profile" component={UserProfile} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

@@ -275,5 +275,28 @@ img {
 .orange {
   background: burlywood;
 }
+.user-profile {
+  width: 750px;
+  height: 323px;
+  margin: 80px auto;
+  background: #ffffff;
+  box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  font-family: 'Roboto', sans-serif;
 
+  display: flex;
+  padding-bottom: 20px;
+
+  flex-direction: column;
+}
+.user-profile-item {
+  /* font-family: 'Roboto', sans-serif; */
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  padding-left: 250px;
+  padding-bottom: 25px;
+  flex-direction: row;
+  color: #5e6977;
+}
 /* confirmation page CSS */
