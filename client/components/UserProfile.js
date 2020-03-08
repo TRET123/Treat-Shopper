@@ -24,7 +24,8 @@ class UserProfile extends Component {
       id: this.state.id,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
-      email: this.state.email
+      email: this.state.email,
+      admin: this.state.admin
     }
 
     this.props.updateUser(user)

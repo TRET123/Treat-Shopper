@@ -19,12 +19,10 @@ const User = db.define('user', {
     allowNull: false,
     validate: {
       len: {
-        args: [6],
-        msg: 'Password must be more than 6 characters'
+        args: [4],
+        msg: 'Password must be more than 4 characters'
       }
     },
-    // validate: {
-    //   len: [6], msg: 'Password must be at least 6 characters'},
 
     get() {
       return () => this.getDataValue('password')
