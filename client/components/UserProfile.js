@@ -9,6 +9,7 @@ class UserProfile extends Component {
       id: this.props.user.id,
       firstName: this.props.user.firstName,
       lastName: this.props.user.lastName,
+      address: this.props.user.address,
       email: this.props.user.email
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -44,27 +45,63 @@ class UserProfile extends Component {
       <div className="user-profile">
         <h5 className="title"> User Profile </h5>
         <hr />
-        <span className="user-profile-item">
-          Name: {`${this.props.user.firstName} `}
-          {this.props.user.lastName}
-        </span>
-        <div className="user-profile-item" defaultValue={this.props.user.email}>
-          Email: {this.state.email}
+        <div className="user-profile-items">
+          <div className="user-profile-item">
+            FirstName
+            <input
+              placeholder={this.props.user.firstName}
+              className="user-profile-input"
+              name="name"
+              type="title"
+              value={this.state.firstName}
+              onChange={evt => this.setState({firstName: evt.target.value})}
+            />
+          </div>
+          <div className="user-profile-item">
+            LastName
+            <input
+              className="user-profile-input"
+              placeholder={this.props.user.lastName}
+              name="name"
+              type="title"
+              value={this.state.lastName}
+              onChange={evt => this.setState({lastName: evt.target.value})}
+            />
+          </div>
+          <div className="user-profile-item">
+            Email
+            <input
+              // style={{width: '80%'}}
+              className="user-profile-input"
+              placeholder={this.props.user.email}
+              name="name"
+              type="email"
+              value={this.state.email}
+              onChange={evt => this.setState({email: evt.target.value})}
+            />
+          </div>
+          <div className="user-profile-item">
+            Address
+            <input
+              className="user-profile-input"
+              placeholder={this.props.user.address}
+              name="name"
+              type="string"
+              value={this.state.address}
+              onChange={evt => this.setState({address: evt.target.value})}
+            />{' '}
+          </div>
         </div>
 
-        <input
-          placeholder={this.props.user.email}
-          name="name"
-          type="email"
-          value={this.state.email}
-          onChange={evt => this.setState({email: evt.target.value})}
-        />
-        <div className="user-profile-item">
-          Address: {this.props.user.address}
+        <div id="user-profile-update-btn">
+          <button
+            disabled={!isEnabled}
+            type="submit"
+            onClick={this.handleSubmit}
+          >
+            Update
+          </button>
         </div>
-        <button disabled={!isEnabled} type="submit" onClick={this.handleSubmit}>
-          Update
-        </button>
       </div>
     )
   }

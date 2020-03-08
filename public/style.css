@@ -277,7 +277,7 @@ img {
 }
 .user-profile {
   width: 750px;
-  height: 323px;
+  height: 540px;
   margin: 80px auto;
   background: #ffffff;
   box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.1);
@@ -286,18 +286,27 @@ img {
 
   display: flex;
   padding-bottom: 20px;
-
+  justify-content: center;
   flex-direction: column;
 }
 .user-profile-item {
-  /* font-family: 'Roboto', sans-serif; */
   display: flex;
-  justify-content: left;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   align-items: flex-start;
-  padding-left: 250px;
+  padding-left: 200px;
   padding-bottom: 25px;
   flex-direction: row;
   color: #5e6977;
-  /* font-size: 12px; */
+  max-width: 650px;
+}
+.user-profile-input {
+  width: 70%;
+}
+#user-profile-update-btn {
+  padding-top: 30px;
+}
+.test {
+  max-width: 200px;
 }
 /* confirmation page CSS */
