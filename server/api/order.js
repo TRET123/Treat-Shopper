@@ -24,7 +24,7 @@ router.get('/userOrder', async (req, res, next) => {
       include: Product
     })
 
-    userOrder ? res.json(userOrder) : res.sendStatus(404)
+    userOrder ? res.json(userOrder) : res.json({})
   } catch (error) {
     next(error)
   }
@@ -70,7 +70,7 @@ router.post('/addToOrder/:productId', async (req, res, next) => {
     const product = await Product.findByPk(req.params.productId)
     if (!req.user) return res.sendStatus(206)
     const user = await User.findByPk(req.user.id)
-    const order = await Order.findOne({
+    const [order] = await Order.findOrCreate({
       where: {complete: false, userId: user.id}
     })
     await order.addProduct(product)

@@ -7,7 +7,6 @@ import {
 } from '../redux/thunks/order'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-// import CheckoutForm from './CheckoutForm'
 
 // have some local state called guestCart
 // ex : this.state = { guestCart: [] }
@@ -56,7 +55,6 @@ class Cart extends Component {
   render() {
     const addedItems = this.props.items ? (
       this.props.items.map(item => {
-        console.log('items', this.props.items)
         return (
           <div className="item" key={item.id}>
             <div className="buttons">
@@ -92,7 +90,7 @@ class Cart extends Component {
               </button>
 
               <input
-                placeholder={item.orderItem ? item.orderItem.quantity : 0}
+                placeholder={item.orderItem ? item.orderItem.quantity : ''}
                 type="text"
                 name="name"
               />
@@ -149,9 +147,8 @@ class Cart extends Component {
     )
   }
 }
-
+// <button disabled={!this.state.value} />
 const mapStateToProps = state => {
-  console.log('state in Cart component', state)
   return {
     items: state.order.userOrder.products
   }

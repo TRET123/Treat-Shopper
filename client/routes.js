@@ -7,6 +7,7 @@ import {me} from './redux/thunks/user'
 import AllProducts from './components/AllProducts'
 import SingleProduct from './components/SingleProduct'
 import Cart from './components/Cart'
+import GuestCart from './components/GuestCart'
 import CheckoutForm from './components/CheckoutForm'
 import ConfirmationPage from './components/ConfirmationPage'
 import UserProfile from './components/UserProfile'
@@ -27,6 +28,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/guest" component={GuestCart} />
         <Route exact path="/checkout" component={CheckoutForm} />
         <Route
           path="/candies/:id"
