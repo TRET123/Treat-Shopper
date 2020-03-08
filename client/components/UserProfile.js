@@ -38,10 +38,7 @@ class UserProfile extends Component {
     })
   }
   render() {
-    const isEnabled =
-      this.state.email.length > 0 &&
-      this.state.firstName.length > 0 &&
-      this.state.lastName.length > 0
+    const isEnabled = this.state.email.length > 0
     return (
       <div className="user-profile">
         <h5 className="title"> User Profile </h5>

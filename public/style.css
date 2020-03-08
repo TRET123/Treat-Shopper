@@ -30,6 +30,7 @@ nav a {
   display: flex;
   align-items: flex-end;
   justify-content: space-evenly;
+  display: flex;
 }
 
 form div {
@@ -319,7 +320,6 @@ img {
   border: 1px solid lightgrey;
   border-radius: 20px;
   width: fit-content;
-  /* align-items: center; */
   justify-content: center;
   opacity: 80%;
   color: darkslateblue;
