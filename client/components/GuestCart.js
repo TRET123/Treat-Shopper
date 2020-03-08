@@ -6,8 +6,7 @@ export default class GuestCart extends Component {
   constructor() {
     super()
     this.getCartTotal = this.getCartTotal.bind(this)
-    this.handleAddQuantity = this.handleAddQuantity.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
+    this.updateCart = this.updateCart.bind(this)
     this.state = {
       guestCart: []
     }
@@ -22,31 +21,30 @@ export default class GuestCart extends Component {
     }
   }
 
-  handleRemove(productId) {
-    this.setState({
-      guestCart: this.state.guestCart.filter(product => {
-        return productId !== product.id
-      })
-    })
-  }
-
-  handleAddQuantity(productId) {
-    this.setState({
-      guestCart: this.state.guestCart.map(product => {
+  updateCart(action, productId) {
+    let sessionCart = JSON.parse(sessionStorage.guestCart)
+    if (action === 'increment') {
+      sessionCart = sessionCart.map(product => {
         if (productId === product.id) product.quantity += 1
         return product
       })
-    })
-  }
-
-  handleSubtractQuantity(productId) {
-    this.setState({
-      guestCart: this.state.guestCart.map(product => {
+    } else if (action === 'decrement') {
+      sessionCart = sessionCart.map(product => {
         if (productId === product.id) product.quantity -= 1
         return product
       })
+    } else if (action === 'remove') {
+      sessionCart = sessionCart.filter(product => {
+        return productId !== product.id
+      })
+    }
+
+    sessionStorage.setItem('guestCart', JSON.stringify(sessionCart))
+    this.setState({
+      guestCart: sessionCart
     })
   }
+
   // add logic if dec qty to zero then remove product from cart
   getCartTotal() {
     if (this.state.guestCart.length) {
@@ -66,7 +64,7 @@ export default class GuestCart extends Component {
             <div className="buttons">
               <span>
                 <button
-                  onClick={() => this.handleRemove(item.id)}
+                  onClick={() => this.updateCart('remove', item.id)}
                   className="remove-button"
                   type="submit"
                 >
@@ -83,7 +81,7 @@ export default class GuestCart extends Component {
             </div>
             <div className="quantity">
               <button
-                onClick={() => this.handleAddQuantity(item.id)}
+                onClick={() => this.updateCart('increment', item.id)}
                 className="buttons"
                 type="submit"
                 name="button"
@@ -95,8 +93,8 @@ export default class GuestCart extends Component {
               <button
                 onClick={() =>
                   item.quantity > 1
-                    ? this.handleSubtractQuantity(item.id)
-                    : this.handleRemove(item.id, item.orderItem.orderId)
+                    ? this.updateCart('decrement', item.id)
+                    : this.updateCart('remove', item.id)
                 }
                 className="buttons"
                 type="submit"
