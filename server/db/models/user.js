@@ -6,11 +6,26 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isEmail: {
+        msg: 'Please enter a valid email address'
+      }
+    }
   },
 
   password: {
     type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      len: {
+        args: [6],
+        msg: 'Password must be more than 6 characters'
+      }
+    },
+    // validate: {
+    //   len: [6], msg: 'Password must be at least 6 characters'},
+
     get() {
       return () => this.getDataValue('password')
     }
@@ -72,6 +87,7 @@ const setSaltAndPassword = user => {
 
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
+
 User.beforeBulkCreate(users => {
   users.forEach(setSaltAndPassword)
 })

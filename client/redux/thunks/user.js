@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../../history'
-import {getUser, removeUser} from '../action-creators/user'
+import {getUser, removeUser, updatedUser} from '../action-creators/user'
 
 export const me = () => async dispatch => {
   try {
@@ -34,5 +34,12 @@ export const logout = () => async dispatch => {
     history.push('/login')
   } catch (err) {
     console.error(err)
+  }
+}
+
+export const updateUser = user => {
+  return async dispatch => {
+    const {data} = await axios.put(`/api/users/${user.id}`, user)
+    dispatch(updatedUser(data))
   }
 }
