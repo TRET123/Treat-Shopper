@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import history from '../history'
-import {Link} from 'react-router-dom'
 import axios from 'axios'
 // import { submitOrderThunk } from './redux/thunks'
 import {connect} from 'react-redux'
@@ -218,7 +217,6 @@ class CheckoutForm extends Component {
 
                 {/* <Link to="/confirmation_page"> */}
                 <button
-                  onClick={this.handleClick}
                   className="btn btn-success"
                   type="submit"
                   value="Submit"

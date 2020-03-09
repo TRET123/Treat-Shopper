@@ -132,7 +132,7 @@ export default class GuestCart extends Component {
             <span className="cart-total-2">
               Cart Total: ${this.getCartTotal()}
             </span>
-            <Link to="/checkout">
+            <Link to="/login">
               <button disabled={!addedItems.length} type="button">
                 Checkout
               </button>
