@@ -32,7 +32,6 @@ class UserProfile extends Component {
   }
 
   handleChange(evt) {
-    console.log('name in handleCh', evt.target)
     this.setState({
       [evt.target.name]: evt.target.value
     })
@@ -106,7 +105,6 @@ class UserProfile extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log('state in UsrPro', state)
   return {
     user: state.user
   }
