@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Product, OrderItem, Order} = require('../db/models')
+const Op = require('sequelize').Op
 
 // increment, decrement, or remove product quantity in cart
 router.put('/:action/:productId/:orderId', async (req, res, next) => {
@@ -38,28 +39,29 @@ router.put('/:guestCart/:productQuantity', async (req, res, next) => {
     const userOrder = await Order.findOne({
       where: {userId: req.user.id, complete: false}
     })
-    const guestCart = req.params.guestCart
-    const productQuantity = req.params.productQuantity
+    const idArray = Array.from(req.params.guestCart).map(element => +element)
+    const qtyArray = Array.from(req.params.productQuantity).map(
+      element => +element
+    )
+
+    const guestCart = await Product.findAll({
+      where: {id: {[Op.in]: idArray}}
+    })
+
     let orderItem
     for (let i = 0; i < guestCart.length; i++) {
       await userOrder.addProduct(guestCart[i])
-      if (productQuantity[guestCart[i].id] > 1) {
+      if (qtyArray[i] > 1) {
         orderItem = await OrderItem.findOne({
           where: {productId: guestCart[i].id, orderId: userOrder.id}
         })
-        await orderItem.update({quantity: productQuantity[guestCart[i].id]})
+        await orderItem.update({quantity: qtyArray[i]})
       }
     }
     res.json(orderItem)
   } catch (error) {
     next(error)
   }
-})
-
-router.get('/:args', (req, res) => {
-  // const e = JSON.parse(req.query.guest)
-  // console.log('e:', e)
-  res.send(req.params.args)
 })
 
 module.exports = router

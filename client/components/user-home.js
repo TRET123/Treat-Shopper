@@ -6,9 +6,21 @@ import axios from 'axios'
 export class UserHome extends React.Component {
   async componentDidMount() {
     if (JSON.parse(sessionStorage.guestCart).length) {
-      const guestCart = JSON.parse(sessionStorage.guestCart)
-      const quantity = JSON.parse(sessionStorage.quantity)
-//       await axios.put(`/api/cart/${guestCart}/${quantity}`)
+      const guestCart = JSON.parse(sessionStorage.guestCart).reduce(
+        (acc, current) => {
+          acc += current.id
+          return acc
+        },
+        ''
+      )
+      const quantity = Object.keys(JSON.parse(sessionStorage.quantity)).reduce(
+        (acc, current) => {
+          acc += JSON.parse(sessionStorage.quantity)[current]
+          return acc
+        },
+        ''
+      )
+      await axios.put(`/api/cart/${guestCart}/${quantity}`)
     }
   }
   render() {
