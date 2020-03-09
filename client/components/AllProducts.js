@@ -60,8 +60,11 @@ class AllProducts extends Component {
                 <div key={product.id}>
                   <SingleProduct key={product.id} product={product} />
                   <button
+                    style={{
+                      marginBottom: '20%'
+                    }}
                     type="submit"
-                    className="buttons"
+                    className="btn btn-primary btn-lg"
                     onClick={() => {
                       this.props.getUserOrder()
                       this.props.addProduct(product.id)
@@ -69,8 +72,6 @@ class AllProducts extends Component {
                   >
                     Add to cart
                   </button>
-                  <br />
-                  <br />
                 </div>
               )
             })}

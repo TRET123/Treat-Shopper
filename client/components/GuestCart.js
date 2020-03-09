@@ -16,23 +16,19 @@ export default class GuestCart extends Component {
     const response = await axios.get('/api/orders/userOrder')
     if (response.status === 206) {
       this.setState({
-        guestCart: JSON.parse(sessionStorage.guestCart)
+        guestCart: JSON.parse(sessionStorage.guestCart),
+        quantity: JSON.parse(sessionStorage.quantity)
       })
     }
   }
 
   updateCart(action, productId) {
     let sessionCart = JSON.parse(sessionStorage.guestCart)
+    let productQuantity = JSON.parse(sessionStorage.quantity)
     if (action === 'increment') {
-      sessionCart = sessionCart.map(product => {
-        if (productId === product.id) product.quantity += 1
-        return product
-      })
+      productQuantity[productId] += 1
     } else if (action === 'decrement') {
-      sessionCart = sessionCart.map(product => {
-        if (productId === product.id) product.quantity -= 1
-        return product
-      })
+      productQuantity[productId] -= 1
     } else if (action === 'remove') {
       sessionCart = sessionCart.filter(product => {
         return productId !== product.id
@@ -40,23 +36,27 @@ export default class GuestCart extends Component {
     }
 
     sessionStorage.setItem('guestCart', JSON.stringify(sessionCart))
+    sessionStorage.setItem('quantity', JSON.stringify(productQuantity))
     this.setState({
-      guestCart: sessionCart
+      guestCart: sessionCart,
+      quantity: productQuantity
     })
   }
 
   // add logic if dec qty to zero then remove product from cart
   getCartTotal() {
+    const productQuantity = this.state.quantity
     if (this.state.guestCart.length) {
       return this.state.guestCart
         .reduce((acc, item) => {
-          return acc + (item.price / 100) * item.quantity
+          return acc + (item.price / 100) * productQuantity[item.id]
         }, 0)
         .toFixed(2)
     }
   }
 
   render() {
+    const productQuantity = this.state.quantity
     const addedItems = this.state.guestCart.length ? (
       this.state.guestCart.map(item => {
         return (
@@ -89,10 +89,14 @@ export default class GuestCart extends Component {
                 +
               </button>
 
-              <input placeholder={item.quantity} type="text" name="name" />
+              <input
+                placeholder={productQuantity[item.id]}
+                type="text"
+                name="name"
+              />
               <button
                 onClick={() =>
-                  item.quantity > 1
+                  productQuantity[item.id] > 1
                     ? this.updateCart('decrement', item.id)
                     : this.updateCart('remove', item.id)
                 }
@@ -105,7 +109,7 @@ export default class GuestCart extends Component {
               <div className="total-price"></div>
             </div>
             <div className="total-price">
-              ${((item.price / 100) * item.quantity).toFixed(2)}
+              ${((item.price / 100) * productQuantity[item.id]).toFixed(2)}
             </div>
             <hr />
           </div>
