@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './redux/thunks/user'
 import AllProducts from './components/AllProducts'
+import AllUsers from './components/AllUsers'
 import SingleProduct from './components/SingleProduct'
 import Cart from './components/Cart'
 import GuestCart from './components/GuestCart'
@@ -43,6 +44,7 @@ class Routes extends Component {
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={CheckoutForm} />
             <Route exact path="/profile" component={UserProfile} />
+            <Route exact path="/users" component={AllUsers} />
           </Switch>
         )}
         {isAdmin && (
