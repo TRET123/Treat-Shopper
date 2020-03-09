@@ -29,7 +29,9 @@ export const addProductThunk = productId => {
       } else {
         const {data} = await axios.get(`/api/products/${productId}`)
         if (!sessionStorage.guestCart.includes(`"id":${productId}`)) {
-          data.quantity = 1
+          const quantity = JSON.parse(sessionStorage.quantity)
+          quantity[productId] = 1
+          sessionStorage.setItem('quantity', JSON.stringify(quantity))
           const guestCart = [...JSON.parse(sessionStorage.guestCart), data]
           sessionStorage.setItem('guestCart', JSON.stringify(guestCart))
         }

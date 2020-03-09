@@ -10,7 +10,7 @@ const users = []
 // admin
 users.push({
   email: 'tret@fs.com',
-  password: '1234',
+  password: '123456',
   admin: true,
   address: faker.fake('{{address.streetAddress}}'),
   lastName: faker.fake('{{name.lastName}}'),
@@ -157,12 +157,6 @@ async function seed() {
       return Product.create(candy)
     })
   )
-
-  const p = await Product.findByPk(3)
-  const o = await Order.create()
-  await o.addProduct(p)
-  const oi = await OrderItem.findOne({where: {productId: 3, orderId: 1}})
-  await oi.update({quantity: 5})
 
   console.log(`seeded successfully`)
 }

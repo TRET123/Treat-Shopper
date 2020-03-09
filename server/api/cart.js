@@ -33,4 +33,33 @@ router.put('/:action/:productId/:orderId', async (req, res, next) => {
   }
 })
 
+router.put('/:guestCart/:productQuantity', async (req, res, next) => {
+  try {
+    const userOrder = await Order.findOne({
+      where: {userId: req.user.id, complete: false}
+    })
+    const guestCart = req.params.guestCart
+    const productQuantity = req.params.productQuantity
+    let orderItem
+    for (let i = 0; i < guestCart.length; i++) {
+      await userOrder.addProduct(guestCart[i])
+      if (productQuantity[guestCart[i].id] > 1) {
+        orderItem = await OrderItem.findOne({
+          where: {productId: guestCart[i].id, orderId: userOrder.id}
+        })
+        await orderItem.update({quantity: productQuantity[guestCart[i].id]})
+      }
+    }
+    res.json(orderItem)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.get('/:args', (req, res) => {
+  // const e = JSON.parse(req.query.guest)
+  // console.log('e:', e)
+  res.send(req.params.args)
+})
+
 module.exports = router
