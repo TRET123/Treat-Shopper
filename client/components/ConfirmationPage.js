@@ -9,8 +9,8 @@ class ConfirmationPage extends Component {
 
   render() {
     const user = this.props.user
-    const userOder = this.props.userOder
-    return userOder.products.length ? (
+    const userOrder = this.props.userOder
+    return userOrder ? (
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -18,12 +18,14 @@ class ConfirmationPage extends Component {
               <div className="card-body p-0">
                 <div className="row p-5">
                   <div className="col-md-6">
-                    <img src="http://via.placeholder.com/400x90?text=logo" />
+                    <img
+                      style={{marginLeft: '50%'}}
+                      src="/images/candylogo.png"
+                    />
                   </div>
                 </div>
 
                 <hr className="my-5" />
-
                 <div className="row pb-5 p-5">
                   <div className="col-md-6">
                     <p className="font-weight-bold mb-4">Payment Details</p>
@@ -60,25 +62,22 @@ class ConfirmationPage extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          {userOder.products.map(product => {
-                            return (
-                              <div key={product.id}>
-                                <td>{product.name}</td>
-                                <td>{product.description}</td>
-                                <td>{product.orderItem.quantity}</td>
-                                <td>{(product.price * 100).toFixed(2)}</td>
-                                <td>
-                                  {(
-                                    (product.price *
-                                      product.orderItem.quantity) /
-                                    100
-                                  ).toFixed(2)}
-                                </td>
-                              </div>
-                            )
-                          })}
-                        </tr>
+                        {userOrder.products.map(product => {
+                          return (
+                            <tr key={product.id}>
+                              <td>{product.name}</td>
+                              <td>{product.description}</td>
+                              <td>{product.orderItem.quantity}</td>
+                              <td>{(product.price / 100).toFixed(2)}</td>
+                              <td>
+                                {(
+                                  (product.price * product.orderItem.quantity) /
+                                  100
+                                ).toFixed(2)}
+                              </td>
+                            </tr>
+                          )
+                        })}
                         <tr></tr>
                       </tbody>
                     </table>
@@ -117,13 +116,13 @@ class ConfirmationPage extends Component {
         </div>
       </div>
     ) : (
-      <img src="/images/loading.gif" />
+      <img style={{borderRadius: '100%'}} src="/images/loading.gif" />
     )
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state)
+  console.log(state, 'here')
   return {
     user: state.user.user,
     userOder: state.order.userOder
@@ -132,7 +131,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUserOder: () => dispatch(getUserOrderThunk())
+    getUserOrder: () => dispatch(getUserOrderThunk())
   }
 }
 

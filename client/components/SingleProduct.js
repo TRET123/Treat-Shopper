@@ -28,7 +28,7 @@ class SingleProduct extends Component {
     return product ? (
       product === this.props.product ? (
         <div id="singleProduct">
-          <h1>{name}</h1>
+          <h4>{name}</h4>
           <div id="productImage">
             <Link to={`/candies/${product.id}`}>
               <img src={imageUrl} />

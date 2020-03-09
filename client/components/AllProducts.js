@@ -43,13 +43,43 @@ class AllProducts extends Component {
 
     return (
       <div>
-        <label htmlFor="fuelType">Filter by candy type: </label>
+        {/* <label htmlFor="fuelType">Filter by candy type: </label>
         <select onChange={this.onChange} value={this.state.fuelType}>
           <option value="all">All</option>
           <option value="sour">Sour</option>
           <option value="chocolate">Chocolate</option>
           <option value="chewy">Chewy</option>
-        </select>
+        </select> */}
+        <small>
+          <strong>candy type</strong>
+        </small>
+        <br />
+        <div className="btn-group">
+          <button
+            type="button"
+            className="btn btn-primary dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Action <span className="caret"></span>
+          </button>
+          <ul className="dropdown-menu">
+            <li>
+              <a href="#">Action</a>
+            </li>
+            <li>
+              <a href="#">Another action</a>
+            </li>
+            <li>
+              <a href="#">Something else here</a>
+            </li>
+            <li role="separator" className="divider"></li>
+            <li>
+              <a href="#">Separated link</a>
+            </li>
+          </ul>
+        </div>
 
         <hr style={{margin: '1% 25% 40 25%'}} />
 
@@ -59,6 +89,7 @@ class AllProducts extends Component {
               return (
                 <div key={product.id}>
                   <SingleProduct key={product.id} product={product} />
+
                   <button
                     style={{
                       marginBottom: '20%'
@@ -70,7 +101,7 @@ class AllProducts extends Component {
                       this.props.addProduct(product.id)
                     }}
                   >
-                    Add to cart
+                    <i className="fas fa-cart-plus"></i>
                   </button>
                 </div>
               )

@@ -33,8 +33,6 @@ class CheckoutForm extends Component {
   async handleSubmit(event) {
     event.preventDefault()
     await axios.put('/api/orders/completeOrder')
-
-    console.log(this.state)
     this.setState({
       firstName: '',
       lastName: '',
