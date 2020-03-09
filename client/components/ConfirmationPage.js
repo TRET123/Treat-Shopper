@@ -1,8 +1,16 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {getUserOrderThunk} from '../redux/thunks/order'
 
 class ConfirmationPage extends Component {
+  async componentDidMount() {
+    await this.props.getUserOrder()
+  }
+
   render() {
-    return (
+    const user = this.props.user
+    const userOder = this.props.userOder
+    return userOder.products.length ? (
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -20,7 +28,7 @@ class ConfirmationPage extends Component {
                   <div className="col-md-6">
                     <p className="font-weight-bold mb-4">Payment Details</p>
                     <p className="mb-1">
-                      <span className="text-muted">Name: </span> John Doe
+                      <span className="text-muted">Name: </span> {user.name}
                     </p>
                     <p className="mb-1">
                       <span className="text-muted">Payment Type: </span> Credit
@@ -53,11 +61,23 @@ class ConfirmationPage extends Component {
                       </thead>
                       <tbody>
                         <tr>
-                          <td>Software</td>
-                          <td>LTS Versions</td>
-                          <td>21</td>
-                          <td>$321</td>
-                          <td>$3452</td>
+                          {userOder.products.map(product => {
+                            return (
+                              <div key={product.id}>
+                                <td>{product.name}</td>
+                                <td>{product.description}</td>
+                                <td>{product.orderItem.quantity}</td>
+                                <td>{(product.price * 100).toFixed(2)}</td>
+                                <td>
+                                  {(
+                                    (product.price *
+                                      product.orderItem.quantity) /
+                                    100
+                                  ).toFixed(2)}
+                                </td>
+                              </div>
+                            )
+                          })}
                         </tr>
                         <tr></tr>
                       </tbody>
@@ -96,8 +116,24 @@ class ConfirmationPage extends Component {
           </a>
         </div>
       </div>
+    ) : (
+      <img src="/images/loading.gif" />
     )
   }
 }
 
-export default ConfirmationPage
+const mapStateToProps = state => {
+  console.log(state)
+  return {
+    user: state.user.user,
+    userOder: state.order.userOder
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getUserOder: () => dispatch(getUserOrderThunk())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmationPage)
