@@ -37,7 +37,6 @@ class AllUsers extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('state in AllUsers', state)
   return {
     users: state.user.users
   }
