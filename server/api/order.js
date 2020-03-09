@@ -30,6 +30,29 @@ router.get('/userOrder', async (req, res, next) => {
   }
 })
 
+// toggle order to complete
+router.put('/completeOrder', async (req, res, next) => {
+  try {
+    // if user is not logged in
+    if (!req.user) return res.sendStatus(400)
+    // const user = await User.findByPk(req.user.id)
+
+    const OrderToUpdate = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        complete: false
+      }
+    })
+    await OrderToUpdate.update({
+      complete: true
+    })
+
+    res.json(OrderToUpdate)
+  } catch (error) {
+    next(error)
+  }
+})
+
 // get order by id
 router.get('/:orderId', async (req, res, next) => {
   try {
