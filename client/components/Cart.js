@@ -147,7 +147,7 @@ class Cart extends Component {
     )
   }
 }
-// <button disabled={!this.state.value} />
+
 const mapStateToProps = state => {
   return {
     items: state.order.userOrder.products

@@ -24,7 +24,8 @@ class UserProfile extends Component {
       id: this.state.id,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
-      email: this.state.email
+      email: this.state.email,
+      admin: this.state.admin
     }
 
     this.props.updateUser(user)
@@ -37,10 +38,7 @@ class UserProfile extends Component {
     })
   }
   render() {
-    const isEnabled =
-      this.state.email.length > 0 &&
-      this.state.firstName.length > 0 &&
-      this.state.lastName.length > 0
+    const isEnabled = this.state.email.length > 0
     return (
       <div className="user-profile">
         <h5 className="title"> User Profile </h5>
