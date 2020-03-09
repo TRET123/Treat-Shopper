@@ -1,6 +1,11 @@
 import axios from 'axios'
 import history from '../../history'
-import {getUser, removeUser, updatedUser} from '../action-creators/user'
+import {
+  getUser,
+  removeUser,
+  updatedUser,
+  getUsers
+} from '../action-creators/user'
 
 export const me = () => async dispatch => {
   try {
@@ -34,6 +39,17 @@ export const logout = () => async dispatch => {
     history.push('/login')
   } catch (err) {
     console.error(err)
+  }
+}
+
+export const gotUsers = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/users')
+      dispatch(getUsers(data))
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 

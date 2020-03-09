@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../redux/thunks/user'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
   <div id="header">
     <nav>
       <div className="nav">
@@ -13,6 +13,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
             <Link to={isLoggedIn ? '/cart' : '/guest'}></Link>
+            <Link to="/profile">Profile</Link>{' '}
             <a href="#" onClick={handleClick}>
               Logout
             </a>
@@ -32,10 +33,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <i className="fas fa-shopping-cart"></i>
         </Link>
         <div>
-          {isLoggedIn ? (
+          {isAdmin ? (
             <div>
-              {/* The navbar will show these links after you log in */}
-              <Link to="/profile">Profile</Link>
+              {/* if admin user show links to All Users and All Products*/}
+              <Link to="/users">All Users</Link>
+              <Link to="/products">All Products</Link>
             </div>
           ) : (
             ' '
@@ -51,8 +53,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  * CONTAINER
  */
 const mapState = state => {
+  console.log('nav state', state)
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.admin
   }
 }
 
@@ -71,5 +75,6 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool
 }

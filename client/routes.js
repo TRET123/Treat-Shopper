@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './redux/thunks/user'
 import AllProducts from './components/AllProducts'
+import AllUsers from './components/AllUsers'
 import SingleProduct from './components/SingleProduct'
 import Cart from './components/Cart'
 import GuestCart from './components/GuestCart'
@@ -21,6 +22,7 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
+    const {isAdmin} = this.props
 
     return (
       <Switch>
@@ -36,6 +38,16 @@ class Routes extends Component {
         />
         <Route path="/candies" component={AllProducts} />
         {isLoggedIn && (
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+            <Route path="/home" component={UserHome} />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={CheckoutForm} />
+            <Route exact path="/profile" component={UserProfile} />
+            <Route exact path="/users" component={AllUsers} />
+          </Switch>
+        )}
+        {isAdmin && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
@@ -59,7 +71,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.admin
   }
 }
 
