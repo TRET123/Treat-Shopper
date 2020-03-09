@@ -35,9 +35,6 @@ class ConfirmationPage extends Component {
                       <thead>
                         <tr>
                           <th className="border-0 text-uppercase small font-weight-bold">
-                            ID
-                          </th>
-                          <th className="border-0 text-uppercase small font-weight-bold">
                             Item
                           </th>
                           <th className="border-0 text-uppercase small font-weight-bold">
@@ -56,29 +53,13 @@ class ConfirmationPage extends Component {
                       </thead>
                       <tbody>
                         <tr>
-                          <td>1</td>
                           <td>Software</td>
                           <td>LTS Versions</td>
                           <td>21</td>
                           <td>$321</td>
                           <td>$3452</td>
                         </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>Software</td>
-                          <td>Support</td>
-                          <td>234</td>
-                          <td>$6356</td>
-                          <td>$23423</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>Software</td>
-                          <td>Sofware Collection</td>
-                          <td>4534</td>
-                          <td>$354</td>
-                          <td>$23434</td>
-                        </tr>
+                        <tr></tr>
                       </tbody>
                     </table>
                   </div>
