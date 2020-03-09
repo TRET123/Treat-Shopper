@@ -31,7 +31,10 @@ export default class GuestCart extends Component {
       productQuantity[productId] -= 1
     } else if (action === 'remove') {
       sessionCart = sessionCart.filter(product => {
-        return productId !== product.id
+        if (productId !== product.id) {
+          return product
+        }
+        delete productQuantity[productId]
       })
     }
 
