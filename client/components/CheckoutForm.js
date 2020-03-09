@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
+import {history} from '../history'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 // import { submitOrderThunk } from './redux/thunks'
 import {connect} from 'react-redux'
 
@@ -29,9 +31,11 @@ class CheckoutForm extends Component {
     })
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
-    //   this.props.submitOrder(this.state);
+    await axios.put('/api/orders/completeOrder')
+
+    console.log(this.state)
     this.setState({
       firstName: '',
       lastName: '',
@@ -44,6 +48,8 @@ class CheckoutForm extends Component {
       zipcode: '',
       expYear: ''
     })
+
+    history.push('/confirmation_page')
   }
 
   // OG
@@ -53,7 +59,11 @@ class CheckoutForm extends Component {
         <div>
           <div className="p65">
             <div className="container">
-              <form onSubmit={this.handleSubmit}>
+              <form
+                onSubmit={this.handleSubmit}
+                className="needs-validation"
+                noValidate
+              >
                 <h1 className="check-heading">Checkout Form</h1>
                 <div className="row">
                   <div className="p50">
@@ -66,6 +76,8 @@ class CheckoutForm extends Component {
                         onChange={this.handleChange}
                         value={this.state.firstName}
                         placeholder="John"
+                        className="form-control"
+                        required
                       />
                     </label>
                     <br />
@@ -79,6 +91,8 @@ class CheckoutForm extends Component {
                         onChange={this.handleChange}
                         value={this.state.lastName}
                         placeholder="Doe"
+                        className="form-control"
+                        required
                       />
                     </label>
                     <br />
@@ -92,6 +106,8 @@ class CheckoutForm extends Component {
                         onChange={this.handleChange}
                         value={this.state.email}
                         placeholder="jdd@treatshopper.com"
+                        className="form-control"
+                        required
                       />
                     </label>
                     <br />
@@ -106,6 +122,8 @@ class CheckoutForm extends Component {
                         onChange={this.handleChange}
                         value={this.state.cardholder}
                         placeholder="John Dee Doe"
+                        className="form-control"
+                        required
                       />
                     </label>
                     <br />
@@ -119,6 +137,8 @@ class CheckoutForm extends Component {
                         onChange={this.handleChange}
                         value={this.state.address}
                         placeholder="123 E. 82nd Street"
+                        className="form-control"
+                        required
                       />
                     </label>
                     <br />
@@ -132,6 +152,8 @@ class CheckoutForm extends Component {
                         onChange={this.handleChange}
                         value={this.state.creditCardNum}
                         placeholder="1111 2222 3333 4444"
+                        className="form-control"
+                        required
                       />
                     </label>
                     <br />
@@ -145,6 +167,8 @@ class CheckoutForm extends Component {
                         onChange={this.handleChange}
                         value={this.state.CVV}
                         placeholder="420"
+                        className="form-control"
+                        required
                       />
                     </label>
                     <br />
@@ -158,6 +182,8 @@ class CheckoutForm extends Component {
                         onChange={this.handleChange}
                         value={this.state.city}
                         placeholder="NY"
+                        className="form-control"
+                        required
                       />
                     </label>
                     <br />
@@ -189,6 +215,17 @@ class CheckoutForm extends Component {
                     <br />
                   </div>
                 </div>
+
+                {/* <Link to="/confirmation_page"> */}
+                <button
+                  onClick={this.handleClick}
+                  className="btn btn-success"
+                  type="submit"
+                  value="Submit"
+                >
+                  Submit
+                </button>
+                {/* </Link> */}
               </form>
             </div>
           </div>
@@ -225,13 +262,6 @@ class CheckoutForm extends Component {
                     <b>$7.28</b>
                   </span>
                 </p>
-                <Link to="/confirmation_page">
-                  <input
-                    className="btn btn-primary"
-                    type="submit"
-                    value="Submit"
-                  ></input>
-                </Link>
               </div>
             </div>
           </div>

@@ -3,7 +3,8 @@ import {
   DECREMENT_QTY,
   REMOVE_ITEM,
   GET_USER_ORDER,
-  ADD_PRODUCT
+  ADD_PRODUCT,
+  COMPLETE_ORDER
 } from '../action-types/order'
 
 export const getUserOrder = userOrder => {
