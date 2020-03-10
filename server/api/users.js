@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
-const {isLoggedIn, isAdmin} = require('./security-middleware')
+const {isAdmin, AdminOrSelf} = require('./security-middleware')
 
+// admins only
 router.get('/', isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -14,12 +15,11 @@ router.get('/', isAdmin, async (req, res, next) => {
   }
 })
 
-router.get('/:id', isAdmin, async (req, res, next) => {
+// admins or self only
+router.get('/:userId', AdminOrSelf, async (req, res, next) => {
   try {
-    const id = req.params.id
-    const singleUser = await User.findByPk(id)
-
-    res.send(singleUser)
+    const singleUser = await User.findByPk(req.params.userId)
+    res.json(singleUser)
   } catch (error) {
     console.error('Error getting a single user')
     next(error)
@@ -30,7 +30,7 @@ router.get('/:id', isAdmin, async (req, res, next) => {
 router.post('/', isAdmin, async (req, res, next) => {
   try {
     const newUser = await User.create(req.body)
-    res.send(newUser)
+    res.json(newUser)
   } catch (error) {
     console.error('Error adding a user')
     next(error)
@@ -38,26 +38,32 @@ router.post('/', isAdmin, async (req, res, next) => {
 })
 
 // admins only
-router.delete('/:id', isAdmin, async (req, res, next) => {
+router.delete('/:userId', isAdmin, async (req, res, next) => {
   try {
     await User.destroy({
       where: {
-        id: req.params.id
+        id: req.params.userId
       }
     })
-    res.status(204).send()
+    res.sendStatus(204)
   } catch (error) {
     console.error('Error deleting a user')
     next(error)
   }
 })
 
-// admins only
-router.put('/:userId', isAdmin, async (req, res, next) => {
+// admin or self only
+router.put('/:userId', AdminOrSelf, async (req, res, next) => {
   try {
     const userToUpdate = await User.findByPk(req.params.userId)
-    await userToUpdate.update(req.body)
-    res.status(200).send(userToUpdate)
+    await userToUpdate.update({
+      email: req.body.email,
+      password: req.body.password,
+      address: req.body.address,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
+    })
+    res.json(userToUpdate)
   } catch (error) {
     console.error('Error updating a user')
     next(error)
