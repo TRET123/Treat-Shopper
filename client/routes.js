@@ -12,7 +12,12 @@ import GuestCart from './components/GuestCart'
 import CheckoutForm from './components/CheckoutForm'
 import ConfirmationPage from './components/ConfirmationPage'
 import UserProfile from './components/UserProfile'
+import ManageProducts from './components/ManageProducts'
+import AdminPage from './components/AdminPage'
+import AddProduct from './components/AddProduct'
+import UpdateProduct from './components/UpdateProduct'
 import NotFound from './components/NotFound'
+
 
 /**
  * COMPONENT
@@ -25,7 +30,7 @@ class Routes extends Component {
   render() {
     const {isLoggedIn} = this.props
     const {isAdmin} = this.props
-
+    console.log('isadmin in routes', isAdmin)
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -57,15 +62,25 @@ class Routes extends Component {
             <Route exact path="/checkout" component={CheckoutForm} />
             <Route exact path="/profile" component={UserProfile} />
             <Route exact path="/users" component={AllUsers} />
+            <Route exact path="/products" component={ManageProducts} />
+            <Route exact path="/admin" component={AdminPage} />
+            <Route exact path="/addproduct" component={AddProduct} />
+            <Route exact path="/products/:id" component={UpdateProduct} />
           </Switch>
         )}
+
         {isAdmin && (
           <Switch>
-            {/* Routes placed here are only available after logging in */}
+            {/* Routes placed here are only available if admin */}
             <Route path="/home" component={UserHome} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout" component={CheckoutForm} />
             <Route exact path="/profile" component={UserProfile} />
+            <Route exact path="/admin" component={AdminPage} />
+            <Route exact path="/admin/products" component={ManageProducts} />
+            <Route exact path="/admin/users" component={AllUsers} />
+            <Route exact path="/products/:id" component={UpdateProduct} />
+            <Route exact path="/addproduct" component={AddProduct} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

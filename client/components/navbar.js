@@ -63,9 +63,9 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
         <div>
           {isAdmin ? (
             <div>
-              {/* if admin user show links to All Users and All Products*/}
-              <Link to="/users">All Users</Link>
-              <Link to="/products">All Products</Link>
+              {/* if admin user show links to Admin page*/}
+
+              <Link to="/admin">Admin</Link>
             </div>
           ) : (
             ' '
