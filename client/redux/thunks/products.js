@@ -1,5 +1,11 @@
 import axios from 'axios'
-import {getAllProducts, getSelectedProduct} from '../action-creators/products'
+import {
+  getAllProducts,
+  getSelectedProduct,
+  addedProduct,
+  deletedProduct,
+  updatedProduct
+} from '../action-creators/products'
 
 export const getAllProductsThunk = () => {
   return async dispatch => {
@@ -20,5 +26,31 @@ export const getSelectedProductThunk = productId => {
     } catch (error) {
       console.error(error)
     }
+  }
+}
+
+export const addProduct = product => {
+  return async dispatch => {
+    const {data} = await axios.post('/api/products', product)
+    dispatch(addedProduct(data))
+  }
+}
+
+export const deleteProduct = product => {
+  return async dispatch => {
+    try {
+      console.log('prod in delProd Thunk', product)
+      const {data} = await axios.put(`/api/products/${product}`)
+      dispatch(deletedProduct(data))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const updateProduct = product => {
+  return async dispatch => {
+    const {data} = await axios.put(`/api/products/${product.id}`, product)
+    dispatch(updatedProduct(data))
   }
 }
