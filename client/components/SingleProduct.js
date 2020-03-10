@@ -14,16 +14,6 @@ class SingleProduct extends Component {
   }
   render() {
     const product = this.props.product || this.props.selected
-    const {
-      id,
-      name,
-      imageUrl,
-      description,
-      inventory,
-      price,
-      calories,
-      candyType
-    } = product
 
     return product ? (
       product === this.props.product ? (
@@ -31,10 +21,10 @@ class SingleProduct extends Component {
           <h3 style={{maxHeight: '35px'}}>{name}</h3>
           <div id="productImage">
             <Link to={`/candies/${product.id}`}>
-              <img src={imageUrl} />
+              <img src={product.imageUrl} />
             </Link>
           </div>
-          <p>${(price / 100).toFixed(2)}</p>
+          <p>${(product.price / 100).toFixed(2)}</p>
         </div>
       ) : (
         <div className="container">
@@ -43,7 +33,7 @@ class SingleProduct extends Component {
               <div>
                 <h3 className="product-title">{name}</h3>
                 <div id="productImage">
-                  <img src={imageUrl} />
+                  <img src={product.imageUrl} />
                 </div>
                 <br />
               </div>
@@ -59,9 +49,10 @@ class SingleProduct extends Component {
                   </div>
                   <span className="review-no">41 reviews</span>
                 </div>
-                <p className="product-description">{description}</p>
+                <p className="product-description">{product.description}</p>
                 <h4 className="price">
-                  current price: <span>${(price / 100).toFixed(2)}</span>
+                  current price:{' '}
+                  <span>${(product.price / 100).toFixed(2)}</span>
                 </h4>
                 <p className="vote">
                   <strong>91%</strong> of buyers enjoyed this product!{' '}

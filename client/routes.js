@@ -18,7 +18,6 @@ import AddProduct from './components/AddProduct'
 import UpdateProduct from './components/UpdateProduct'
 import NotFound from './components/NotFound'
 
-
 /**
  * COMPONENT
  */
@@ -30,7 +29,6 @@ class Routes extends Component {
   render() {
     const {isLoggedIn} = this.props
     const {isAdmin} = this.props
-    console.log('isadmin in routes', isAdmin)
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
