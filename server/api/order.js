@@ -31,6 +31,24 @@ router.get('/userOrder', async (req, res, next) => {
   }
 })
 
+// get most recent completed order for logged in user
+router.get('/recentOrder', isLoggedIn, async (req, res, next) => {
+  const [recentOrder] = await Order.findAll({
+    limit: 1,
+    where: {complete: true, userId: req.user.id},
+    order: [['createdAt', 'DESC']]
+  })
+  res.json(recentOrder)
+})
+
+// order history for logged in user
+router.get('/orderHistory', isLoggedIn, async (req, res, next) => {
+  const orderHistory = await Order.findAll({
+    where: {complete: true, userId: req.user.id}
+  })
+  res.json(orderHistory)
+})
+
 // toggle order to complete
 router.put('/completeOrder', isLoggedIn, async (req, res, next) => {
   try {
