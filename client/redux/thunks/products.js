@@ -48,8 +48,10 @@ export const deleteProduct = id => {
 }
 
 export const updateProduct = product => {
+  console.log('product in update product', product)
   return async dispatch => {
     const {data} = await axios.put(`/api/products/${product.id}`, product)
+    // const {data} = await axios.put(`/api/products/11`, product)
     dispatch(updatedProduct(data))
   }
 }

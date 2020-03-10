@@ -6,25 +6,14 @@ class UpdateProduct extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      id: this.props.product.id,
+      // id: this.props.product.id || '',
       name: this.props.product.name || '',
       inventory: this.props.product.inventory || '',
       calories: this.props.product.calories || '',
-      type: this.props.product.type,
-      imageUrl: this.props.product.imageUrl,
-      description: this.props.product.description
+      imageUrl: this.props.product.imageUrl || '',
+      description: this.props.product.description || '',
+      price: this.props.product.price || ''
     }
-    // this.state = {
-    //   id: 10,
-    //   name: 'Classic Original Coconut Patties',
-    //   inventory: 160,
-    //   price: 150,
-    //   description:
-    //     'These classic original coconut patties are made up of a smooth, shredded coconut texture that is then dipped in a rich dark chocolatey coating, making a perfect combination for coconut candy lovers.',
-    //   type: 'chewy',
-    //   calories: 200,
-    //   imageUrl: '/images/candy10.png'
-    // }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -39,16 +28,15 @@ class UpdateProduct extends Component {
   handleSubmit(evt) {
     evt.preventDefault()
     const product = {
-      id: this.state.id,
+      id: this.props.product.id,
       name: this.state.name || '',
       inventory: this.state.inventory || '',
       calories: this.state.calories || '',
-      type: this.state.type,
-      price: this.state.price,
-      imageUrl: this.state.imageUrl,
-      description: this.state.description
+      price: this.state.price || '',
+      imageUrl: this.state.imageUrl || '',
+      description: this.state.description || ''
     }
-
+    console.log('product in handleSubmit', product)
     this.props.updateProduct(product)
   }
 
@@ -59,8 +47,7 @@ class UpdateProduct extends Component {
   }
 
   render() {
-    const isEnabled =
-      this.state.name.length > 0 && this.state.description.length > 0
+    const isEnabled = this.state.name.length > 0
     return (
       <div className="user-profile">
         <h5 className="title"> Product to Update </h5>
@@ -105,21 +92,21 @@ class UpdateProduct extends Component {
               className="user-profile-input"
               placeholder={this.props.product.calories}
               name="name"
-              type="string"
+              type="number"
               value={this.state.calories}
               onChange={evt => this.setState({calories: evt.target.value})}
-            />{' '}
+            />
           </div>
           <div className="user-profile-item">
-            Type
+            Price
             <input
               className="user-profile-input"
-              placeholder={this.props.product.type}
+              placeholder={this.props.product.price}
               name="name"
-              type="string"
-              value={this.state.type}
-              onChange={evt => this.setState({type: evt.target.value})}
-            />{' '}
+              type="number"
+              value={this.state.price}
+              onChange={evt => this.setState({price: evt.target.value})}
+            />
           </div>
           <div className="user-profile-item">
             Image Url
@@ -130,7 +117,7 @@ class UpdateProduct extends Component {
               type="string"
               value={this.state.imageUrl}
               onChange={evt => this.setState({imageUrl: evt.target.value})}
-            />{' '}
+            />
           </div>
         </div>
 
@@ -149,7 +136,6 @@ class UpdateProduct extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log('state im mapState', state)
   return {
     product: state.products.selectedProduct
   }
@@ -159,10 +145,7 @@ const mapDispatchToProps = dispatch => {
   return {
     getSelected: id => dispatch(getSelectedProductThunk(id)),
 
-    updateProduct: (id, name, description, inventory, calories, imageUrl) =>
-      dispatch(
-        updateProduct(id, name, description, inventory, calories, imageUrl)
-      )
+    updateProduct: product => dispatch(updateProduct(product))
   }
 }
 

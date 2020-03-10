@@ -56,7 +56,9 @@ router.put('/:id', async (req, res, next) => {
     // admins only
     if (!req.user || !req.user.admin) return res.sendStatus(401)
     const id = req.params.id
+    console.log('params', req.params.id)
     const productToUpdate = await Product.findByPk(id)
+    console.log('p to up in api', productToUpdate)
     await productToUpdate.update(req.body)
 
     res.status(200).send(productToUpdate)
