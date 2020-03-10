@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
+const {isLoggedIn, isAdmin} = require('./security-middleware')
 
-router.get('/', async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       attributes: ['id', 'firstName', 'lastName', 'email', 'address', 'admin']
@@ -13,7 +14,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', isAdmin, async (req, res, next) => {
   try {
     const id = req.params.id
     const singleUser = await User.findByPk(id)
@@ -25,10 +26,9 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+// admins only
+router.post('/', isAdmin, async (req, res, next) => {
   try {
-    // admins only
-    if (!req.user || !req.user.admin) return res.sendStatus(401)
     const newUser = await User.create(req.body)
     res.send(newUser)
   } catch (error) {
@@ -37,10 +37,9 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+// admins only
+router.delete('/:id', isAdmin, async (req, res, next) => {
   try {
-    // admins only
-    if (!req.user || !req.user.admin) return res.sendStatus(401)
     await User.destroy({
       where: {
         id: req.params.id
@@ -53,15 +52,11 @@ router.delete('/:id', async (req, res, next) => {
   }
 })
 
-router.put('/:id', async (req, res, next) => {
+// admins only
+router.put('/:userId', isAdmin, async (req, res, next) => {
   try {
-    // admins only
-    // if (!req.user || !req.user.admin) return res.sendStatus(401)
-    if (!req.user) return res.sendStatus(401)
-    const id = req.params.id
-    const userToUpdate = await User.findByPk(id)
+    const userToUpdate = await User.findByPk(req.params.userId)
     await userToUpdate.update(req.body)
-
     res.status(200).send(userToUpdate)
   } catch (error) {
     console.error('Error updating a user')

@@ -1,8 +1,10 @@
 const router = require('express').Router()
 const {Product, User, Order} = require('../db/models')
+const {isAdmin} = require('./security-middleware')
 
 // get current orders
-router.get('/', async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
+  // if request is for the logged in user's order, send to next route
   if (req.query.get === 'userOrder') return next()
   try {
     const orders = await Order.findAll({include: Product})
