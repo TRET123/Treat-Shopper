@@ -16,12 +16,15 @@ const User = db.define('user', {
 
   password: {
     type: Sequelize.STRING,
-    allowNull: false,
     validate: {
       len: {
         args: [4],
         msg: 'Password must be more than 4 characters'
       }
+    },
+
+    imgUrl: {
+      type: Sequelize.STRING
     },
 
     get() {
