@@ -14,7 +14,8 @@ router.put(
       })
       const currentOrder = await Order.findByPk(orderItem.orderId)
       const productInCart = await Product.findByPk(orderItem.productId)
-
+      if (!req.user.admin || req.user.id !== currentOrder.userId)
+        return res.sendStatus(401)
       if (req.params.action === 'increment') {
         await orderItem.update({quantity: orderItem.quantity + 1})
       } else if (req.params.action === 'decrement') {

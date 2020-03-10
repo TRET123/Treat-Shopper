@@ -24,7 +24,8 @@ for (let i = 0; i < instanceCount; i++) {
     password: faker.fake('{{internet.password}}'),
     address: faker.fake('{{address.streetAddress}}'),
     lastName: faker.fake('{{name.lastName}}'),
-    firstName: faker.fake('{{name.firstName}}')
+    firstName: faker.fake('{{name.firstName}}'),
+    imgUrl: ''
   }
 
   users.push(randomUser)
