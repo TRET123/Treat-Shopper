@@ -34,38 +34,31 @@ router.put(
 )
 
 // merge guest cart
-router.put(
-  '/:guestCart/:productQuantity',
-  isLoggedIn,
-  async (req, res, next) => {
-    try {
-      const userOrder = await Order.findOne({
-        where: {userId: req.user.id, complete: false}
-      })
-      const idArray = Array.from(req.params.guestCart).map(element => +element)
-      const qtyArray = Array.from(req.params.productQuantity).map(
-        element => +element
-      )
+router.put('/mergeCarts', isLoggedIn, async (req, res, next) => {
+  try {
+    const userOrder = await Order.findOne({
+      where: {userId: req.user.id, complete: false}
+    })
+    const idArray = req.body.idArray
+    const qtyArray = req.body.qtyArray
+    const guestCart = await Product.findAll({
+      where: {id: {[Op.in]: idArray}}
+    })
 
-      const guestCart = await Product.findAll({
-        where: {id: {[Op.in]: idArray}}
-      })
-
-      let orderItem
-      for (let i = 0; i < guestCart.length; i++) {
-        await userOrder.addProduct(guestCart[i])
-        if (qtyArray[i] > 1) {
-          orderItem = await OrderItem.findOne({
-            where: {productId: guestCart[i].id, orderId: userOrder.id}
-          })
-          await orderItem.update({quantity: qtyArray[i]})
-        }
+    let orderItem
+    for (let i = 0; i < guestCart.length; i++) {
+      await userOrder.addProduct(guestCart[i])
+      if (qtyArray[i] > 1) {
+        orderItem = await OrderItem.findOne({
+          where: {productId: guestCart[i].id, orderId: userOrder.id}
+        })
+        await orderItem.update({quantity: qtyArray[i]})
       }
-      res.json(orderItem)
-    } catch (error) {
-      next(error)
     }
+    res.json(orderItem)
+  } catch (error) {
+    next(error)
   }
-)
+})
 
 module.exports = router
