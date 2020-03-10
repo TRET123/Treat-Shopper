@@ -6,6 +6,7 @@ import {
   updateProduct,
   deleteProduct
 } from '../redux/thunks/products'
+import UpdateProduct from './UpdateProduct'
 
 export class ManageProducts extends React.Component {
   constructor() {
@@ -20,7 +21,6 @@ export class ManageProducts extends React.Component {
     }
   }
   handleRemove = id => {
-    console.log('state in Manage Products', this.state)
     this.props.deleteProduct(id)
   }
   handleSubmit(evt) {
@@ -47,18 +47,10 @@ export class ManageProducts extends React.Component {
     const allProducts = this.props.allProducts ? (
       this.props.allProducts.map(product => {
         return (
-          <div key={product.id}>
-            <div className="product">
-              <span>Name: {product.name}</span>
-              <span>Price: {product.price} </span>
-              <span>Inventory: {product.inventory} </span>
-              <span>Calories: {product.calories} </span>
-              <span>Type: {product.candyType} </span>
-              <span>Image URL: {product.imageUrl} </span>
-              <span>Desription: {product.description} </span>
-              <span key={product.id}>
+          <div className="item" key={product.id}>
+            <div className="buttons">
+              <span>
                 <button
-                  key={product.id}
                   onClick={() => this.handleRemove(product.id)}
                   className="remove-button"
                   type="submit"
@@ -66,6 +58,17 @@ export class ManageProducts extends React.Component {
                   x
                 </button>
               </span>
+            </div>
+            <div className="product">
+              <Link to={`/products/${product.id}`}>
+                <span>{product.name}</span>
+              </Link>
+              <span>Price: {product.price} </span>
+              <span>Inventory: {product.inventory} </span>
+              <span>Calories: {product.calories} </span>
+              <span>Type: {product.candyType} </span>
+              <span>Image: {product.imageUrl} </span>
+              <span>Description: {product.description} </span>
             </div>
           </div>
         )
