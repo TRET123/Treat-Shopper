@@ -12,10 +12,9 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:productId', async (req, res, next) => {
   try {
-    const id = req.params.id
-    const singleProduct = await Product.findByPk(id)
+    const singleProduct = await Product.findByPk(req.params.prodcutId)
     res.send(singleProduct)
   } catch (error) {
     console.error('Error getting a single product')
@@ -35,11 +34,11 @@ router.post('/', isAdmin, async (req, res, next) => {
 })
 
 // admins only
-router.delete('/:id', isAdmin, async (req, res, next) => {
+router.delete('/:productId', isAdmin, async (req, res, next) => {
   try {
     await Product.destroy({
       where: {
-        id: req.params.id
+        id: req.params.productId
       }
     })
     res.sendStatus(204)
@@ -50,13 +49,12 @@ router.delete('/:id', isAdmin, async (req, res, next) => {
 })
 
 // admins only
-router.put('/:id', isAdmin, async (req, res, next) => {
+router.put('/:productId', isAdmin, async (req, res, next) => {
   try {
-    const id = req.params.id
-    const productToUpdate = await Product.findByPk(id)
+    const productToUpdate = await Product.findByPk(req.params.productId)
     await productToUpdate.update(req.body)
 
-    res.status(200).send(productToUpdate)
+    res.json(productToUpdate)
   } catch (error) {
     console.error('Error updating a product')
     next(error)

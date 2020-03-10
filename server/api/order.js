@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const {Product, User, Order} = require('../db/models')
-const {isAdmin} = require('./security-middleware')
+const {isAdmin, isLoggedIn} = require('./security-middleware')
 
 // get current orders
 router.get('/', isAdmin, async (req, res, next) => {
@@ -72,14 +72,10 @@ router.get('/:orderId', async (req, res, next) => {
 })
 
 // create new order for logged in user
-router.post('/createUserOrder', async (req, res, next) => {
+router.post('/createUserOrder', isLoggedIn, async (req, res, next) => {
   try {
-    // logged in users only
-    if (!req.user) return res.sendStatus(400)
-
-    const user = await User.findByPk(req.user.id)
     const [order] = await Order.findOrCreate({
-      where: {complete: false, userId: user.id}
+      where: {complete: false, userId: req.user.id}
     })
 
     await user.addOrder(order)
