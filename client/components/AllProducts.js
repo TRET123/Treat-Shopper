@@ -43,7 +43,10 @@ class AllProducts extends Component {
 
     return (
       <div>
-        <label htmlFor="fuelType">Filter by candy type: </label>
+        <small>
+          <strong>candy type</strong>
+        </small>
+        <br />
         <select onChange={this.onChange} value={this.state.fuelType}>
           <option value="all">All</option>
           <option value="sour">Sour</option>
@@ -59,6 +62,7 @@ class AllProducts extends Component {
               return (
                 <div key={product.id}>
                   <SingleProduct key={product.id} product={product} />
+
                   <button
                     style={{
                       marginBottom: '20%'
@@ -70,7 +74,7 @@ class AllProducts extends Component {
                       this.props.addProduct(product.id)
                     }}
                   >
-                    Add to cart
+                    <i className="fas fa-cart-plus"></i>
                   </button>
                 </div>
               )

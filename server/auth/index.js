@@ -7,7 +7,7 @@ router.post('/login', async (req, res, next) => {
     const user = await User.findOne({where: {email: req.body.email}})
     // create a new order for the user
     const order = await Order.create()
-    user.addOrder(order)
+    await user.addOrder(order)
     if (!user) {
       console.log('No such user found:', req.body.email)
       res.status(401).send('Wrong username and/or password')

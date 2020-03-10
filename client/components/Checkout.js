@@ -1,34 +1,41 @@
 import React from 'react'
 import axios from 'axios'
 import StripeCheckout from 'react-stripe-checkout'
+import history from '../history'
 
-const onToken = (amount, description) => async token => {
-  try {
-    await axios.post({
+import STRIPE_PUBLISHABLE from '../../constants/stripe'
+import PAYMENT_SERVER_URL from '../../constants/server'
+
+const CURRENCY = 'USD'
+const fromUSDToCent = amount => amount * 100
+
+const successPayment = () => {
+  history.push('/confirmation_page')
+}
+
+const errorPayment = data => {
+  alert('Payment Error')
+}
+
+const onToken = (amount, description) => token =>
+  axios
+    .post(PAYMENT_SERVER_URL, {
       description,
       source: token.id,
-      currency: 'USD',
-      amount
+      currency: CURRENCY,
+      amount: fromUSDToCent(amount)
     })
+    .then(successPayment)
+    .catch(errorPayment)
 
-    console.log('SUCCESS!!!')
-    // successPayment(data)
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-const Checkout = ({name, description, amount}) => {
-  return (
-    <StripeCheckout
-      name={name}
-      description={description}
-      amount={amount}
-      token={onToken(amount, description)}
-      currency="USD"
-      stripeKey={process.env.PUBLISHABLE}
-    />
-  )
-}
-
+const Checkout = ({name, description, amount}) => (
+  <StripeCheckout
+    name={name}
+    description={description}
+    amount={fromUSDToCent(amount)}
+    token={onToken(amount, description)}
+    currency={CURRENCY}
+    stripeKey={STRIPE_PUBLISHABLE}
+  />
+)
 export default Checkout

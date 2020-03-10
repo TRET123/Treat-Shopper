@@ -46,15 +46,16 @@ form div {
 
 #products {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 100px;
   grid-auto-rows: minmax(5%, auto);
+  margin: auto 3% auto 3%;
 }
 
 #productImage {
   height: 325px;
   width: 85%;
-  padding-left: 20%;
+  margin-left: 10%;
   display: flex;
   justify-content: center;
   align-items: center;

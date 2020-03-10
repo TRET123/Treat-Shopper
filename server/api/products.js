@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Product = require('../db/models/product')
+const {isAdmin} = require('./security-middleware')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -11,11 +12,9 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:productId', async (req, res, next) => {
   try {
-    const id = req.params.id
-    const singleProduct = await Product.findByPk(id)
-
+    const singleProduct = await Product.findByPk(req.params.prodcutId)
     res.send(singleProduct)
   } catch (error) {
     console.error('Error getting a single product')
@@ -23,10 +22,9 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+// admins only
+router.post('/', isAdmin, async (req, res, next) => {
   try {
-    // admins only
-    if (!req.user || !req.user.admin) return res.sendStatus(401)
     const newProduct = await Product.create(req.body)
     res.status(201).json(newProduct)
   } catch (error) {
@@ -35,33 +33,29 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
-  let productToDelete = await Product.findByPk(req.params.id)
-  if (productToDelete) {
-    try {
-      // admins only
-      if (!req.user || !req.user.admin) return res.sendStatus(401)
-      await Product.destroy({where: {id: req.params.id}})
-      res.status(204).send()
-    } catch (err) {
-      next(err)
-    }
-  } else {
-    res.status(404).send()
+
+// admins only
+router.delete('/:productId', isAdmin, async (req, res, next) => {
+  try {
+    await Product.destroy({
+      where: {
+        id: req.params.productId
+      }
+    })
+    res.sendStatus(204)
+  } catch (error) {
+    console.error('Error deleting a product')
+    next(error)
+
   }
 })
 
-router.put('/:id', async (req, res, next) => {
+// admins only
+router.put('/:productId', isAdmin, async (req, res, next) => {
   try {
-    // admins only
-    if (!req.user || !req.user.admin) return res.sendStatus(401)
-    const id = req.params.id
-    console.log('params', req.params.id)
-    const productToUpdate = await Product.findByPk(id)
-    console.log('p to up in api', productToUpdate)
+    const productToUpdate = await Product.findByPk(req.params.productId)
     await productToUpdate.update(req.body)
-
-    res.status(200).send(productToUpdate)
+    res.json(productToUpdate)
   } catch (error) {
     console.error('Error updating a product')
     next(error)

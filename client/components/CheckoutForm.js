@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import history from '../history'
 import axios from 'axios'
+import Checkout from './Checkout'
 // import { submitOrderThunk } from './redux/thunks'
 import {connect} from 'react-redux'
 
@@ -10,14 +10,7 @@ class CheckoutForm extends Component {
     this.state = {
       firstName: '',
       lastName: '',
-      email: '',
-      cardholder: '',
-      address: '',
-      creditCardNum: '',
-      CVV: '',
-      city: '',
-      zipcode: '',
-      expYear: ''
+      address: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -33,22 +26,11 @@ class CheckoutForm extends Component {
   async handleSubmit(event) {
     event.preventDefault()
     await axios.put('/api/orders/completeOrder')
-
-    console.log(this.state)
     this.setState({
       firstName: '',
       lastName: '',
-      email: '',
-      cardholder: '',
-      address: '',
-      creditCardNum: '',
-      CVV: '',
-      city: '',
-      zipcode: '',
-      expYear: ''
+      address: ''
     })
-
-    history.push('/confirmation_page')
   }
 
   // OG
@@ -56,7 +38,7 @@ class CheckoutForm extends Component {
     return (
       <div className="row">
         <div>
-          <div className="p65">
+          <div>
             <div className="container">
               <form
                 onSubmit={this.handleSubmit}
@@ -67,14 +49,12 @@ class CheckoutForm extends Component {
                 <div className="row">
                   <div className="p50">
                     <label htmlFor="firstName">
-                      First Name:
-                      <br />
                       <input
                         type="text"
                         name="firstName"
                         onChange={this.handleChange}
                         value={this.state.firstName}
-                        placeholder="John"
+                        placeholder="First Name"
                         className="form-control"
                         required
                       />
@@ -82,148 +62,42 @@ class CheckoutForm extends Component {
                     <br />
 
                     <label htmlFor="lastName">
-                      Last Name:
-                      <br />
+                      {/* <br /> */}
                       <input
                         type="text"
                         name="lastName"
                         onChange={this.handleChange}
                         value={this.state.lastName}
-                        placeholder="Doe"
+                        placeholder="Last Name"
                         className="form-control"
                         required
                       />
                     </label>
                     <br />
 
-                    <label htmlFor="email">
-                      Email:
-                      <br />
-                      <input
-                        type="text"
-                        name="email"
-                        onChange={this.handleChange}
-                        value={this.state.email}
-                        placeholder="jdd@treatshopper.com"
-                        className="form-control"
-                        required
-                      />
-                    </label>
-                    <br />
-
-                    <h4>Payment Info</h4>
-                    <label htmlFor="cardholder">
-                      Cardholder:
-                      <br />
-                      <input
-                        type="text"
-                        name="cardholder"
-                        onChange={this.handleChange}
-                        value={this.state.cardholder}
-                        placeholder="John Dee Doe"
-                        className="form-control"
-                        required
-                      />
-                    </label>
                     <br />
 
                     <label htmlFor="address">
-                      Address:
-                      <br />
                       <input
                         type="text"
                         name="address"
                         onChange={this.handleChange}
                         value={this.state.address}
-                        placeholder="123 E. 82nd Street"
+                        placeholder="Address"
                         className="form-control"
                         required
                       />
                     </label>
                     <br />
-
-                    <label htmlFor="creditCardNum">
-                      Credit Card Number:
-                      <br />
-                      <input
-                        type="text"
-                        name="creditCardNum"
-                        onChange={this.handleChange}
-                        value={this.state.creditCardNum}
-                        placeholder="1111 2222 3333 4444"
-                        className="form-control"
-                        required
-                      />
-                    </label>
                     <br />
-
-                    <label htmlFor="CVV">
-                      CVV:
-                      <br />
-                      <input
-                        type="text"
-                        name="CVV"
-                        onChange={this.handleChange}
-                        value={this.state.CVV}
-                        placeholder="420"
-                        className="form-control"
-                        required
-                      />
-                    </label>
-                    <br />
-
-                    <label htmlFor="city">
-                      City:
-                      <br />
-                      <input
-                        type="text"
-                        name="city"
-                        onChange={this.handleChange}
-                        value={this.state.city}
-                        placeholder="NY"
-                        className="form-control"
-                        required
-                      />
-                    </label>
-                    <br />
-
-                    <label htmlFor="zipcode">
-                      Zipcode:
-                      <br />
-                      <input
-                        type="text"
-                        name="zipcode"
-                        onChange={this.handleChange}
-                        value={this.state.zipcode}
-                        placeholder="10021"
-                      />
-                    </label>
-                    <br />
-
-                    <label htmlFor="expYear">
-                      Exp Year:
-                      <br />
-                      <input
-                        type="text"
-                        name="expYear"
-                        onChange={this.handleChange}
-                        value={this.state.expYear}
-                        placeholder="2022"
-                      />
-                    </label>
-                    <br />
+                    {/* STRIPE CHECKOUT COMPONENT */}
+                    <Checkout
+                      name="Treat Shopper"
+                      description="Sweet Deals"
+                      amount={1}
+                    />
                   </div>
                 </div>
-
-                {/* <Link to="/confirmation_page"> */}
-                <button
-                  className="btn btn-success"
-                  type="submit"
-                  value="Submit"
-                >
-                  Submit
-                </button>
-                {/* </Link> */}
               </form>
             </div>
           </div>
@@ -268,13 +142,5 @@ class CheckoutForm extends Component {
     )
   }
 }
-
-//   const mapDispatchToProps = dispatch => {
-//     return {
-//       addRobot: newRobot => dispatch(addRobotThunk(newRobot))
-//     };
-//   };
-
-//   export default connect(null, mapDispatchToProps)(NewRobotForm);
 
 export default CheckoutForm

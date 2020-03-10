@@ -6,21 +6,24 @@ import axios from 'axios'
 export class UserHome extends React.Component {
   async componentDidMount() {
     if (JSON.parse(sessionStorage.guestCart).length) {
-      const guestCart = JSON.parse(sessionStorage.guestCart).reduce(
+      const idArray = JSON.parse(sessionStorage.guestCart).reduce(
         (acc, current) => {
-          acc += current.id
+          acc.push(current.id)
           return acc
         },
-        ''
+        []
       )
-      const quantity = Object.keys(JSON.parse(sessionStorage.quantity)).reduce(
+      const qtyArray = Object.keys(JSON.parse(sessionStorage.quantity)).reduce(
         (acc, current) => {
-          acc += JSON.parse(sessionStorage.quantity)[current]
+          acc.push(JSON.parse(sessionStorage.quantity)[current])
           return acc
         },
-        ''
+        []
       )
-      await axios.put(`/api/cart/${guestCart}/${quantity}`)
+      await axios.put('/api/cart/mergeCarts', {
+        idArray,
+        qtyArray
+      })
     }
   }
   render() {
@@ -28,6 +31,7 @@ export class UserHome extends React.Component {
     return (
       <div>
         <h3 className="welcome">Welcome, {firstName}</h3>
+        <h2>Shop our wide variety of candies!</h2>
       </div>
     )
   }
