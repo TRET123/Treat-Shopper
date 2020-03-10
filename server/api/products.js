@@ -33,6 +33,7 @@ router.post('/', isAdmin, async (req, res, next) => {
   }
 })
 
+
 // admins only
 router.delete('/:productId', isAdmin, async (req, res, next) => {
   try {
@@ -45,6 +46,7 @@ router.delete('/:productId', isAdmin, async (req, res, next) => {
   } catch (error) {
     console.error('Error deleting a product')
     next(error)
+
   }
 })
 
@@ -53,7 +55,6 @@ router.put('/:productId', isAdmin, async (req, res, next) => {
   try {
     const productToUpdate = await Product.findByPk(req.params.productId)
     await productToUpdate.update(req.body)
-
     res.json(productToUpdate)
   } catch (error) {
     console.error('Error updating a product')
