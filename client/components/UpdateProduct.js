@@ -36,7 +36,6 @@ class UpdateProduct extends Component {
       imageUrl: this.state.imageUrl || '',
       description: this.state.description || ''
     }
-    console.log('product in handleSubmit', product)
     this.props.updateProduct(product)
   }
 

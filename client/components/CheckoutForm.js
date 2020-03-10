@@ -1,20 +1,26 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import Checkout from './Checkout'
-// import { submitOrderThunk } from './redux/thunks'
-import {connect} from 'react-redux'
 
-class CheckoutForm extends Component {
+export default class CheckoutForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
       firstName: '',
       lastName: '',
-      address: ''
+      address: '',
+      userOrder: {}
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  async componentDidMount() {
+    const {data} = await axios.get('/api/orders/userOrder')
+    this.setState({
+      userOrder: data
+    })
   }
 
   handleChange(event) {
@@ -22,7 +28,7 @@ class CheckoutForm extends Component {
       [event.target.name]: event.target.value
     })
   }
-
+  // send total as well
   async handleSubmit(event) {
     event.preventDefault()
     await axios.put('/api/orders/completeOrder')
@@ -35,7 +41,9 @@ class CheckoutForm extends Component {
 
   // OG
   render() {
-    return (
+    let total = 0
+    const products = this.state.userOrder.products
+    return products ? (
       <div className="row">
         <div>
           <div>
@@ -45,7 +53,7 @@ class CheckoutForm extends Component {
                 className="needs-validation"
                 noValidate
               >
-                <h1 className="check-heading">Checkout Form</h1>
+                <h1 className="check-heading">Checkout</h1>
                 <div className="row">
                   <div className="p50">
                     <label htmlFor="firstName">
@@ -109,29 +117,26 @@ class CheckoutForm extends Component {
                   Items in Cart:
                   <span className="price">
                     <i className="fa fa-shopping-cart"></i>
-                    <b>4</b>
                   </span>
                 </h3>
                 <br />
-
-                <p>
-                  <a href="#">Skittles</a> <span className="price">$1.29</span>{' '}
-                </p>
-                <p>
-                  <a href="#">Sour Straws</a>{' '}
-                  <span className="price">$1.29</span>{' '}
-                </p>
-                <p>
-                  <a href="#">Nerds</a> <span className="price">$2.50</span>{' '}
-                </p>
-                <p>
-                  <a href="#">Gushers</a> <span className="price">$2.99</span>{' '}
-                </p>
-
+                {products.map(product => {
+                  total += product.price
+                  return (
+                    <div key={product.id}>
+                      <p>
+                        <a style={{color: '#3385ff'}}>{product.name}</a>{' '}
+                        <span className="price">
+                          {`$${(product.price / 100).toFixed(2)}`}
+                        </span>{' '}
+                      </p>
+                    </div>
+                  )
+                })}
                 <p>
                   Total{' '}
                   <span className="total">
-                    <b>$7.28</b>
+                    <b>{`$${(total / 100).toFixed(2)}`}</b>
                   </span>
                 </p>
               </div>
@@ -139,8 +144,8 @@ class CheckoutForm extends Component {
           </div>
         </div>
       </div>
+    ) : (
+      <img src="/images/loading.png" />
     )
   }
 }
-
-export default CheckoutForm

@@ -14,8 +14,8 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:productId', async (req, res, next) => {
   try {
-    const singleProduct = await Product.findByPk(req.params.prodcutId)
-    res.send(singleProduct)
+    const singleProduct = await Product.findByPk(req.params.productId)
+    res.json(singleProduct)
   } catch (error) {
     console.error('Error getting a single product')
     next(error)
@@ -33,7 +33,6 @@ router.post('/', isAdmin, async (req, res, next) => {
   }
 })
 
-
 // admins only
 router.delete('/:productId', isAdmin, async (req, res, next) => {
   try {
@@ -46,7 +45,6 @@ router.delete('/:productId', isAdmin, async (req, res, next) => {
   } catch (error) {
     console.error('Error deleting a product')
     next(error)
-
   }
 })
 
