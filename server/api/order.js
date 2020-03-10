@@ -35,7 +35,7 @@ router.get('/userOrder', async (req, res, next) => {
 router.get('/recentOrder', isLoggedIn, async (req, res, next) => {
   const [recentOrder] = await Order.findAll({
     limit: 1,
-    where: {complete: true, userId: req.user.id},
+    where: {complete: false, userId: req.user.id},
     order: [['createdAt', 'DESC']]
   })
   res.json(recentOrder)

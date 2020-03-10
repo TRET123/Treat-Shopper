@@ -1,16 +1,27 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {getUserOrderThunk} from '../redux/thunks/order'
+import axios from 'axios'
 
-class ConfirmationPage extends Component {
+export default class ConfirmationPage extends Component {
+  constructor() {
+    super()
+    this.state = {
+      user: {},
+      userOrder: {}
+    }
+  }
   async componentDidMount() {
-    await this.props.getUserOrder()
+    const user = await axios.get('/auth/me')
+    const userOder = await axios.get('/api/orders/recentOrder')
+    this.setState({
+      user: user.data,
+      userOrder: userOder.data
+    })
   }
 
   render() {
-    const user = this.props.user
-    const userOrder = this.props.userOder
-    return userOrder ? (
+    const user = this.state.user
+    const products = this.state.userOrder.products
+    return products.length ? (
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -62,7 +73,7 @@ class ConfirmationPage extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        {userOrder.products.map(product => {
+                        {products.map(product => {
                           return (
                             <tr key={product.id}>
                               <td>{product.name}</td>
@@ -108,6 +119,7 @@ class ConfirmationPage extends Component {
         <div className="text-light mt-5 mb-5 text-center small">
           <a
             className="text-light"
+            // eslint-disable-next-line react/jsx-no-target-blank
             target="_blank"
             href="https://treat-shopper.herokuapp.com/"
           >
@@ -120,19 +132,3 @@ class ConfirmationPage extends Component {
     )
   }
 }
-
-const mapStateToProps = state => {
-  console.log(state, 'here')
-  return {
-    user: state.user.user,
-    userOder: state.order.userOder
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getUserOrder: () => dispatch(getUserOrderThunk())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmationPage)
