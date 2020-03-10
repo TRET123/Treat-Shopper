@@ -7,9 +7,9 @@ class UserProfile extends Component {
     super(props)
     this.state = {
       id: this.props.user.id,
-      firstName: this.props.user.firstName,
-      lastName: this.props.user.lastName,
-      address: this.props.user.address,
+      firstName: this.props.user.firstName || '',
+      lastName: this.props.user.lastName || '',
+      address: this.props.user.address || '',
       email: this.props.user.email
     }
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -22,8 +22,9 @@ class UserProfile extends Component {
     evt.preventDefault()
     const user = {
       id: this.state.id,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
+      firstName: this.state.firstName || '',
+      lastName: this.state.lastName || '',
+      address: this.state.address || '',
       email: this.state.email,
       admin: this.state.admin
     }
@@ -32,6 +33,7 @@ class UserProfile extends Component {
   }
 
   handleChange(evt) {
+    console.log('name in handleCh', evt.target)
     this.setState({
       [evt.target.name]: evt.target.value
     })
@@ -49,7 +51,7 @@ class UserProfile extends Component {
               placeholder={this.props.user.firstName}
               className="user-profile-input"
               name="name"
-              type="title"
+              type="string"
               value={this.state.firstName}
               onChange={evt => this.setState({firstName: evt.target.value})}
             />
@@ -60,7 +62,7 @@ class UserProfile extends Component {
               className="user-profile-input"
               placeholder={this.props.user.lastName}
               name="name"
-              type="title"
+              type="string"
               value={this.state.lastName}
               onChange={evt => this.setState({lastName: evt.target.value})}
             />
@@ -68,10 +70,9 @@ class UserProfile extends Component {
           <div className="user-profile-item">
             Email
             <input
-              // style={{width: '80%'}}
               className="user-profile-input"
               placeholder={this.props.user.email}
-              name="name"
+              name="string"
               type="email"
               value={this.state.email}
               onChange={evt => this.setState({email: evt.target.value})}
@@ -105,6 +106,7 @@ class UserProfile extends Component {
   }
 }
 const mapStateToProps = state => {
+  console.log('state in UsrPro', state)
   return {
     user: state.user
   }

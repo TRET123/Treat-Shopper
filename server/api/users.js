@@ -56,7 +56,8 @@ router.delete('/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     // admins only
-    if (!req.user || !req.user.admin) return res.sendStatus(401)
+    // if (!req.user || !req.user.admin) return res.sendStatus(401)
+    if (!req.user) return res.sendStatus(401)
     const id = req.params.id
     const userToUpdate = await User.findByPk(id)
     await userToUpdate.update(req.body)

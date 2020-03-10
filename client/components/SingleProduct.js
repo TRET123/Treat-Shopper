@@ -28,7 +28,7 @@ class SingleProduct extends Component {
     return product ? (
       product === this.props.product ? (
         <div id="singleProduct">
-          <h1>{name}</h1>
+          <h3 style={{maxHeight: '35px'}}>{name}</h3>
           <div id="productImage">
             <Link to={`/candies/${product.id}`}>
               <img src={imageUrl} />
@@ -69,12 +69,10 @@ class SingleProduct extends Component {
                 </p>
 
                 <div className="action">
-                  <button className="add-to-cart btn btn-default" type="button">
+                  <button className="add-to-cart btn btn-primary" type="button">
                     add to cart
                   </button>
-                  <button className="like btn btn-default" type="button">
-                    <span className="fa fa-heart"></span>
-                  </button>
+                  <br />
                 </div>
               </div>
             </div>

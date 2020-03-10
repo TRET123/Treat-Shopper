@@ -1,8 +1,16 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {getUserOrderThunk} from '../redux/thunks/order'
 
 class ConfirmationPage extends Component {
+  async componentDidMount() {
+    await this.props.getUserOrder()
+  }
+
   render() {
-    return (
+    const user = this.props.user
+    const userOrder = this.props.userOder
+    return userOrder ? (
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -10,17 +18,19 @@ class ConfirmationPage extends Component {
               <div className="card-body p-0">
                 <div className="row p-5">
                   <div className="col-md-6">
-                    <img src="http://via.placeholder.com/400x90?text=logo" />
+                    <img
+                      style={{marginLeft: '50%'}}
+                      src="/images/candylogo.png"
+                    />
                   </div>
                 </div>
 
                 <hr className="my-5" />
-
                 <div className="row pb-5 p-5">
                   <div className="col-md-6">
                     <p className="font-weight-bold mb-4">Payment Details</p>
                     <p className="mb-1">
-                      <span className="text-muted">Name: </span> John Doe
+                      <span className="text-muted">Name: </span> {user.name}
                     </p>
                     <p className="mb-1">
                       <span className="text-muted">Payment Type: </span> Credit
@@ -34,9 +44,6 @@ class ConfirmationPage extends Component {
                     <table className="table">
                       <thead>
                         <tr>
-                          <th className="border-0 text-uppercase small font-weight-bold">
-                            ID
-                          </th>
                           <th className="border-0 text-uppercase small font-weight-bold">
                             Item
                           </th>
@@ -55,30 +62,23 @@ class ConfirmationPage extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Software</td>
-                          <td>LTS Versions</td>
-                          <td>21</td>
-                          <td>$321</td>
-                          <td>$3452</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>Software</td>
-                          <td>Support</td>
-                          <td>234</td>
-                          <td>$6356</td>
-                          <td>$23423</td>
-                        </tr>
-                        <tr>
-                          <td>1</td>
-                          <td>Software</td>
-                          <td>Sofware Collection</td>
-                          <td>4534</td>
-                          <td>$354</td>
-                          <td>$23434</td>
-                        </tr>
+                        {userOrder.products.map(product => {
+                          return (
+                            <tr key={product.id}>
+                              <td>{product.name}</td>
+                              <td>{product.description}</td>
+                              <td>{product.orderItem.quantity}</td>
+                              <td>{(product.price / 100).toFixed(2)}</td>
+                              <td>
+                                {(
+                                  (product.price * product.orderItem.quantity) /
+                                  100
+                                ).toFixed(2)}
+                              </td>
+                            </tr>
+                          )
+                        })}
+                        <tr></tr>
                       </tbody>
                     </table>
                   </div>
@@ -115,8 +115,24 @@ class ConfirmationPage extends Component {
           </a>
         </div>
       </div>
+    ) : (
+      <img style={{borderRadius: '100%'}} src="/images/loading.gif" />
     )
   }
 }
 
-export default ConfirmationPage
+const mapStateToProps = state => {
+  console.log(state, 'here')
+  return {
+    user: state.user.user,
+    userOder: state.order.userOder
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getUserOrder: () => dispatch(getUserOrderThunk())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmationPage)

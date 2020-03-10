@@ -60,7 +60,7 @@ const dummyCandies = [
     imageUrl: '/images/candy1.png'
   },
   {
-    name: '100 Grand Candy Bar',
+    name: '100 Grand',
     imageUrl: '/images/candy5.png',
     inventory: 50,
     calories: 200,
@@ -70,7 +70,7 @@ const dummyCandies = [
     candyType: 'chocolate'
   },
   {
-    name: '5th Avenue Candy Bar',
+    name: '5th Avenue',
     imageUrl: '/images/candy4.png',
     inventory: 55,
     calories: 150,
@@ -80,7 +80,7 @@ const dummyCandies = [
     candyType: 'chocolate'
   },
   {
-    name: 'Airheads Blue Raspberry Taffy Bar',
+    name: 'Airheads Blue Raspberry',
     imageUrl: '/images/candy7.png',
     inventory: 100,
     calories: 50,
@@ -90,7 +90,7 @@ const dummyCandies = [
     candyType: 'sour'
   },
   {
-    name: 'Airheads Watermelon Taffy Bar ',
+    name: 'Airheads Watermelon',
     imageUrl: '/images/candy6.png',
     inventory: 50,
     calories: 50,
@@ -100,7 +100,7 @@ const dummyCandies = [
     candyType: 'sour'
   },
   {
-    name: 'Chuckles Assorted Fruit Jelly Candy Bars',
+    name: 'Chuckles',
     imageUrl: '/images/candy8.png',
     inventory: 30,
     calories: 90,
@@ -110,7 +110,7 @@ const dummyCandies = [
     candyType: 'chewy'
   },
   {
-    name: 'Clark Cups Peanut Butter Cups',
+    name: 'Clark Cups',
     imageUrl: '/images/candy9.png',
     inventory: 160,
     calories: 200,
@@ -120,7 +120,7 @@ const dummyCandies = [
     candyType: 'chewy'
   },
   {
-    name: 'Classic Original Coconut Patties',
+    name: 'Coconut Patties',
     imageUrl: '/images/candy10.png',
     inventory: 160,
     calories: 200,
@@ -131,7 +131,7 @@ const dummyCandies = [
   },
 
   {
-    name: 'Joyva Raspberry Joys',
+    name: 'Joys',
     imageUrl: '/images/candy11.png',
     inventory: 90,
     calories: 140,
