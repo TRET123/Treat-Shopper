@@ -36,18 +36,18 @@ router.post('/', async (req, res, next) => {
 })
 
 router.delete('/:id', async (req, res, next) => {
-  try {
-    // admins only
-    if (!req.user || !req.user.admin) return res.sendStatus(401)
-    await Product.destroy({
-      where: {
-        id: req.params.id
-      }
-    })
-    res.sendStatus(204)
-  } catch (error) {
-    console.error('Error deleting a product')
-    next(error)
+  let productToDelete = await Product.findByPk(req.params.id)
+  if (productToDelete) {
+    try {
+      // admins only
+      if (!req.user || !req.user.admin) return res.sendStatus(401)
+      await Product.destroy({where: {id: req.params.id}})
+      res.status(204).send()
+    } catch (err) {
+      next(err)
+    }
+  } else {
+    res.status(404).send()
   }
 })
 

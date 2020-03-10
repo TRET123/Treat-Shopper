@@ -3,7 +3,7 @@ import {
   GET_SELECTED_PRODUCT,
   DELETE_PRODUCT,
   UPDATE_PRODUCT,
-  ADD_PRODUCT
+  ADD_PRODUCT_ADMIN
 } from '../action-types/products'
 
 export const getAllProducts = allProducts => {
@@ -22,7 +22,7 @@ export const getSelectedProduct = selectedProduct => {
 
 export const addedProduct = product => {
   return {
-    type: ADD_PRODUCT,
+    type: ADD_PRODUCT_ADMIN,
     product
   }
 }
@@ -34,9 +34,9 @@ export const updatedProduct = product => {
   }
 }
 
-export const deletedProduct = product => {
+export const deletedProduct = productId => {
   return {
     type: DELETE_PRODUCT,
-    product
+    productId
   }
 }

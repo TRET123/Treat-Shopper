@@ -36,12 +36,11 @@ export const addProduct = product => {
   }
 }
 
-export const deleteProduct = product => {
+export const deleteProduct = id => {
   return async dispatch => {
     try {
-      console.log('prod in delProd Thunk', product)
-      const {data} = await axios.put(`/api/products/${product}`)
-      dispatch(deletedProduct(data))
+      await axios.delete(`/api/products/${id}`)
+      dispatch(deletedProduct(id))
     } catch (error) {
       console.error(error)
     }

@@ -20,6 +20,7 @@ export class ManageProducts extends React.Component {
     }
   }
   handleRemove = id => {
+    console.log('state in Manage Products', this.state)
     this.props.deleteProduct(id)
   }
   handleSubmit(evt) {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {addProduct} from '../redux/thunks/products'
-
+import axios from 'axios'
 class AddProduct extends Component {
   constructor(props) {
     super(props)
@@ -19,7 +19,7 @@ class AddProduct extends Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  handleSubmit(evt) {
+  async handleSubmit(evt) {
     evt.preventDefault()
     const product = {
       name: this.state.name,
@@ -30,14 +30,16 @@ class AddProduct extends Component {
       calories: this.state.calories,
       candyType: this.state.candyType
     }
+    // make a post request to database directly
+    // await axios.post('/api/products', product)
     this.props.addProduct(product)
     this.setState({
       name: '',
       imageUrl: '',
       description: '',
-      inventory: 0,
-      price: 0,
-      calories: 0,
+      inventory: '',
+      price: '',
+      calories: '',
       candyType: ''
     })
   }
@@ -131,15 +133,7 @@ class AddProduct extends Component {
     )
   }
 }
-// const product={
-//   name,
-//   imageUrl,
-//   description,
-//   inventory,
-//   price,
-//   calories,
-//   candyType
-// }
+
 const mapDispatchToProps = dispatch => {
   return {
     addProduct: product => dispatch(addProduct(product))
