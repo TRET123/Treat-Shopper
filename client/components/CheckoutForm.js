@@ -1,8 +1,6 @@
 import React, {Component} from 'react'
 import history from '../history'
 import axios from 'axios'
-// import { submitOrderThunk } from './redux/thunks'
-import {connect} from 'react-redux'
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -266,13 +264,5 @@ class CheckoutForm extends Component {
     )
   }
 }
-
-//   const mapDispatchToProps = dispatch => {
-//     return {
-//       addRobot: newRobot => dispatch(addRobotThunk(newRobot))
-//     };
-//   };
-
-//   export default connect(null, mapDispatchToProps)(NewRobotForm);
 
 export default CheckoutForm

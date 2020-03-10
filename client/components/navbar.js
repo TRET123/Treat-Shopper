@@ -16,7 +16,6 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
               <br />
               <small>home</small>
             </Link>
-            <Link to={isLoggedIn ? '/cart' : '/guest'}></Link>
             <Link to="/profile">
               <i className="fas fa-user-circle"></i>
               <br />
