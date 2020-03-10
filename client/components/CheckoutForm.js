@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import history from '../history'
 import axios from 'axios'
+import Checkout from './Checkout'
 // import { submitOrderThunk } from './redux/thunks'
 import {connect} from 'react-redux'
 
@@ -11,13 +12,9 @@ class CheckoutForm extends Component {
       firstName: '',
       lastName: '',
       email: '',
-      cardholder: '',
       address: '',
-      creditCardNum: '',
-      CVV: '',
       city: '',
-      zipcode: '',
-      expYear: ''
+      zipcode: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -39,13 +36,10 @@ class CheckoutForm extends Component {
       firstName: '',
       lastName: '',
       email: '',
-      cardholder: '',
       address: '',
-      creditCardNum: '',
       CVV: '',
       city: '',
-      zipcode: '',
-      expYear: ''
+      zipcode: ''
     })
 
     history.push('/confirmation_page')
@@ -56,7 +50,7 @@ class CheckoutForm extends Component {
     return (
       <div className="row">
         <div>
-          <div className="p65">
+          <div>
             <div className="container">
               <form
                 onSubmit={this.handleSubmit}
@@ -104,28 +98,14 @@ class CheckoutForm extends Component {
                         name="email"
                         onChange={this.handleChange}
                         value={this.state.email}
-                        placeholder="jdd@treatshopper.com"
+                        placeholder="fs@treatshopper.com"
                         className="form-control"
                         required
                       />
                     </label>
                     <br />
 
-                    <h4>Payment Info</h4>
-                    <label htmlFor="cardholder">
-                      Cardholder:
-                      <br />
-                      <input
-                        type="text"
-                        name="cardholder"
-                        onChange={this.handleChange}
-                        value={this.state.cardholder}
-                        placeholder="John Dee Doe"
-                        className="form-control"
-                        required
-                      />
-                    </label>
-                    <br />
+                    <h4>Shipping Information</h4>
 
                     <label htmlFor="address">
                       Address:
@@ -136,36 +116,6 @@ class CheckoutForm extends Component {
                         onChange={this.handleChange}
                         value={this.state.address}
                         placeholder="123 E. 82nd Street"
-                        className="form-control"
-                        required
-                      />
-                    </label>
-                    <br />
-
-                    <label htmlFor="creditCardNum">
-                      Credit Card Number:
-                      <br />
-                      <input
-                        type="text"
-                        name="creditCardNum"
-                        onChange={this.handleChange}
-                        value={this.state.creditCardNum}
-                        placeholder="1111 2222 3333 4444"
-                        className="form-control"
-                        required
-                      />
-                    </label>
-                    <br />
-
-                    <label htmlFor="CVV">
-                      CVV:
-                      <br />
-                      <input
-                        type="text"
-                        name="CVV"
-                        onChange={this.handleChange}
-                        value={this.state.CVV}
-                        placeholder="420"
                         className="form-control"
                         required
                       />
@@ -200,18 +150,13 @@ class CheckoutForm extends Component {
                     </label>
                     <br />
 
-                    <label htmlFor="expYear">
-                      Exp Year:
-                      <br />
-                      <input
-                        type="text"
-                        name="expYear"
-                        onChange={this.handleChange}
-                        value={this.state.expYear}
-                        placeholder="2022"
-                      />
-                    </label>
-                    <br />
+                    <h4>Payment Info</h4>
+                    {/* STRIPE CHECKOUT COMPONENT */}
+                    <Checkout
+                      name="The Road to learn React"
+                      description="Only the Book"
+                      amount={1}
+                    />
                   </div>
                 </div>
 
