@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import StripeCheckout from 'react-stripe-checkout'
+import history from '../history'
 
 import STRIPE_PUBLISHABLE from '../../constants/stripe'
 import PAYMENT_SERVER_URL from '../../constants/server'
@@ -8,8 +9,8 @@ import PAYMENT_SERVER_URL from '../../constants/server'
 const CURRENCY = 'USD'
 const fromUSDToCent = amount => amount * 100
 
-const successPayment = data => {
-  alert('Payment Successful')
+const successPayment = () => {
+  history.push('/confirmation_page')
 }
 
 const errorPayment = data => {
