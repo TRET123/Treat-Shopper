@@ -12,6 +12,8 @@ import GuestCart from './components/GuestCart'
 import CheckoutForm from './components/CheckoutForm'
 import ConfirmationPage from './components/ConfirmationPage'
 import UserProfile from './components/UserProfile'
+import NotFound from './components/NotFound'
+
 /**
  * COMPONENT
  */
@@ -27,16 +29,21 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route exact path="/home" component={UserHome} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/guest" component={GuestCart} />
         <Route exact path="/checkout" component={CheckoutForm} />
         <Route
+          exact
           path="/candies/:id"
           render={({match}) => <SingleProduct match={match} />}
         />
         <Route path="/candies" component={AllProducts} />
+
+        {/* Issues/collisions for rendering NotFound page */}
+        {/* <Route path="*" component={NotFound} /> */}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
