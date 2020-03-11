@@ -6,7 +6,7 @@ export default class ConfirmationPage extends Component {
     super()
     this.state = {
       user: {},
-      userOrder: {}
+      products: {}
     }
   }
   async componentDidMount() {
@@ -14,13 +14,13 @@ export default class ConfirmationPage extends Component {
     const userOder = await axios.get('/api/orders/recentOrder')
     this.setState({
       user: user.data,
-      userOrder: userOder.data
+      products: userOder.data.products
     })
   }
 
   render() {
     const user = this.state.user
-    const products = this.state.userOrder.products
+    const products = this.state.products
     return products.length ? (
       <div className="container">
         <div className="row">
@@ -41,7 +41,8 @@ export default class ConfirmationPage extends Component {
                   <div className="col-md-6">
                     <p className="font-weight-bold mb-4">Payment Details</p>
                     <p className="mb-1">
-                      <span className="text-muted">Name: </span> {user.name}
+                      <span className="text-muted">Name: </span>{' '}
+                      {user.firstName + ' ' + user.lastName}
                     </p>
                     <p className="mb-1">
                       <span className="text-muted">Payment Type: </span> Credit
@@ -49,7 +50,7 @@ export default class ConfirmationPage extends Component {
                     </p>
                   </div>
                 </div>
-
+                <h1>Order Summary</h1>
                 <div className="row p-5">
                   <div className="col-md-12">
                     <table className="table">
@@ -95,21 +96,13 @@ export default class ConfirmationPage extends Component {
                   </div>
                 </div>
 
-                <div className="d-flex flex-row-reverse bg-dark text-white p-4">
-                  <div className="py-3 px-5 text-right">
-                    <div className="mb-2">Grand Total</div>
-                    <div className="h2 font-weight-light">$234,234</div>
-                  </div>
-
-                  <div className="py-3 px-5 text-right">
-                    <div className="mb-2">Discount</div>
-                    <div className="h2 font-weight-light">10%</div>
-                  </div>
-
-                  <div className="py-3 px-5 text-right">
-                    <div className="mb-2">Sub - Total amount</div>
-                    <div className="h2 font-weight-light">$32,432</div>
-                  </div>
+                <div className="bg-dark text-white p-4">
+                  <p>Thank you for shopping with Tret inc!</p>
+                  <br />
+                  <p>
+                    You will receive an email confirmation soon with shipping
+                    and tracking details
+                  </p>
                 </div>
               </div>
             </div>

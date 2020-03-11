@@ -63,10 +63,11 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
         <div>
           {isAdmin ? (
             <div>
+              <br />
               {/* if admin user show links to Admin page*/}
-
               <Link to="/admin">
-                <i className="fas fa-user-shield"></i> <br />
+                <i className="fas fa-user-shield"></i>
+                <br />
                 <small>admin</small>
               </Link>
             </div>

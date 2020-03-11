@@ -145,7 +145,7 @@ export default class CheckoutForm extends Component {
         </div>
       </div>
     ) : (
-      <img src="/images/loading.png" />
+      <img src="/images/loading.gif" />
     )
   }
 }
