@@ -16,7 +16,6 @@ import ManageProducts from './components/ManageProducts'
 import AdminPage from './components/AdminPage'
 import AddProduct from './components/AddProduct'
 import UpdateProduct from './components/UpdateProduct'
-import NotFound from './components/NotFound'
 
 /**
  * COMPONENT
@@ -44,9 +43,6 @@ class Routes extends Component {
           render={({match}) => <SingleProduct match={match} />}
         />
         <Route path="/candies" component={AllProducts} />
-
-        {/* Issues/collisions for rendering NotFound page */}
-        {/* <Route path="*" component={NotFound} /> */}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
