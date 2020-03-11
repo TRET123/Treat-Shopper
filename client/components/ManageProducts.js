@@ -6,7 +6,6 @@ import {
   updateProduct,
   deleteProduct
 } from '../redux/thunks/products'
-import UpdateProduct from './UpdateProduct'
 
 export class ManageProducts extends React.Component {
   constructor() {
@@ -47,7 +46,7 @@ export class ManageProducts extends React.Component {
     const allProducts = this.props.allProducts ? (
       this.props.allProducts.map(product => {
         return (
-          <div className="item" key={product.id}>
+          <div className="prod" key={product.id}>
             <div className="buttons">
               <span>
                 <button
@@ -55,7 +54,7 @@ export class ManageProducts extends React.Component {
                   className="remove-button"
                   type="submit"
                 >
-                  x
+                  Delete
                 </button>
               </span>
             </div>
@@ -78,9 +77,15 @@ export class ManageProducts extends React.Component {
     )
     return (
       <div className="products">
-        <Link to="/addproduct">Add Product</Link>
         <div>
-          <h5 className="title">All Products</h5>
+          <h5 className="title">
+            All Products
+            <div>{'          '}</div>
+            <Link id="add-prod" to="/addproduct">
+              Add Product
+            </Link>
+          </h5>
+
           <ul>{allProducts}</ul>
         </div>
       </div>
