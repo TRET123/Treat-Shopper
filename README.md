@@ -3,14 +3,11 @@
 ## Overview:
 
 Treat-shopper is an application that allows users to purchase candy. In the all candies page, a user can view the entire inventory, or use the filter to filter by a specific category of candy (chocolate, sour, chewy).
-![products image](/images/treat-shopper_products.png)
 
 Each product can be clicked on to display additional information about the product. A product can be added to the cart using the ‘Add to Cart’ button. In the cart, users can increment, decrement or remove products, and the checkout process can be completed.
 
-![cart image](/images/treat-shopper_cart.png)
 If a guest user has added products to their cart and wishes to check out, they will be prompted to log in to complete the checkout process. When a guest user logs in or signs up, their cart will persist. Logged in users have access to their profile page, in which they can view and edit their contact information.
 
-![profile](/images/treat-shopper_profile.png)
 Admin users have access to the Admin Page, which allows them to view all users and add, remove and update products.
 
 ## Features
