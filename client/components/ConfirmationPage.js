@@ -60,9 +60,6 @@ export default class ConfirmationPage extends Component {
                             Item
                           </th>
                           <th className="border-0 text-uppercase small font-weight-bold">
-                            Description
-                          </th>
-                          <th className="border-0 text-uppercase small font-weight-bold">
                             Quantity
                           </th>
                           <th className="border-0 text-uppercase small font-weight-bold">
@@ -78,7 +75,6 @@ export default class ConfirmationPage extends Component {
                           return (
                             <tr key={product.id}>
                               <td>{product.name}</td>
-                              <td>{product.description}</td>
                               <td>{product.orderItem.quantity}</td>
                               <td>{(product.price / 100).toFixed(2)}</td>
                               <td>
