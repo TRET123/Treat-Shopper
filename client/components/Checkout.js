@@ -13,7 +13,7 @@ const successPayment = () => {
   history.push('/confirmation_page')
 }
 
-const errorPayment = data => {
+const errorPayment = () => {
   // eslint-disable-next-line no-alert
   alert('Payment Error')
 }
