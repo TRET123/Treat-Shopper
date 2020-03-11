@@ -45,7 +45,6 @@ router.put('/mergeCarts', isLoggedIn, async (req, res, next) => {
     const guestCart = await Product.findAll({
       where: {id: {[Op.in]: idArray}}
     })
-
     let orderItem
     for (let i = 0; i < guestCart.length; i++) {
       await userOrder.addProduct(guestCart[i])

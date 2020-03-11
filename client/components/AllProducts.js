@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {getAllProductsThunk} from '../redux/thunks/products'
 import {addProductThunk, getUserOrderThunk} from '../redux/thunks/order'
@@ -30,9 +29,7 @@ class AllProducts extends Component {
   }
 
   render() {
-    // const allProducts = this.props.allProducts
     let allProducts
-
     if (this.state.candyType !== 'all') {
       allProducts = this.props.allProducts.filter(
         product => product.candyType === this.state.candyType
@@ -47,7 +44,7 @@ class AllProducts extends Component {
           <strong>candy type</strong>
         </small>
         <br />
-        <select onChange={this.onChange} value={this.state.fuelType}>
+        <select onChange={this.onChange} value={this.state.candyType}>
           <option value="all">All</option>
           <option value="sour">Sour</option>
           <option value="chocolate">Chocolate</option>

@@ -14,6 +14,7 @@ const successPayment = () => {
 }
 
 const errorPayment = data => {
+  // eslint-disable-next-line no-alert
   alert('Payment Error')
 }
 
