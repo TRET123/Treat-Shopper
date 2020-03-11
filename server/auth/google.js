@@ -22,7 +22,6 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       const imgUrl = profile.photos[0].value
       const firstName = profile.name.givenName
       const lastName = profile.name.familyName
-
       User.findOrCreate({
         where: {googleId},
         defaults: {email, imgUrl, firstName, lastName}

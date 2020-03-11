@@ -30,8 +30,12 @@ export class UserHome extends React.Component {
     const {firstName} = this.props
     return (
       <div>
-        <h3 className="welcome">Welcome, {firstName}</h3>
+        <h3 style={{marginLeft: '40%'}} className="welcome">
+          Welcome {firstName ? firstName : 'stranger'}!
+        </h3>
         <h2>Shop our wide variety of candies!</h2>
+        <br />
+        <img style={{width: '100%', height: '50%'}} src="/images/home.gif" />
       </div>
     )
   }
@@ -41,6 +45,7 @@ export class UserHome extends React.Component {
  * CONTAINER
  */
 const mapState = state => {
+  console.log(state)
   return {
     firstName: state.user.firstName
   }
