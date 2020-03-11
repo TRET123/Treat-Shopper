@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {getSelectedProductThunk} from '../redux/thunks/products'
+import {addProductThunk, getUserOrderThunk} from '../redux/thunks/order'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
@@ -13,7 +14,22 @@ class SingleProduct extends Component {
     }
   }
   render() {
+    // random num
+    function randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+
     const product = this.props.product || this.props.selected
+    const {
+      id,
+      name,
+      imageUrl,
+      description,
+      inventory,
+      price,
+      calories,
+      candyType
+    } = product
 
     return product ? (
       product === this.props.product ? (
@@ -21,10 +37,10 @@ class SingleProduct extends Component {
           <h3 style={{maxHeight: '35px'}}>{name}</h3>
           <div id="productImage">
             <Link to={`/candies/${product.id}`}>
-              <img src={product.imageUrl} />
+              <img src={imageUrl} />
             </Link>
           </div>
-          <p>${(product.price / 100).toFixed(2)}</p>
+          <p>${(price / 100).toFixed(2)}</p>
         </div>
       ) : (
         <div className="container">
@@ -33,35 +49,49 @@ class SingleProduct extends Component {
               <div>
                 <h3 className="product-title">{name}</h3>
                 <div id="productImage">
-                  <img src={product.imageUrl} />
+                  <img src={imageUrl} />
                 </div>
                 <br />
               </div>
 
               <div>
                 <div className="rating">
-                  <div className="stars">
+                  <div
+                    onClick={evt => evt.target.classList.toggle('checked')}
+                    className="stars"
+                  >
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star checked"></span>
                     <span className="fa fa-star"></span>
                   </div>
-                  <span className="review-no">41 reviews</span>
+                  <span className="review-no">{randomNum(30, 80)} reviews</span>
                 </div>
-                <p className="product-description">{product.description}</p>
+                <p className="product-description">
+                  <i>'{description}'</i>
+                </p>
                 <h4 className="price">
-                  current price:{' '}
-                  <span>${(product.price / 100).toFixed(2)}</span>
+                  current price: <span>${(price / 100).toFixed(2)}</span>
                 </h4>
                 <p className="vote">
-                  <strong>91%</strong> of buyers enjoyed this product!{' '}
-                  <strong>(87 votes)</strong>
+                  <strong>{randomNum(80, 100)}%</strong> of buyers enjoyed this
+                  product! <strong>{randomNum(30, 80)} votes</strong>
                 </p>
 
                 <div className="action">
-                  <button className="add-to-cart btn btn-primary" type="button">
-                    add to cart
+                  <button
+                    style={{
+                      marginBottom: '8%'
+                    }}
+                    type="submit"
+                    className="btn btn-primary btn-lg"
+                    onClick={() => {
+                      this.props.getUserOrder()
+                      this.props.addProduct(product.id)
+                    }}
+                  >
+                    <i className="fas fa-cart-plus"></i>
                   </button>
                   <br />
                 </div>
@@ -84,7 +114,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getSelected: id => dispatch(getSelectedProductThunk(id))
+    getSelected: id => dispatch(getSelectedProductThunk(id)),
+    addProduct: id => dispatch(addProductThunk(id)),
+    getUserOrder: () => dispatch(getUserOrderThunk())
   }
 }
 
