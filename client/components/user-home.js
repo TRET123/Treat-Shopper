@@ -27,11 +27,16 @@ export class UserHome extends React.Component {
     }
   }
   render() {
-    const {firstName} = this.props
+    const {firstName, imgUrl} = this.props
     return (
       <div>
-        <h3 className="welcome">Welcome, {firstName}</h3>
+        <h3 style={{marginLeft: '36%'}} className="welcome">
+          Welcome {firstName ? firstName : 'stranger'}!
+        </h3>
+        <img style={{borderRadius: '100%'}} src={imgUrl} />
         <h2>Shop our wide variety of candies!</h2>
+        <br />
+        <img style={{width: '100%', height: '50%'}} src="/images/home.gif" />
       </div>
     )
   }
@@ -42,7 +47,8 @@ export class UserHome extends React.Component {
  */
 const mapState = state => {
   return {
-    firstName: state.user.firstName
+    firstName: state.user.firstName,
+    imgUrl: state.user.firstName
   }
 }
 
