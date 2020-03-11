@@ -23,13 +23,13 @@ const User = db.define('user', {
       }
     },
 
-    imgUrl: {
-      type: Sequelize.STRING
-    },
-
     get() {
       return () => this.getDataValue('password')
     }
+  },
+
+  imgUrl: {
+    type: Sequelize.STRING
   },
 
   salt: {

@@ -42,6 +42,10 @@ class UserProfile extends Component {
     return (
       <div className="user-profile">
         <h5 className="title"> User Profile </h5>
+        <img
+          style={{borderRadius: '100%', width: '10%', marginLeft: '45%'}}
+          src={this.props.imgUrl}
+        />
         <hr />
         <div className="user-profile-items">
           {this.props.user.admin ? (
@@ -111,7 +115,8 @@ class UserProfile extends Component {
 }
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    imgUrl: state.user.imgUrl
   }
 }
 
