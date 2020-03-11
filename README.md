@@ -26,7 +26,7 @@ Fork and or clone this repository to your local machine.
 Open project directory and run the psql command `createdb treat-shopper.`
 This will create the PostgreSQL database used to store product and user information.
 
-`Run npm run start-dev.`
+Run `npm run start-dev.`
 This will start the server for our application in development mode.
 
 On a seperate terminal, and while the server is still running, run
@@ -54,11 +54,11 @@ Node.js for server
 
 ### Contributors:
 
-Thomas Zhang
-https://github.com/thomaszhang97
+- Thomas Zhang
+  https://github.com/thomaszhang97
 
-Rana Quadri
-https://github.com/ranaq
+- Rana Quadri
+  https://github.com/ranaq
 
-Erick Canals
-https://github.com/EC7495
+- Erick Canals
+  https://github.com/EC7495
